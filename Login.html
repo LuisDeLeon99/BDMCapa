@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -64,7 +65,7 @@
     <br>
     <div class="card border-light mb-3 center" style="margin:auto; width:30%;">
 
-        <form action="Pagina_Inicio.html" method="post">
+        <div>
             <div class="card-header text-dark text-center">Inicio de sesión</div>
             <div class="form-group text-center">
 
@@ -84,11 +85,35 @@
             <div class="form-group text-center">
                 <i class="text-center"> ¿No tienes cuenta? </i>
                 <a href="Registro.html" class="link text-ligth"> Registrate</a> <br>
-                <button type="submit" style="margin: 10px; width:60%;" class="btn btn-outline-dark">Ingresar</button>
+                <button type="button" style="margin: 10px; width:60%;" class="btn btn-outline-dark"
+                    onClick="login();">Ingresar</button>
             </div>
-        </form>
+        </div>
 
-        <script src="login.js"></script>
+        <script>
+            function login() {
+                const user = $("#usuario").val();
+                const pass = $("#contrasenia").val();
+                const DataToSend = {
+                    usuario: user,
+                    contraseña: pass
+                }
+                $.ajax({
+                    url: './WebServices/conexion.php',
+                    type: 'POST',
+                    data: DataToSend,
+                    success: function (response) {
+                       console.log(response) // Aquí procesas la respuesta del servidor
+                    }
+                });
+            }
+            $(document).ready(function () {
+
+            })
+
+
+        </script>
+
     </div>
 
 
