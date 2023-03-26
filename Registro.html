@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar</title>
+    <link rel="stylesheet" type="text/css" href="categorias.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link href="css/styles.css" rel="stylesheet" />
+    <script>
+        function VFecha() {
+            var myDate = document.getElementById("fechanac").value;
+            var indate = new Date(myDate).toISOString().slice(0, 10)
+            var today = new Date().toISOString().slice(0, 10);
+            var valid = 0
+            if (indate > today) {
+                alert("La fecha debe ser anterior al dia actual");
+                return 0;
+            }
+            return 1;
+        }
+        function VContra() {
+            Corr1 = document.getElementById("contrasenia");
+            Corr2 = document.getElementById("confcontra");
+            if (Corr1.value !== Corr2.value) {
+                alert("Las contraseñas no coinciden");
+                return 0;
+            }
+            return 1;
+        }
+
+        function Ver() {
+            var f = VFecha();
+            var c = VContra();
+            var res = f + c;
+            if (res == 2) {
+                location.replace("login.html");
+                return false;
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Full-Learning</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Inicio
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Cursos.html">Categorías</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-sm-2" type="search" placeholder="Buscar">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                <ul class="navbar-nav me-auto espacioder">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrito.html">Carrito
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="Registro.html">Crear cuenta
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Login.html">Inicia sesión
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Perfil.html">Cuenta
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div style="margin:auto; width:50%;">
+
+        <div class="card border-secondary text-center mb-3 py-5">
+
+            <form action="index.html" method="post">
+                <div class="card-header text-dark text-center text-uppercase">Crear cuenta nueva</div>
+
+                <div class="form-group text-center">
+                    <label class="col-form-label mt-4" for="inputDefault">Nombre(s)</label>
+                    <input type="text" style="margin:auto; width:80%;" class="form-control" placeholder="Escribe tu nombre" id="inputDefault" required
+                        pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$" title="El nombre solo debe incluir letras">
+                </div>
+
+                <div class="form-group text-center">
+                    <label class="col-form-label mt-4" for="inputDefault">Apellido(s)</label>
+                    <input type="text" style="margin:auto; width:80%;" class="form-control" placeholder="Escribe tus apellidos" id="inputDefault"
+                        required pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$" title="Los apellidos solo deben incluir letras">
+                </div>
+                <br>
+                <label for="Fecha_N">Fecha de Nacimiento</label>
+                <input type="date" name="Fecha_N" id="Fecha_N" required>
+                <br>
+
+                <br>
+                <div class="form-group text-center">
+                    <label for="exampleInputEmail1" class="form-label mt-4">Dirección de correo</label>
+                    <input type="email" style="margin:auto; width:80%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Ingresa tu correo" required pattern="^[a-zA-Z\d\S.-_]+@[a-z.]+$"
+                        title="Formato de correo no valido">
+                    <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo con
+                        alguien.</small>
+                </div>
+
+                <div class="form-group text-center">
+                    <label class="col-form-label mt-4" for="inputDefault">Usuario</label>
+                    <input type="text" style="margin:auto; width:80%;" class="form-control" placeholder="Ingresa tu usuario" id="inputDefault">
+                </div>
+                <label for="contrasenia">Contraseña</label>
+                <br>
+                <div class="form-group text-center">
+                    <input type="password" style="margin:auto; width:80%;" class="form-control" id="floatingPassword" placeholder="Ingresa tu contraseña" required
+                        pattern="(?=[\w¿?.:;,{}()#@]*\d)(?=[\w¿?.:;,{}()#@]*[a-z])(?=[\w¿?.:;,{}()#@]*[¿?.:;,{}()#@])(?=[\w¿?.:;,{}()#@]*[A-Z])\S{8,}"
+                        title="La contraseña debe contener 8 caracteres, al menos una mayuscula, minuscula, digito y signo">
+                   
+                </div>
+
+                <label for="confcontra">Confirmar Contraseña</label>
+                <br>
+                <div class="form-group text-center">
+                    <input type="password" style="margin:auto; width:80%;" class="form-control" id="floatingPassword" placeholder="Ingresa tu contraseña" required
+                        pattern="(?=[\w¿?.:;,{}()#@]*\d)(?=[\w¿?.:;,{}()#@]*[a-z])(?=[\w¿?.:;,{}()#@]*[¿?.:;,{}()#@])(?=[\w¿?.:;,{}()#@]*[A-Z])\S{8,}"
+                        title="La contraseña debe contener 8 caracteres, al menos una mayuscula, minuscula, digito y signo">
+                  
+                </div>
+
+                <br>
+                <input type="file" name="inpFile" accept="image/*" id="inpFile" required
+                    title="Es necesario subir una imagen">
+                <div class="image-preview" id="imagePreview">
+                    <img src="" alt="Image preview" class="image-preview__image">
+                    <span class="image-preview__default-text">Preview</span>
+                </div>
+                <script>
+                    const inpFile = document.getElementById("inpFile");
+                    const previewContainer = document.getElementById("imagePreview");
+                    const previewImage = previewContainer.querySelector(".image-preview__image");
+                    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+
+                    inpFile.addEventListener("change", function () {
+                        const file = this.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            previewDefaultText.style.display = "none";
+                            previewImage.style.display = "block";
+                            reader.addEventListener("load", function () {
+                                console.log(this);
+                                previewImage.setAttribute("src", this.result)
+                            });
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                </script>
+                <br>
+                <button type="submit" class="btn btn-outline-dark">Crear cuenta</button>
+            </form>
+
+
+        </div>
+    </div>
+</body>
+
+</html>

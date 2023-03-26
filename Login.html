@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="categorias.css">
+    <link href="css/styles.css" rel="stylesheet" />
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Full-Learning</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Inicio
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Cursos.html">Categorías</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-sm-2" type="search" placeholder="Buscar">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                <ul class="navbar-nav me-auto espacioder">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrito.html">Carrito
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="Registro.html">Crear cuenta
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Login.html">Inicia sesión
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Perfil.html">Cuenta
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <!------ Include the above in your HEAD tag ---------->
+    <br>
+    <div class="card border-light mb-3 center" style="margin:auto; width:30%;">
+
+        <form action="Pagina_Inicio.html" method="post">
+            <div class="card-header text-dark text-center">Inicio de sesión</div>
+            <div class="form-group text-center">
+
+                <i class="font-italic text-center"> Usuario: </i>
+                <input type="text" style="margin:auto; width:80%;" class="form-control" id="usuario"
+                    placeholder="Usuario">
+
+            </div>
+            <div class="form-group text-center">
+                <i class="font-italic text-center"> Contraseña: </i>
+                <input type="password" style="margin:auto; width:80%;" class="form-control" id="contrasenia"
+                    placeholder="Contraseña" required
+                    pattern="(?=[\w¿?.:;,{}()#@]*\d)(?=[\w¿?.:;,{}()#@]*[a-z])(?=[\w¿?.:;,{}()#@]*[¿?.:;,{}()#@])(?=[\w¿?.:;,{}()#@]*[A-Z])\S{8,}"
+                    title="La contraseña debe contener 8 caracteres, al menos una mayuscula, minuscula, digito y signo">
+                <br>
+            </div>
+            <div class="form-group text-center">
+                <i class="text-center"> ¿No tienes cuenta? </i>
+                <a href="Registro.html" class="link text-ligth"> Registrate</a> <br>
+                <button type="submit" style="margin: 10px; width:60%;" class="btn btn-outline-dark">Ingresar</button>
+            </div>
+        </form>
+
+        <script src="login.js"></script>
+    </div>
+
+
+
+</body>
+
+</html>
