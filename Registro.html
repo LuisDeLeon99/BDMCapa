@@ -98,18 +98,18 @@
 
         <div class="card border-secondary text-center mb-3 py-5">
 
-            <form action="index.html" method="post">
+            <form action="./WebServices/registro.php" method="post">
                 <div class="card-header text-dark text-center text-uppercase">Crear cuenta nueva</div>
 
                 <div class="form-group text-center">
                     <label class="col-form-label mt-4" for="inputDefault">Nombre(s)</label>
-                    <input type="text" style="margin:auto; width:80%;" class="form-control" placeholder="Escribe tu nombre" id="inputDefault" required
+                    <input type="text" style="margin:auto; width:80%;" class="form-control" placeholder="Escribe tu nombre" id="Nombreid" name="nombre" required
                         pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$" title="El nombre solo debe incluir letras">
                 </div>
 
                 <div class="form-group text-center">
                     <label class="col-form-label mt-4" for="inputDefault">Apellido(s)</label>
-                    <input type="text" style="margin:auto; width:80%;" class="form-control" placeholder="Escribe tus apellidos" id="inputDefault"
+                    <input type="text" style="margin:auto; width:80%;" class="form-control" placeholder="Escribe tus apellidos" id="Apellidosid" name="apellidos"
                         required pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$" title="Los apellidos solo deben incluir letras">
                 </div>
                 <br>
@@ -120,7 +120,7 @@
                 <br>
                 <div class="form-group text-center">
                     <label for="exampleInputEmail1" class="form-label mt-4">Dirección de correo</label>
-                    <input type="email" style="margin:auto; width:80%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input type="email" style="margin:auto; width:80%;" class="form-control" id="email" name="correo" aria-describedby="emailHelp"
                         placeholder="Ingresa tu correo" required pattern="^[a-zA-Z\d\S.-_]+@[a-z.]+$"
                         title="Formato de correo no valido">
                     <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo con
@@ -129,12 +129,12 @@
 
                 <div class="form-group text-center">
                     <label class="col-form-label mt-4" for="inputDefault">Usuario</label>
-                    <input type="text" style="margin:auto; width:80%;" class="form-control" placeholder="Ingresa tu usuario" id="inputDefault">
+                    <input type="text" style="margin:auto; width:80%;" class="form-control" placeholder="Ingresa tu usuario" id="inputDefault" name="usuario">
                 </div>
                 <label for="contrasenia">Contraseña</label>
                 <br>
                 <div class="form-group text-center">
-                    <input type="password" style="margin:auto; width:80%;" class="form-control" id="floatingPassword" placeholder="Ingresa tu contraseña" required
+                    <input type="password" style="margin:auto; width:80%;" class="form-control" id="floatingPassword" placeholder="Ingresa tu contraseña" name="contrasenia"required
                         pattern="(?=[\w¿?.:;,{}()#@]*\d)(?=[\w¿?.:;,{}()#@]*[a-z])(?=[\w¿?.:;,{}()#@]*[¿?.:;,{}()#@])(?=[\w¿?.:;,{}()#@]*[A-Z])\S{8,}"
                         title="La contraseña debe contener 8 caracteres, al menos una mayuscula, minuscula, digito y signo">
                    
@@ -143,14 +143,14 @@
                 <label for="confcontra">Confirmar Contraseña</label>
                 <br>
                 <div class="form-group text-center">
-                    <input type="password" style="margin:auto; width:80%;" class="form-control" id="floatingPassword" placeholder="Ingresa tu contraseña" required
+                    <input type="password" style="margin:auto; width:80%;" class="form-control" id="floatingPassword" placeholder="Ingresa tu contraseña"name="confcontra" required
                         pattern="(?=[\w¿?.:;,{}()#@]*\d)(?=[\w¿?.:;,{}()#@]*[a-z])(?=[\w¿?.:;,{}()#@]*[¿?.:;,{}()#@])(?=[\w¿?.:;,{}()#@]*[A-Z])\S{8,}"
                         title="La contraseña debe contener 8 caracteres, al menos una mayuscula, minuscula, digito y signo">
                   
                 </div>
 
                 <br>
-                <input type="file" name="inpFile" accept="image/*" id="inpFile" required
+                <input type="file" name="image" accept="image/*" id="inpFile" required
                     title="Es necesario subir una imagen">
                 <div class="image-preview" id="imagePreview">
                     <img src="" alt="Image preview" class="image-preview__image">
