@@ -23,7 +23,7 @@ if($_POST){
     $imagen = $_POST['image'];
     }
 
-    $query = "CALL spGestionUsuarios('IN',1,$nombre,$apellidos,$apellidos,$contraseña,1,$imagen,1,$correo,$fechaNac,$fechaNac,0)";
+    $query = "CALL spGestionUsuarios('IN','1','$nombre','$apellidos','$apellidos','$contraseña','1','$imagen','1','$correo','$fechaNac','$fechaNac','0')";
 $result = mysqli_query($conn, $query);
 
 // Verificar si la consulta se ejecutó correctamente
