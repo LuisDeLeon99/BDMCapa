@@ -14,16 +14,21 @@ if (!$conn) {
 if($_POST){
     
     $nombre = $_POST['nombre'];
-    $apellidos = $_POST['apellidos'];
+    $apellidop = $_POST['apellidopat'];
+    $apellidom = $_POST['apellidomat'];
     $correo = $_POST['correo'];
     $fechaNac = $_POST['Fecha_N'];
-    // $usuario = $_POST['usuario']
+    $usuario = $_POST['usuario'];
     $contraseña = $_POST['contrasenia'];
     $confcontra = $_POST['confcontra'];
     $imagen = $_POST['image'];
+    $genero = $_POST['genero'];
+    $genero = intval($genero);
+    $rol = $_POST['rol'];
+    $rol = intval($rol);
     }
 
-    $query = "CALL spGestionUsuarios('IN','1','$nombre','$apellidos','$apellidos','$contraseña','1','$imagen','1','$correo','$fechaNac','$fechaNac','0')";
+    $query = "CALL spGestionUsuarios('IN','1','$usuario','$nombre','$apellidop','$apellidom','$contraseña','$rol','$imagen','$genero','$correo','$fechaNac','$fechaNac','0')";
 $result = mysqli_query($conn, $query);
 
 // Verificar si la consulta se ejecutó correctamente

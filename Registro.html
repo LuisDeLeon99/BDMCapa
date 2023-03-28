@@ -40,7 +40,31 @@
                 return false;
             }
         }
+        window.addEventListener('load', function() {
+        const btnMasculino = document.getElementById("Masculino");
+        const btnFemenino = document.getElementById("Femenino");
+        const generoInput = document.getElementById("genero");
 
+        btnMasculino.addEventListener("click", function() {
+            generoInput.value = "0";
+        });
+
+        btnFemenino.addEventListener("click", function() {
+            generoInput.value = "1";
+        });
+
+        const btninst = document.getElementById("btnradio1");
+        const btnalumn = document.getElementById("btnradio2");
+        const rolInput = document.getElementById("rol");
+
+        btnMasculino.addEventListener("click", function() {
+            rolInput.value = "1";
+        });
+
+        btnFemenino.addEventListener("click", function() {
+            rolInput.value = "2";
+        });
+     });
     </script>
 </head>
 
@@ -127,9 +151,10 @@
                 <br>
                 <br>
                 <label>Escoge tu genero:</label>
+                <input type="hidden" name="genero" id="genero" value="">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <button type="button" class="btn btn-outline-secondary btn-outline-dark" name="mascu">Masculino</button>
-                    <button type="button" class="btn btn-outline-secondary btn-outline-dark " name="fem">Femenino</button>
+                    <button type="button" class="btn btn-outline-secondary btn-outline-dark" name="Masculino" id="Masculino">Masculino</button>
+                    <button type="button" class="btn btn-outline-secondary btn-outline-dark " name="Femenino" id="Femenino">Femenino</button>
                   </div>
                 <br>
                 <div class="form-group text-center">
@@ -167,11 +192,12 @@
                 </div>
                 <br>
                 <label>Elige tu rol de usuario:</label>
+                <input type="hidden" name="rol" id="rol" value="">
                 <br>
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio1" autocomplete="off" checked>
                     <label class="btn btn-outline-dark" for="btnradio1">Alumno</label>
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio2" autocomplete="off">
                     <label class="btn btn-outline-dark" for="btnradio2">Instructor</label>
                 </div>
                 <br>
