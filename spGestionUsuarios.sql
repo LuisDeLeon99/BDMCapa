@@ -13,7 +13,7 @@ CREATE PROCEDURE spGestionUsuarios(
     IN Am VARCHAR(30),
     IN Pass VARCHAR(30),
     IN Rol INT,
-    IN Imagen BLOB,
+    IN Imagen LONGBLOB,
     IN Genero BOOLEAN,
 	IN Correo VARCHAR(30),
     IN Fecha Date, 
@@ -24,9 +24,9 @@ CREATE PROCEDURE spGestionUsuarios(
 BEGIN
     IF Accion = 'IN' THEN
         SET Fecha = NOW();
-        SET Imagen = null;
+        
         INSERT INTO Usuarios(Usuario,Nombre, Ap, Am, Pass, Rol, Imagen, Genero, Correo, Fecha, Fechan, err )
-        VALUES( Usuario,Nombre, Ap, Am, Pass, Rol, 1, Genero, Correo, Fecha, Fechan,0 );
+        VALUES( Usuario,Nombre, Ap, Am, Pass, Rol, Imagen, Genero, Correo, Fecha, Fechan,0 );
     END IF;
     
     IF Accion = 'UP' THEN
