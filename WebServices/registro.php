@@ -36,7 +36,7 @@ if($_POST){
     }
 
 
-if ($valida) {$query = "CALL spGestionUsuarios('IN','1','$usuario','$nombre','$apellidop','$apellidom','$contraseña','$rol','$imgContent','$genero','$correo','$fechaNac','$fechaNac','0')";
+if ($valida) {$query = "CALL spGestionUsuarios('IN','1','$usuario','$nombre','$apellidop','$apellidom','$contraseña','$rol','$imgContent','$genero','$correo','$fechaNac','$fechaNac','0','0')";
 $result = mysqli_query($conn, $query);
 if (!$result) {
     die("Error al ejecutar la consulta: " . mysqli_error($conn));
