@@ -1,16 +1,13 @@
 <?php
 include 'validacion.php';
-$servername = "localhost";
-$username = "root";
-$password = "miau123";
-$dbname = "bdm";
+require_once 'conexion.php';
+
 $valida = 0;
+$usuarioExistente = 0;
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
-if (!$conn) {
-    die("Conexión fallida: " . mysqli_connect_error());
-}
+
 
 if($_POST){
     
@@ -35,12 +32,30 @@ if($_POST){
     $rol = intval($rol);
     }
 
+    $query = "CALL spVerificarUsuario('$usuario', @usuarioExistente)";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        die("Error al ejecutar la consulta: " . mysqli_error($conn));
+    }
 
-if ($valida) {$query = "CALL spGestionUsuarios('IN','1','$usuario','$nombre','$apellidop','$apellidom','$contraseña','$rol','$imgContent','$genero','$correo','$fechaNac','$fechaNac','0','0')";
-$result = mysqli_query($conn, $query);
-if (!$result) {
-    die("Error al ejecutar la consulta: " . mysqli_error($conn));
-}
+    $query = "SELECT @usuarioExistente";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        die("Error al ejecutar la consulta: " . mysqli_error($conn));
+    }
+
+    $row = mysqli_fetch_array($result);
+    $usuarioExistente = $row[0];
+   
+    if ($usuarioExistente > 0) {
+        echo "El usuario ya existe. Por favor, elige otro nombre de usuario.";
+    } else {
+        if ($valida) {$query = "CALL spGestionUsuarios('IN','1','$usuario','$nombre','$apellidop','$apellidom','$contraseña','$rol','$imgContent','$genero','$correo','$fechaNac','$fechaNac','0','0')";
+        $result = mysqli_query($conn, $query);
+        if (!$result) {
+            die("Error al ejecutar la consulta: " . mysqli_error($conn));
+        }
+    }
 }
 
 // Verificar si la consulta se ejecutó correctamente
