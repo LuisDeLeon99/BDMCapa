@@ -1,5 +1,6 @@
 <?php
 require_once 'conexion.php';
+session_start();
 
 // Obtener los valores del formulario de inicio de sesión
 if (isset($_POST['usuario']) && isset($_POST['pass'])) {
@@ -12,23 +13,24 @@ if (isset($_POST['usuario']) && isset($_POST['pass'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $rol = $row['Rol'];
+        
         $usel = $row['usel'];
         $err = $row['err'];
 
         if ($err >= 3) {
             // Cuenta bloqueada
             echo "Tu cuenta está bloqueada. Por favor, ponte en contacto con el administrador.";
-        } else {
+        } else{
             // Inicio de sesión exitoso
-            // Realizar acciones adicionales según el rol o usel
-            // ...
+            $rol = $row['Rol'];
 
-            echo "Inicio de sesión exitoso. Rol: $rol, usel: $usel";
+            // Guardar usuario y rol en la sesión
+            $_SESSION['usuario'] = $usuario;
+            $_SESSION['rol'] = $rol;                       
+            header("Location: ../index.html");
+            exit();
         }
     } else {
-        
-        
         // Inicio de sesión fallido
         echo "Inicio de sesión fallido. Usuario o contraseña incorrectos.";
     }

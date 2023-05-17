@@ -14,7 +14,7 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link rel="stylesheet" type="text/css" href="popper.min.js">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 
 <body>
@@ -25,8 +25,8 @@
                 aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav me-auto">
+            <div class="collapse navbar-collapse" id="navbarColor02" >
+                <ul class="navbar-nav me-auto" >
                     <li class="nav-item">
                         <a class="nav-link active" href="index.html">Inicio
                             <span class="visually-hidden">(current)</span>
@@ -40,27 +40,9 @@
                     <input class="form-control me-sm-2" type="search" placeholder="Buscar">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
-                <ul class="navbar-nav me-auto espacioder">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="carrito.html">Carrito
-                        </a>
-                        
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="Registro.html">Crear cuenta
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Login.html">Inicia sesión
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Perfil.html">Cuenta
-                        </a>
-                    </li>
-                 </ul>
+                <ul class="navbar-nav me-auto espacioder"id="menu-item" >
+                    
+                </ul>
                   
             </div>
         </div>
@@ -310,6 +292,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: './WebServices/menu.php',
+                success: function(response) {
+                    $('#menu-item').html(response);
+                }
+            });
+        });
+    </script>
+    
 </body>
 
 </html>

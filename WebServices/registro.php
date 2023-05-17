@@ -50,13 +50,18 @@ if($_POST){
     if ($usuarioExistente > 0) {
         echo "El usuario ya existe. Por favor, elige otro nombre de usuario.";
     } else {
-        if ($valida) {$query = "CALL spGestionUsuarios('IN','1','$usuario','$nombre','$apellidop','$apellidom','$contraseña','$rol','$imgContent','$genero','$correo','$fechaNac','$fechaNac','0','0')";
-        $result = mysqli_query($conn, $query);
-        if (!$result) {
-            die("Error al ejecutar la consulta: " . mysqli_error($conn));
+        if ($valida) {
+            $query = "CALL spGestionUsuarios('IN','1','$usuario','$nombre','$apellidop','$apellidom','$contraseña','$rol','$imgContent','$genero','$correo','$fechaNac','$fechaNac','0','0')";
+            $result = mysqli_query($conn, $query);
+            if (!$result) {
+                die("Error al ejecutar la consulta: " . mysqli_error($conn));
+            } else {
+                // Registro exitoso, redirigir a index.html
+                header("Location: ../index.html");
+                exit();
+            }
         }
     }
-}
 
 // Verificar si la consulta se ejecutó correctamente
 
