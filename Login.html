@@ -10,7 +10,9 @@
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+</head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -96,22 +98,19 @@
                 const pass = $("#contrasenia").val();
                 const DataToSend = {
                     usuario: user,
-                    contraseña: pass
-                }
+                    pass: pass
+                };
+    
                 $.ajax({
-                    url: './WebServices/conexion.php',
+                    url: './WebServices/login.php',
                     type: 'POST',
                     data: DataToSend,
-                    success: function (response) {
-                       console.log(response) // Aquí procesas la respuesta del servidor
+                    success: function(response) {
+                        console.log(response); // Procesar la respuesta del servidor
+                        
                     }
                 });
             }
-            $(document).ready(function () {
-
-            })
-
-
         </script>
 
     </div>

@@ -9,12 +9,12 @@ CREATE PROCEDURE spLogin (
 )
 BEGIN
 	UPDATE Usuarios
-	SET err = err + 1
-	WHERE Usuario = Usuario AND Pass <> Pass;
+	SET err = CASE WHEN err < 4 THEN err + 1 ELSE err END
+	WHERE Usuario = usuarios.Usuario AND Pass <> usuarios.Pass;
 
 	SELECT Usuario, Pass, Rol, err, usel
 	FROM Usuarios
-	WHERE Usuario = Usuario AND Pass = Pass;
+	WHERE Usuario = usuarios.Usuario AND Pass = usuarios.Pass;
 END //
 
 DELIMITER ;

@@ -2,10 +2,10 @@
 require_once 'conexion.php';
 
 // Obtener los valores del formulario de inicio de sesión
-if (isset($_POST['submit'])) {
+if (isset($_POST['usuario']) && isset($_POST['pass'])) {
     $usuario = $_POST['usuario'];
     $pass = $_POST['pass'];
-
+    
     // Llamar al procedimiento almacenado spLogin
     $sql = "CALL spLogin('$usuario', '$pass')";
     $result = $conn->query($sql);
@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
         $usel = $row['usel'];
         $err = $row['err'];
 
-        if ($err == 3) {
+        if ($err >= 3) {
             // Cuenta bloqueada
             echo "Tu cuenta está bloqueada. Por favor, ponte en contacto con el administrador.";
         } else {
@@ -27,6 +27,8 @@ if (isset($_POST['submit'])) {
             echo "Inicio de sesión exitoso. Rol: $rol, usel: $usel";
         }
     } else {
+        
+        
         // Inicio de sesión fallido
         echo "Inicio de sesión fallido. Usuario o contraseña incorrectos.";
     }
