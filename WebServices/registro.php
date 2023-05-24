@@ -74,5 +74,4 @@ if($_POST){
 
 // Cerrar la conexión
 mysqli_close($conn);
-
 ?>

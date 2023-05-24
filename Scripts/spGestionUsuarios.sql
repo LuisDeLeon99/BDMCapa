@@ -26,7 +26,7 @@ BEGIN
     IF Accion = 'IN' THEN
         SET Fecha = NOW();
         
-        INSERT INTO Usuarios(Usuario,Nombre, Ap, Am, Pass, Rol, Imagen, Genero, Correo, Fecha, Fechan, err,usel )
+        INSERT INTO Usuarios(Usuario,Nombre, Apaterno, Amaterno, Pass, Rol, Imagen, Genero, Correo, Fecha, Fechan, err,usel )
         VALUES( Usuario,Nombre, Ap, Am, Pass, Rol, Imagen, Genero, Correo, Fecha, Fechan,0,0 );
     END IF;
     
@@ -34,8 +34,8 @@ BEGIN
         UPDATE Usuarios
         SET Usuario = Usuario,
             Nombre = Nombre,
-            Ap = Ap,
-            Am = Am,
+            Apaterno = Ap,
+            Apaterno = Am,
             Pass = Pass,
             Rol = Rol,
             Imagen = Imagen,

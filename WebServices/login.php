@@ -19,22 +19,46 @@ if (isset($_POST['usuario']) && isset($_POST['pass'])) {
 
         if ($err >= 3) {
             // Cuenta bloqueada
-            echo "Tu cuenta está bloqueada. Por favor, ponte en contacto con el administrador.";
-        } else{
+            
+        } else {
             // Inicio de sesión exitoso
             $rol = $row['Rol'];
-
+            $genero = $row['Genero'];
+            
             // Guardar usuario y rol en la sesión
             $_SESSION['usuario'] = $usuario;
-            $_SESSION['rol'] = $rol;                       
+            
+            if ($rol == 0) {
+                $_SESSION['rol'] = 'Admin';
+            } elseif ($rol == 1) {
+                $_SESSION['rol'] = 'Alumno';
+            } elseif ($rol == 2) {
+                $_SESSION['rol'] = 'Instructor';
+            }
+            
+            $_SESSION['nombre'] = $row['Nombre'];
+            $_SESSION['Apaterno'] = $row['Apaterno'];
+            $_SESSION['Amaterno'] = $row['Amaterno'];
+            $_SESSION['imagen'] = $row['Imagen'];
+            
+            if ($genero == 0) {
+                $_SESSION['genero'] = 'Masculino';
+            } elseif ($genero == 1) {
+                $_SESSION['genero'] = 'Femenino';
+            }
+            
+            $_SESSION['fecha'] = $row['Fecha'];
+            $_SESSION['fechan'] = $row['Fechan'];
+            $_SESSION['correo'] = $row['Correo'];
             header("Location: ../index.html");
             exit();
         }
     } else {
         // Inicio de sesión fallido
-        echo "Inicio de sesión fallido. Usuario o contraseña incorrectos.";
+        header("Location: ../index.html");
+        exit();
     }
 }
-
 mysqli_close($conn);
 ?>
+    

@@ -8,6 +8,56 @@
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $.ajax({
+          url: 'WebServices/perfil.php',
+          type: 'GET',
+          dataType: 'json',
+          statusCode: {
+            302: function() {
+              // Redirigir al usuario a la página de inicio
+              window.location.href = './index.html';
+            }
+          },
+          success: function(response) {
+            // Manipula los datos de sesión aquí
+            $('#rol').text(response.rol);
+            $('#fecha-creacion').text(response.fecha_creacion);
+            $('#fecha-nacimiento').text(response.fecha_nacimiento);
+            $('#genero').text(response.genero);
+            $('#usuario').text(response.usuario);
+            $('#nombre').text(response.nombre);
+            $('#apaterno').text(response.apaterno);
+            $('#amaterno').text(response.amaterno);
+            $('#correo').text(response.correo);
+          },
+          error: function(xhr, status, error) {
+            // Maneja los errores aquí
+            console.error(error);
+          }
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function() {
+        $.ajax({
+    url: 'WebServices/perfilfoto.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {
+        if (response.imagen) {
+            var imageUrl = 'data:image/jpeg;base64,' + response.imagen;
+            $('#imagen').attr('src', imageUrl);
+        }
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+        }
+      });
+    });
+    </script>
 </head>
 <body>
 
@@ -71,11 +121,12 @@
      
             <div class="panel panel-info">
               <div class="panel-heading">
-                <h3 class="panel-title">Luis De Leon</h3>
+                <h3 class="panel-title"><span id="nombre"></span> <span id="apaterno"></span></h3>
               </div>
               <div class="panel-body">
                 <div class="row">
-                  <div class="center"> <img alt="User Pic" class="img-responsive" src="http://placehold.it/150x150" class="img-circle img-responsive"> </div>
+                  <img alt="User Pic" id="imagen" class="img-responsive img-circle" src="" style="width: 200px; height: 200px;">
+
                   
                   <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
                     <dl>
@@ -95,38 +146,33 @@
                       <tbody>
                         <tr>
                           <td>Tipo de cuenta:</td>
-                          <td>Instructor</td>
+                          <td><span id="rol"></span></td>
                         </tr>
                         <tr>
                           <td>Fecha de creación:</td>
-                          <td>23/02/2020</td>
+                          <td><span id="fecha-creacion"></span></td>
                         </tr>
                         <tr>
                           <td>Fecha de nacimiento:</td>
-                          <td>26/01/1998</td>
-                        </tr>
-                     
-                           <tr>
-                               <tr>
-                          <td>Genero:</td>
-                          <td>Masculino</td>
-                        </tr>
-                          <tr>
-                          <td>Usuario:</td>
-                          <td>Luis123</td>
+                          <td><span id="fecha-nacimiento"></span></td>
                         </tr>
                         <tr>
-                          <td>Dirección de correo</td>
-                          <td>luis@gmail.com</td>
+                          <td>Género:</td>
+                          <td><span id="genero"></span></td>
                         </tr>
-                      
+                        <tr>
+                          <td>Usuario:</td>
+                          <td><span id="usuario"></span></td>
                         </tr>
-                       
+                        <tr>
+                          <td>Dirección de correo:</td>
+                          <td><span id="correo"></span></td>
+                        </tr>
                       </tbody>
                     </table>
                     
-                    <a href="crearCurso.html" class="btn btn-primary">Mis cursos agregados</a>
-                    <a href="historial_compras.html" class="btn btn-primary">Mis cursos inscritos</a>
+                    <a  id="menu-item"></a>
+                    
                     <br>
                   </div>
                   <br>
@@ -142,5 +188,16 @@
           </div>
         </div>
       </div>
+
+      <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: './WebServices/menuPerfil.php',
+                success: function(response) {
+                    $('#menu-item').html(response);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

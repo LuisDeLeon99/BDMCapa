@@ -12,7 +12,7 @@ BEGIN
 	SET err = CASE WHEN err < 4 THEN err + 1 ELSE err END
 	WHERE Usuario = usuarios.Usuario AND Pass <> usuarios.Pass;
 
-	SELECT Usuario, Pass, Rol, err, usel
+	SELECT Usuario,Nombre, Apaterno, Amaterno,  Rol, Imagen, Genero, Correo, Fecha, Fechan, err,usel
 	FROM Usuarios
 	WHERE Usuario = usuarios.Usuario AND Pass = usuarios.Pass;
 END //
