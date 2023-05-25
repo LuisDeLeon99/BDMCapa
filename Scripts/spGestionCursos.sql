@@ -15,12 +15,13 @@ CREATE PROCEDURE spGestionCursos(
     IN Diploma LONGBLOB,
     IN Gratis BOOLEAN,
     IN Eliminado BOOLEAN,
-    IN IDCat INT
+    IN IDCat INT,
+    IN Creacion DATE
 )
 BEGIN
     IF Accion = 'IN' THEN
-        INSERT INTO Curso(ID_curso, Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat)
-        VALUES(ID_curso, Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, 0, 1);
+        INSERT INTO Curso(Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat, Creacion)
+        VALUES(Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, 0, IDCat, CURDATE());
     END IF;
 
     IF Accion = 'UP' THEN
@@ -33,7 +34,8 @@ BEGIN
             Diploma = Diploma,
             Gratis = Gratis,
             Eliminado = Eliminado,
-            IDCat = IDCat
+            IDCat = IDCat,
+            Creacion = Creacion
         WHERE ID_curso = ID_curso;
     END IF;
 
@@ -45,11 +47,50 @@ BEGIN
 
     IF Accion = 'DE' THEN
         DELETE FROM Curso WHERE ID_curso = ID_curso; 
-    END IF;  
+    END IF;
 
     IF Accion = 'SE' THEN
-        SELECT ID_curso, Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat
+        SELECT ID_curso, Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat, Creacion
         FROM Curso WHERE ID_curso = ID_curso;
+    END IF;
+
+    IF Accion = 'SE1' THEN
+        IF IDCat <> 1 THEN
+            SELECT ID_curso, Titulo, CalificacionPromedio
+            FROM viGestionCursos
+            WHERE IDCat = IDCat
+            ORDER BY CalificacionPromedio DESC;
+        ELSE
+            SELECT ID_curso, Titulo, CalificacionPromedio
+            FROM viGestionCursos
+            ORDER BY CalificacionPromedio DESC;
+        END IF;
+    END IF;
+
+    IF Accion = 'SE2' THEN
+        IF IDCat <> 1 THEN
+            SELECT ID_curso, Titulo, Ventas
+            FROM viGestionCursos
+            WHERE IDCat = IDCat
+            ORDER BY Ventas DESC;
+        ELSE
+            SELECT ID_curso, Titulo, Ventas
+            FROM viGestionCursos
+            ORDER BY Ventas DESC;
+        END IF;
+    END IF;
+
+    IF Accion = 'SE3' THEN
+        IF IDCat <> 1 THEN
+            SELECT ID_curso, Titulo, UltimaVenta
+            FROM viGestionCursos
+            WHERE IDCat = IDCat
+            ORDER BY UltimaVenta DESC;
+        ELSE
+            SELECT ID_curso, Titulo, UltimaVenta
+            FROM viGestionCursos
+            ORDER BY UltimaVenta DESC;
+        END IF;
     END IF;
     
 END //

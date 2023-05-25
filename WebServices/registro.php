@@ -5,7 +5,7 @@ require_once 'conexion.php';
 $valida = 0;
 $usuarioExistente = 0;
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+//$conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
 
 

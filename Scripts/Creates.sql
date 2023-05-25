@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS Pago;
 CREATE TABLE Pago
 (
   ID_pago int primary key auto_increment,
-  Descripcion INT NOT NULL
+  Descripcion VARCHAR(40) NOT NULL
  
 );
 
@@ -76,6 +76,8 @@ IDNiv INT  PRIMARY KEY auto_increment,
 ID_curso INT  NOT NULL, -- FK(Curso)
 Nivel INT NOT NUll,
 Video LONGBLOB NOT NULL,
+Titulo VARCHAR(30) NOT NULL,
+Descripcion VARCHAR(50) NOT NULL,
 Premium BOOL NOT NULL
 );
 
@@ -106,6 +108,7 @@ Imagen BLOB NOT NULL,
 Diploma BLOB NOT NULL,
 Gratis BOOL NOT NULL,
 Eliminado BOOL NOT NULL,
+Creacion DATE NOT NULL,
 IDCat INT NOT NULL -- FK(Categoria)
 );
 

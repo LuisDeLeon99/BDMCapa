@@ -27,7 +27,7 @@ BEGIN
         SET Fecha = NOW();
         
         INSERT INTO Usuarios(Usuario,Nombre, Apaterno, Amaterno, Pass, Rol, Imagen, Genero, Correo, Fecha, Fechan, err,usel )
-        VALUES( Usuario,Nombre, Ap, Am, Pass, Rol, Imagen, Genero, Correo, Fecha, Fechan,0,0 );
+        VALUES( Usuario,Nombre, Ap, Am, Pass, Rol, Imagen, Genero, Correo, CURDATE(), Fechan,0,0 );
     END IF;
     
     IF Accion = 'UP' THEN
@@ -41,7 +41,7 @@ BEGIN
             Imagen = Imagen,
             Genero = Genero,
             Correo = Correo,
-            Fecha = Fecha,
+            Fecha = CURDATE(),
             Fechan = Fechan
             
         WHERE ID_usuario = ID_usuario;
