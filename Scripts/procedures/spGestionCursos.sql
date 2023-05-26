@@ -16,7 +16,9 @@ CREATE PROCEDURE spGestionCursos(
     IN Gratis BOOLEAN,
     IN Eliminado BOOLEAN,
     IN IDCat INT,
-    IN Creacion DATE
+    IN Creacion DATE,
+    IN Inicio INT,
+    IN Cantidad INT
 )
 BEGIN
     IF Accion = 'IN' THEN
@@ -59,11 +61,13 @@ BEGIN
             SELECT ID_curso, Titulo, CalificacionPromedio
             FROM viGestionCursos
             WHERE IDCat = IDCat
-            ORDER BY CalificacionPromedio DESC;
+            ORDER BY CalificacionPromedio DESC
+            LIMIT Inicio, Cantidad;
         ELSE
             SELECT ID_curso, Titulo, CalificacionPromedio
             FROM viGestionCursos
-            ORDER BY CalificacionPromedio DESC;
+            ORDER BY CalificacionPromedio DESC
+            LIMIT Inicio, Cantidad;
         END IF;
     END IF;
 
@@ -72,27 +76,30 @@ BEGIN
             SELECT ID_curso, Titulo, Ventas
             FROM viGestionCursos
             WHERE IDCat = IDCat
-            ORDER BY Ventas DESC;
+            ORDER BY Ventas DESC
+            LIMIT Inicio, Cantidad;
         ELSE
             SELECT ID_curso, Titulo, Ventas
             FROM viGestionCursos
-            ORDER BY Ventas DESC;
+            ORDER BY Ventas DESC
+            LIMIT Inicio, Cantidad;
         END IF;
     END IF;
 
-    IF Accion = 'SE3' THEN
+     IF Accion = 'SE3' THEN
         IF IDCat <> 1 THEN
             SELECT ID_curso, Titulo, UltimaVenta
             FROM viGestionCursos
             WHERE IDCat = IDCat
-            ORDER BY UltimaVenta DESC;
+            ORDER BY UltimaVenta DESC
+            LIMIT Inicio, Cantidad;
         ELSE
             SELECT ID_curso, Titulo, UltimaVenta
             FROM viGestionCursos
-            ORDER BY UltimaVenta DESC;
+            ORDER BY UltimaVenta DESC
+            LIMIT Inicio, Cantidad;
         END IF;
     END IF;
-    
 END //
 
 DELIMITER ;

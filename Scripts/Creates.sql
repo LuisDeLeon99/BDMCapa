@@ -6,7 +6,7 @@ CREATE TABLE CursosUsuarios
 ID_curso INT  NOT NULL, -- FK(Curso)
 ID_alumno INT NOT NULL, -- FK(Usuario)
 ID_instructor INT NOT NULL, -- FK(Usuario)
-Progreso INT  NOT NULL,
+Progreso DECIMAL(5,2)  NOT NULL,
 Diploma BLOB NOT NULL, 
 Fecha DATE NOT NULL,
 FechaF DATE NOT NULL,
@@ -78,7 +78,8 @@ Nivel INT NOT NUll,
 Video LONGBLOB NOT NULL,
 Titulo VARCHAR(30) NOT NULL,
 Descripcion VARCHAR(50) NOT NULL,
-Premium BOOL NOT NULL
+Premium BOOL NOT NULL,
+Completado BOOL NOT NULL
 );
 
 

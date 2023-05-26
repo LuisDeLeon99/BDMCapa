@@ -64,20 +64,35 @@ class Curso {
     }
 
     // Método estático para obtener todos los cursos desde la vista
-    public static function obtenerCursos() {
+    public static function obtenerCursos($accion, $pagina) {
         require_once 'conexion.php';
-
-        // Consulta para obtener los cursos desde la vista
-        $consulta = "SELECT * FROM viGestionCursos";
-
+    
+        // Cálculo de la posición de inicio para la paginación
+        $cursosPorPagina = 12;
+        $inicio = ($pagina - 1) * $cursosPorPagina;
+    
+        // Consulta para llamar al procedimiento almacenado según la acción y la paginación
+        $consulta = "";
+    
+        if ($accion === 'SE1') {
+            $consulta = "CALL spGestionCursosSE1($inicio, $cursosPorPagina)";
+        } elseif ($accion === 'SE2') {
+            $consulta = "CALL spGestionCursosSE2($inicio, $cursosPorPagina)";
+        } elseif ($accion === 'SE3') {
+            $consulta = "CALL spGestionCursosSE3($inicio, $cursosPorPagina)";
+        } else {
+            // Acción no válida
+            return null;
+        }
+    
         // Ejecutar la consulta
         $resultado = mysqli_query($conexion, $consulta);
-
+    
         // Verificar si se obtuvieron resultados
         if ($resultado) {
             // Array para almacenar los cursos
             $cursos = array();
-
+    
             // Recorrer los resultados y crear objetos Curso
             while ($fila = mysqli_fetch_assoc($resultado)) {
                 $curso = new Curso(
@@ -93,13 +108,13 @@ class Curso {
                 );
                 $cursos[] = $curso;
             }
-
+    
             // Liberar los resultados
             mysqli_free_result($resultado);
-
+    
             // Cerrar la conexión a la base de datos
             mysqli_close($conexion);
-
+    
             return $cursos;
         } else {
             // Error al ejecutar la consulta
