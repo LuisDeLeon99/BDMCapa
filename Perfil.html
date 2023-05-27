@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script>
       $(document).ready(function() {
         $.ajax({
@@ -80,30 +80,12 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <input class="form-control me-sm-2" type="search" placeholder="Buscar">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-            <ul class="navbar-nav me-auto espacioder">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="carrito.html">Carrito
-                    </a>
-                    
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="Registro.html">Crear cuenta
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Login.html">Inicia sesión
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Perfil.html">Cuenta
-                    </a>
-                </li>
-             </ul>
+              <input class="form-control me-sm-2" type="search" placeholder="Buscar">
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+          </form>
+          <ul class="navbar-nav me-auto espacioder"id="menu-item" >
+              
+          </ul>
               
         </div>
     </div>
@@ -188,7 +170,7 @@
           </div>
         </div>
       </div>
-
+      <script src="js/scripts.js"></script>
       <script>
         $(document).ready(function() {
             $.ajax({

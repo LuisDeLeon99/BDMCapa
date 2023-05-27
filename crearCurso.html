@@ -61,9 +61,13 @@
     </nav>
     <form>
         <div style="margin:auto; width:50%;">
+            <br>
+            <h1>Bienvenido a la creación de Curso</h1>
+           
             <div class="form-group">
-                <label for="exampleSelect1" class="form-label mt-4">Niveles que tendrá el curso</label>
-                <select class="form-select" id="exampleSelect1">
+                <label for="exampleSelect1" class="form-label mt-4" style="font-size: 20px;">Niveles que tendrá el curso</label>
+                <br>
+                <select class="form-select-sm" id="exampleSelect1">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -94,35 +98,95 @@
                     <div class="form-group">
                         <div class="input-group mb-3">
                             <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="text" class="form-control-sm" aria-label="Amount (to the nearest dollar)">
                             <span class="input-group-text">.00</span>
                         </div>
 
                         <div class="form-group">
                             <label class="col-form-label mt-4" for="inputDefault">Nombre del curso</label>
-                            <input type="text" class="form-control" placeholder="Escribe el nombre de tu curso"
-                                id="inputDefault">
+                            <input type="text" class="form-control" placeholder="Ponle nombre a tu curso"
+                                id="inputDefault" name="nombreCurso">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleTextarea" class="form-label mt-4">Descripción del curso</label>
-                            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Explicale a la gente de que trata tú curso"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="formFile" class="form-label mt-4">Imagen de presentación del curso</label>
                             <input class="form-control" type="file" id="formFile">
                         </div>
-
-                        <label class="form-label mt-4">Categoria del curso</label>
+                        <br>
                         <div>
-                            <select class="form-select" id="exampleSelect1">
-                                <option value="" selected>Selecciona una categoría</option>
-                                <option value="opcion1">Categoría 1</option>
-                                <option value="opcion2">Categoría 2</option>
-                                <option value="opcion3">Categoría 3</option>
-                                <option value="opcion4">Categoría 4</option>
-                            </select>
+                            <label class="form-label mt-4">Categoria del curso</label>
+                            <br>
+                            <button id="openModalBtn" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#myModal">Crear nueva categoría</button>
+
+                            <div class="modal" id="myModal" style="margin:250px 80px 45px 55px;">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Nueva categoría</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label mt-4" for="inputDefault">Nombre de la
+                                                categoría</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Escribe el nombre de la nueva categoría" id="inputDefault"
+                                                name="nombreCurso">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleTextarea" class="form-label mt-4">Descripción de la
+                                                categoría</label>
+                                            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary">Guardar</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                // Obtener el botón por su ID
+                                var openModalBtn = document.getElementById('openModalBtn');
+
+                                // Obtener la pantalla modal por su ID
+                                var modal = document.getElementById('myModal');
+
+                                // Agregar un evento de clic al botón
+                                openModalBtn.addEventListener('click', function () {
+                                    // Mostrar la pantalla modal
+                                    modal.style.display = 'block';
+                                });
+
+                                // Agregar un evento de clic al botón de cerrar
+                                var closeModalBtn = modal.querySelector('.btn-close');
+                                closeModalBtn.addEventListener('click', function () {
+                                    // Ocultar la pantalla modal
+                                    modal.style.display = 'none';
+                                });
+                            </script>
+                            <br>
+                            <br>
+                            <div>
+                                <select class="form-select" id="exampleSelect1">
+                                    <option value="" selected>Selecciona una categoría</option>
+                                    <option value="opcion1">Categoría 1</option>
+                                    <option value="opcion2">Categoría 2</option>
+                                    <option value="opcion3">Categoría 3</option>
+                                    <option value="opcion4">Categoría 4</option>
+                                </select>
+                            </div>
                         </div>
                         <br>
     </form>
