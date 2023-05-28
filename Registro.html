@@ -8,7 +8,7 @@
     <title>Registrar</title>
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <link href="css/styles.css" rel="stylesheet" />
+    <!-- <link href="css/styles.css" rel="stylesheet" /> -->
     <script>
         function VFecha() {
             var myDate = document.getElementById("fechanac").value;
@@ -153,9 +153,24 @@
                 <label>Escoge tu genero:</label>
                 <input type="hidden" name="genero" id="genero" value="">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <button type="button" class="btn btn-outline-secondary btn-outline-dark" name="genero" id="Masculino">Masculino</button>
-                    <button type="button" class="btn btn-outline-secondary btn-outline-dark " name="genero" id="Femenino">Femenino</button>
+                    <button type="radio" class="btn btn-outline-secondary btn-outline-dark" name="genero" id="Masculino">Masculino</button>
+                    <button type="radio" class="btn btn-outline-secondary btn-outline-dark " name="genero" id="Femenino">Femenino</button>
                   </div>
+                  <script>
+                    const btnMasculino = document.getElementById('Masculino');
+                    const btnFemenino = document.getElementById('Femenino');
+                  
+                    btnMasculino.addEventListener('click', function() {
+                      btnMasculino.classList.add('active');
+                      btnFemenino.classList.remove('active');
+                    });
+                  
+                    btnFemenino.addEventListener('click', function() {
+                      btnFemenino.classList.add('active');
+                      btnMasculino.classList.remove('active');
+                    });
+                  </script>
+                  
                 <br>
                 <div class="form-group text-center">
                     <label for="exampleInputEmail1" class="form-label mt-4">Dirección de correo</label>
@@ -195,11 +210,28 @@
                 <input type="hidden" name="rol" id="rol" value="">
                 <br>
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio1" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="btnradio1" id="btnradio1" autocomplete="off">
                     <label class="btn btn-outline-primary" for="btnradio1">Alumno</label>
                     <input type="radio" class="btn-check" name="btnradio2" id="btnradio2" autocomplete="off">
                     <label class="btn btn-outline-primary" for="btnradio2">Instructor</label>
                   </div>
+                  <script>
+                    const radioBtn1 = document.getElementById('btnradio1');
+                    const radioBtn2 = document.getElementById('btnradio2');
+                  
+                    radioBtn1.addEventListener('change', function() {
+                      if (radioBtn1.checked) {
+                        radioBtn2.checked = false;
+                      }
+                    });
+                  
+                    radioBtn2.addEventListener('change', function() {
+                      if (radioBtn2.checked) {
+                        radioBtn1.checked = false;
+                      }
+                    });
+                  </script>
+                  
                 <br>
                 <br>
                 <input type="file" name="image"  id="image" required 
