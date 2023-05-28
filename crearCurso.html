@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -59,16 +61,16 @@
             </div>
         </div>
     </nav>
-    <form>
+    <form id="formcurso">
         <div style="margin:auto; width:50%;">
             <br>
             <h1>Bienvenido a la creación de Curso</h1>
 
             <div class="form-group">
-                <label for="exampleSelect1" class="form-label mt-4" style="font-size: 20px;">Niveles que tendrá el
+                <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Niveles que tendrá el
                     curso</label>
                 <br>
-                <select class="form-select-sm" id="exampleSelect1">
+                <select class="form-select-sm" id="nivelesnum">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -133,26 +135,26 @@
 
 
                         <div class="form-group">
-                            <label class="col-form-label mt-4" for="inputDefault">Nombre del curso</label>
+                            <label class="col-form-label mt-4" for="nombrecurso">Nombre del curso</label>
                             <input type="text" class="form-control" placeholder="Ponle nombre a tu curso"
-                                id="inputDefault" name="nombreCurso">
+                                id="nombrecurso" name="nombreCurso">
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleTextarea" class="form-label mt-4">Descripción del curso</label>
+                            <label for="descripcioncurso" class="form-label mt-4">Descripción del curso</label>
                             
-                            <textarea class="form-control" id="exampleTextarea" rows="3"
+                            <textarea class="form-control" id="descripcioncurso" rows="3"
                                 placeholder="Explicale a la gente de que trata tú curso" name="descripcionCurso"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="formFile" class="form-label mt-4">Imagen de presentación del curso</label>
-                            <input class="form-control" type="file" id="formFile" name="imagenCurso">
+                            <label for="imagenCurso" class="form-label mt-4">Imagen de presentación del curso</label>
+                            <input class="form-control" type="file" id="imagenCurso" name="imagenCurso">
                         </div>
                         <br>
                         <div class="form-group">
-                            <label for="formFile" class="form-label mt-4">Diploma que se recibe al concluir el curso</label>
-                            <input class="form-control" type="file" id="formFile" name="diploma">
+                            <label for="diploma" class="form-label mt-4">Diploma que se recibe al concluir el curso</label>
+                            <input class="form-control" type="file" id="diploma" name="diploma">
                         </div>
                         <br>
                         <div>
@@ -172,20 +174,20 @@
                                             </button>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-form-label mt-4" for="inputDefault">Nombre de la
+                                            <label class="col-form-label mt-4" for="inputNombreCat">Nombre de la
                                                 categoría</label>
                                             <input type="text" class="form-control"
-                                                placeholder="Escribe el nombre de la nueva categoría" id="inputDefault"
+                                                placeholder="Escribe el nombre de la nueva categoría" id="inputNombreCat"
                                                 name="nombreCat">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="exampleTextarea" class="form-label mt-4">Descripción de la
+                                            <label for="inputdescripcionCat" class="form-label mt-4">Descripción de la
                                                 categoría</label>
-                                            <textarea class="form-control" id="exampleTextarea" rows="3" name="descripcionCat"></textarea>
+                                            <textarea class="form-control" id="inputdescripcionCat" rows="3" name="descripcionCat"></textarea>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary">Guardar</button>
+                                            <button type="button" onclick="crearCategoria()" class="btn btn-primary">Guardar</button>
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Cerrar</button>
                                         </div>
@@ -215,18 +217,144 @@
                             </script>
                             <br>
                             <br>
-                            <div>
-                                <select class="form-select" id="exampleSelect1">
+                            <div id="categoriaDiv">
+                                <select class="categoria-select" id="categoria">
                                     <option value="" selected>Selecciona una categoría</option>
-                                    <option value="opcion1">Categoría 1</option>
-                                    <option value="opcion2">Categoría 2</option>
-                                    <option value="opcion3">Categoría 3</option>
-                                    <option value="opcion4">Categoría 4</option>
                                 </select>
                             </div>
                         </div>
                         <br>
     </form>
+    
+    <script async>
+        // Hacer la solicitud AJAX al archivo PHP
+        async function obtenerCategorias() {
+    try {
+        const response = await fetch('WebServices/categoriafetch.php', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (response.ok) {
+            const categorias = await response.json();
+            console.log(categorias);
+
+            // Generar las opciones de categoría dinámicamente
+            let optionsHTML = '';
+
+            categorias.forEach(categoria => {
+                // Agregar cada categoría como una opción al HTML
+                optionsHTML += `<option value="${categoria.IDCat}">${categoria.Categoria}</option>`;
+            });
+
+            // Obtener el elemento select por su ID
+            const categoriaSelect = document.getElementById('categoria');
+
+            // Eliminar las opciones existentes
+            categoriaSelect.innerHTML = '';
+            // Establecer el contenido HTML en el select
+            categoriaSelect.innerHTML += optionsHTML;
+        } else {
+            console.error('Error en la solicitud:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+    }
+}
+    
+        obtenerCategorias();
+
+        async function crearCategoria() {
+        try {
+            const data = {
+                nombreCategoria: document.getElementById('inputNombreCat').value,
+                descripcionCategoria: document.getElementById('inputdescripcionCat').value
+            };
+
+            const response = await fetch('WebServices/categoriafetch.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                console.log('Categoría creada con éxito');
+                obtenerCategorias();
+                document.getElementById('inputNombreCat').value = '';
+                document.getElementById('inputdescripcionCat').value = '';
+            } else {
+                console.error('Error en la solicitud:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+        }
+        }
+        async function crearCurso() {
+            try {
+                const imagenCursoInput = document.getElementById('imagenCurso');
+                const diplomaInput = document.getElementById('diploma');
+
+                const imagenCursoFile = imagenCursoInput.files[0];
+                const diplomaFile = diplomaInput.files[0];
+                const data = {
+                    nivelesCurso: document.getElementById('nivelesnum').value,
+                    gratisCurso: document.getElementById('optionsRadios1').checked,
+                    tituloCurso: document.getElementById('nombrecurso').value,
+                    descripcionCurso: document.getElementById('descripcioncurso').value,
+                    imagenCurso: await getBase64Image(imagenCursoFile),
+                    diplomaCurso: await getBase64Image(diplomaFile),
+                    costoCurso: document.getElementById('precioCurso').value,
+                    idCategoria: document.getElementById('categoria').value
+                };
+                console.log(data);
+                const response = await fetch('WebServices/curso.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    console.log('Curso creado con éxito');
+                    // Realiza las acciones adicionales después de crear el curso, si es necesario
+                } else {
+                    console.error('Error en la solicitud:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+            }
+        }
+
+        // Agregar un evento de envío al formulario
+        const formCurso = document.getElementById('formcurso');
+        formCurso.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+            crearCurso(); // Llamar a la función crearCurso para enviar los datos
+        });
+        function getBase64Image(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                const base64Data = reader.result.split(',')[1];
+                resolve(base64Data);
+            };
+
+            reader.onerror = function (error) {
+                reject(error);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+    </script>
+    
     </div>
 </body>
 

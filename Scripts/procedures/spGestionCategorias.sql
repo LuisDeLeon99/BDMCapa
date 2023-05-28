@@ -6,7 +6,7 @@ DELIMITER //
 
 CREATE PROCEDURE spGestionCategorias(
     IN Accion CHAR(3),
-    IN IDCat INT,
+    IN IDCat INT ,
     IN ID_usuario INT,
     IN Categoria VARCHAR(30),
     IN Descripcion VARCHAR(50),
@@ -44,6 +44,11 @@ BEGIN
         FROM viCategoria WHERE IDCat = IDCat;
         
     END IF;
+    
+    IF Accion = 'SE1' THEN
+    SELECT viCategoria.IDCat, viCategoria.NombreUsuario, viCategoria.Categoria, viCategoria.Descripcion, viCategoria.creacion, viCategoria.catel
+    FROM viCategoria ;
+	END IF;
     
 END //
 

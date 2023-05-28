@@ -40,7 +40,7 @@ if (isset($_POST['usuario']) && isset($_POST['pass'])) {
             $_SESSION['Apaterno'] = $row['Apaterno'];
             $_SESSION['Amaterno'] = $row['Amaterno'];
             $_SESSION['imagen'] = $row['Imagen'];
-            
+            $_SESSION['ID_usuario'] = $row['ID_usuario'];
             if ($genero == 0) {
                 $_SESSION['genero'] = 'Masculino';
             } elseif ($genero == 1) {
@@ -59,6 +59,6 @@ if (isset($_POST['usuario']) && isset($_POST['pass'])) {
         exit();
     }
 }
-mysqli_close($conn);
+$conn->close();
 ?>
     

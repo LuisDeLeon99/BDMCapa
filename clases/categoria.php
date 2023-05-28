@@ -69,19 +69,21 @@ class Categoria {
        
 
         // Llamada al stored procedure para obtener las categorías
-        $accion = 'SE';
-        $IDCat = 0;
-        $ID_usuario = 0;
-        $Categoria = '';
-        $Descripcion = '';
-        $creacion = '';
-        $catel = 0;
-
+        $accion = 'SE1';
+        $IDCat = null;
+        $ID_usuario = null;
+        $Categoria = null;
+        $Descripcion = null;
+        $creacion = null;
+        $catel = null;
+        echo 'aantes' ;
         // Preparar y ejecutar la sentencia
         $stmt = mysqli_prepare($conexion, "CALL spGestionCategorias(?, ?, ?, ?, ?, ?, ?)");
         mysqli_stmt_bind_param($stmt, "sissisi", $accion, $IDCat, $ID_usuario, $Categoria, $Descripcion, $creacion, $catel);
         mysqli_stmt_execute($stmt);
-
+        echo 'Error en el stored procedure: despues' ;
+        return 0;   
+        
         // Verificar si se obtuvieron resultados
         $resultado = mysqli_stmt_get_result($stmt);
         if ($resultado) {
@@ -92,7 +94,7 @@ class Categoria {
             while ($fila = mysqli_fetch_assoc($resultado)) {
                 $categoria = new Categoria(
                     $fila['IDCat'],
-                    $fila['ID_usuario'],
+                    $fila['NombreUsuario'],
                     $fila['Categoria'],
                     $fila['Descripcion'],
                     $fila['creacion'],
