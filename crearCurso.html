@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuenta</title>
+    <title>Nuevo Curso</title>
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
@@ -100,36 +100,36 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">$</span>
                             <input type="text" class="form-control-sm" aria-label="Amount (to the nearest dollar)"
-                                id="precioCurso">
+                                id="precioCurso" name="precio">
                             <span class="input-group-text">.00</span>
                         </div>
                         <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                              const precioCursoInput = document.getElementById('precioCurso');
-                          
-                              precioCursoInput.addEventListener('input', function(event) {
-                                const valorIngresado = event.target.value;
-                                const soloNumeros = /^[0-9]+$/.test(valorIngresado);
-                          
-                                if (!soloNumeros) {
-                                  event.target.value = valorIngresado.replace(/[^0-9]/g, '');
-                                }
-                              });
-                          
-                              const optionsRadios1 = document.getElementById('optionsRadios1');
-                              const optionsRadios2 = document.getElementById('optionsRadios2');
-                          
-                              optionsRadios1.addEventListener('change', function() {
-                                precioCursoInput.disabled = false;
-                              });
-                          
-                              optionsRadios2.addEventListener('change', function() {
-                                precioCursoInput.disabled = true;
-                                precioCursoInput.value = ''; // Limpiar el valor del campo
-                              });
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const precioCursoInput = document.getElementById('precioCurso');
+
+                                precioCursoInput.addEventListener('input', function (event) {
+                                    const valorIngresado = event.target.value;
+                                    const soloNumeros = /^[0-9]+$/.test(valorIngresado);
+
+                                    if (!soloNumeros) {
+                                        event.target.value = valorIngresado.replace(/[^0-9]/g, '');
+                                    }
+                                });
+
+                                const optionsRadios1 = document.getElementById('optionsRadios1');
+                                const optionsRadios2 = document.getElementById('optionsRadios2');
+
+                                optionsRadios1.addEventListener('change', function () {
+                                    precioCursoInput.disabled = false;
+                                });
+
+                                optionsRadios2.addEventListener('change', function () {
+                                    precioCursoInput.disabled = true;
+                                    precioCursoInput.value = ''; // Limpiar el valor del campo
+                                });
                             });
-                          </script>
-                          
+                        </script>
+
 
 
                         <div class="form-group">
@@ -140,13 +140,14 @@
 
                         <div class="form-group">
                             <label for="exampleTextarea" class="form-label mt-4">Descripción del curso</label>
+                            
                             <textarea class="form-control" id="exampleTextarea" rows="3"
-                                placeholder="Explicale a la gente de que trata tú curso"></textarea>
+                                placeholder="Explicale a la gente de que trata tú curso" name="descripcionCurso"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="formFile" class="form-label mt-4">Imagen de presentación del curso</label>
-                            <input class="form-control" type="file" id="formFile">
+                            <input class="form-control" type="file" id="formFile" name="imagenCurso">
                         </div>
                         <br>
                         <div>
@@ -170,13 +171,13 @@
                                                 categoría</label>
                                             <input type="text" class="form-control"
                                                 placeholder="Escribe el nombre de la nueva categoría" id="inputDefault"
-                                                name="nombreCurso">
+                                                name="nombreCat">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="exampleTextarea" class="form-label mt-4">Descripción de la
                                                 categoría</label>
-                                            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                                            <textarea class="form-control" id="exampleTextarea" rows="3" name="descripcionCat"></textarea>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary">Guardar</button>
