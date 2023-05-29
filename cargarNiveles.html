@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>!Ya casi!</title>
+    <title>¡Ya casi!</title>
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
@@ -71,9 +71,18 @@
             <label for="cargaNiv" class="form-label mt-4">Carga el contenido de tu cruso</label>
             <input class="form-control" type="file" id="cargaNiv" name="cargaNiv">
         </div>
+        <button type="submit" name="submit" value="UPLOAD" class="btn btn-outline-info"
+        style="margin:10px 10px 55px 350px; width:20%;" onclick="redirigir()">¡Crear curso!</button>
+
+    <script>
+        function redirigir() {
+            window.location.href = "cursosAgregados.html";
+        }
+    </script>
     </div>
     <br>
-
+    <br>
+    
     </div>
 </body>
 
