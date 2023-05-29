@@ -60,13 +60,13 @@ BEGIN
 
     IF Accion = 'SE1' THEN
         IF IDCat <> 1 THEN
-            SELECT ID_curso, Titulo, CalificacionPromedio
+            SELECT ID_curso, Titulo, CalificacionPromedio,Ventas,UltimaVenta
             FROM viGestionCursos
             WHERE IDCat = IDCat
             ORDER BY CalificacionPromedio DESC
             LIMIT Inicio, Cantidad;
         ELSE
-            SELECT ID_curso, Titulo, CalificacionPromedio
+            SELECT ID_curso, Titulo, CalificacionPromedio,Ventas,UltimaVenta
             FROM viGestionCursos
             ORDER BY CalificacionPromedio DESC
             LIMIT Inicio, Cantidad;
@@ -75,13 +75,13 @@ BEGIN
 
     IF Accion = 'SE2' THEN
         IF IDCat <> 1 THEN
-            SELECT ID_curso, Titulo, Ventas
+            SELECT ID_curso, Titulo, Ventas,CalificacionPromedio,UltimaVenta
             FROM viGestionCursos
             WHERE IDCat = IDCat
             ORDER BY Ventas DESC
             LIMIT Inicio, Cantidad;
         ELSE
-            SELECT ID_curso, Titulo, Ventas
+            SELECT ID_curso, Titulo, Ventas,CalificacionPromedio,UltimaVenta
             FROM viGestionCursos
             ORDER BY Ventas DESC
             LIMIT Inicio, Cantidad;
@@ -90,13 +90,13 @@ BEGIN
 
      IF Accion = 'SE3' THEN
         IF IDCat <> 1 THEN
-            SELECT ID_curso, Titulo, UltimaVenta
+            SELECT ID_curso, Titulo, UltimaVenta,Ventas,CalificacionPromedio
             FROM viGestionCursos
             WHERE IDCat = IDCat
             ORDER BY UltimaVenta DESC
             LIMIT Inicio, Cantidad;
         ELSE
-            SELECT ID_curso, Titulo, UltimaVenta
+            SELECT ID_curso, Titulo, UltimaVenta,Ventas,CalificacionPromedio
             FROM viGestionCursos
             ORDER BY UltimaVenta DESC
             LIMIT Inicio, Cantidad;

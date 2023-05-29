@@ -11,38 +11,33 @@ if (!isset($_SESSION['usuario'])) {
 $json_data = file_get_contents('php://input');
 $data = json_decode($json_data, true);
 
-if (isset($data['tituloCurso'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ID_usuario = $_SESSION['ID_usuario'];
-    $Niveles = $data['nivelesCurso'];
-    $Gratis = $data['gratisCurso'];    
-    $Titulo = $data['tituloCurso'];
-    $Descripcion = $data['descripcionCurso'];   
-    if ( $Gratis) {
+    $Niveles = $_POST['nivelesCurso'];
+    $Gratis = $_POST['optionsRadios'];    
+    $Titulo = $_POST['nombreCurso'];
+    $Descripcion = $_POST['descripcionCurso'];   
+    if ($Gratis) {
         $Costo = 0;
     } else {
-        $Costo = $data['costoCurso'];
+        $Costo = $_POST['precio'];
     }
-    // Decodifica las imágenes en formato base64 a datos binarios
-    //$imagenCursoData = file_get_contents($_FILES['imagenCurso']['tmp_name']);
-    //$diplomaData = file_get_contents($_FILES['diploma']['tmp_name']);
-    //$imagenCursoBinario = base64_decode($data['imagenCurso']);
-    //$diplomaBinario = base64_decode($data['diplomaCurso']);
-    $imagenCursoData = base64_decode($data['imagenCurso']);
-    $diplomaData = base64_decode($data['diplomaCurso']);
+    $imagenCursoData = file_get_contents($_FILES['imagenCurso']['tmp_name']);
+    $diplomaData = file_get_contents($_FILES['diploma']['tmp_name']);
     $accion = 'IN';
     $Eliminado = 0; // Valor predeterminado para la columna Eliminado
-    $IDCat = $data['idCategoria'];
+    $IDCat = $_POST['categoria'];
+    $IDCat = 1;
     $Creacion = '2000-05-05'; // Fecha actual
     $Inicio = 0;
     $Cantidad = 0;
     $idcur = 0;
-    
+
     // Perform the insertion into the database using the prepared statement
     $insertQuery = "CALL spGestionCursos(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $insertStmt = $conn->prepare($insertQuery);
     $insertStmt->bind_param("ssisssbbiissiii", $accion, $idcur, $Niveles, $Costo, $Titulo, $Descripcion, $imagenCursoData, $diplomaData, $Gratis, $Eliminado, $IDCat, $Creacion, $Inicio, $Cantidad, $ID_usuario);
     $insertResult = $insertStmt->execute();
-    
 
     if ($insertStmt->error) {
         echo 'Error en la consulta: ' . $insertStmt->error;

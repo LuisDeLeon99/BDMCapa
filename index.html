@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link rel="stylesheet" type="text/css" href="popper.min.js">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    
 </head>
 
 <body>
@@ -294,12 +295,47 @@
     <script src="js/scripts.js"></script>
     <script>
         $(document).ready(function() {
+        // Obtener el menú
+        obtenerMenu();
+
+        // Obtener los cursos
+        obtenerCursos('SE1', 1);
+
+        // Función para obtener el menú mediante AJAX
+        function obtenerMenu() {
             $.ajax({
-                url: './WebServices/menu.php',
-                success: function(response) {
-                    $('#menu-item').html(response);
-                }
+            url: './WebServices/menu.php',
+            success: function(response) {
+                // Actualizar el contenido del menú
+                $('#menu-item').html(response);
+            },
+            error: function() {
+                // Manejar errores en la solicitud AJAX
+                console.log('Error al obtener el menú');
+            }
             });
+        }
+
+        // Función para obtener los cursos mediante AJAX
+        function obtenerCursos(accion, pagina) {
+            $.ajax({
+            url: './obtener_cursos.php',
+            method: 'POST',
+            data: {
+                accion: accion,
+                pagina: pagina
+            },
+            success: function(response) {
+                // Manejar la respuesta del servidor
+                // Aquí puedes actualizar el contenido de tu página con los cursos obtenidos
+                $('#cursos-container').html(response);
+            },
+            error: function() {
+                // Manejar errores en la solicitud AJAX
+                console.log('Error al obtener los cursos');
+            }
+            });
+        }
         });
     </script>
     

@@ -1,129 +1,83 @@
 <?php
+// Archivo: obtener_cursos.php
 
-class Curso {
-    // Propiedades privadas de la clase
-    private $ID_curso;
-    private $Titulo;
-    private $Descripcion;
-    private $Costo;
-    private $Imagen;
-    private $CalificacionPromedio;
-    private $Ventas;
-    private $UltimaVenta;
-    private $Categoria;
+require_once 'conexion.php';
 
-    // Constructor de la clase
-    public function __construct($ID_curso, $Titulo, $Descripcion, $Costo, $Imagen, $CalificacionPromedio, $Ventas, $UltimaVenta, $Categoria) {
-        $this->ID_curso = $ID_curso;
-        $this->Titulo = $Titulo;
-        $this->Descripcion = $Descripcion;
-        $this->Costo = $Costo;
-        $this->Imagen = $Imagen;
-        $this->CalificacionPromedio = $CalificacionPromedio;
-        $this->Ventas = $Ventas;
-        $this->UltimaVenta = $UltimaVenta;
-        $this->Categoria = $Categoria;
-    }
+// Parámetros de entrada
+$accion = isset($_GET['accion']) ? $_GET['accion'] : 'SE1';
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 
-    // Métodos para obtener y establecer las propiedades (getters y setters)
+// Cálculo de la posición de inicio para la paginación
+$cursosPorPagina = 12;
+$inicio = ($pagina - 1) * $cursosPorPagina;
 
-    public function getIDCurso() {
-        return $this->ID_curso;
-    }
+// Consulta para llamar al procedimiento almacenado según la acción y la paginación
+$consulta = "";
 
-    public function getTitulo() {
-        return $this->Titulo;
-    }
-
-    public function getDescripcion() {
-        return $this->Descripcion;
-    }
-
-    public function getCosto() {
-        return $this->Costo;
-    }
-
-    public function getImagen() {
-        return $this->Imagen;
-    }
-
-    public function getCalificacionPromedio() {
-        return $this->CalificacionPromedio;
-    }
-
-    public function getVentas() {
-        return $this->Ventas;
-    }
-
-    public function getUltimaVenta() {
-        return $this->UltimaVenta;
-    }
-
-    public function getCategoria() {
-        return $this->Categoria;
-    }
-
-    // Método estático para obtener todos los cursos desde la vista
-    public static function obtenerCursos($accion, $pagina) {
-        require_once 'conexion.php';
-    
-        // Cálculo de la posición de inicio para la paginación
-        $cursosPorPagina = 12;
-        $inicio = ($pagina - 1) * $cursosPorPagina;
-    
-        // Consulta para llamar al procedimiento almacenado según la acción y la paginación
-        $consulta = "";
-    
-        if ($accion === 'SE1') {
-            $consulta = "CALL spGestionCursosSE1($inicio, $cursosPorPagina)";
-        } elseif ($accion === 'SE2') {
-            $consulta = "CALL spGestionCursosSE2($inicio, $cursosPorPagina)";
-        } elseif ($accion === 'SE3') {
-            $consulta = "CALL spGestionCursosSE3($inicio, $cursosPorPagina)";
-        } else {
-            // Acción no válida
-            return null;
-        }
-    
-        // Ejecutar la consulta
-        $resultado = mysqli_query($conexion, $consulta);
-    
-        // Verificar si se obtuvieron resultados
-        if ($resultado) {
-            // Array para almacenar los cursos
-            $cursos = array();
-    
-            // Recorrer los resultados y crear objetos Curso
-            while ($fila = mysqli_fetch_assoc($resultado)) {
-                $curso = new Curso(
-                    $fila['ID_curso'],
-                    $fila['Titulo'],
-                    $fila['Descripcion'],
-                    $fila['Costo'],
-                    $fila['Imagen'],
-                    $fila['CalificacionPromedio'],
-                    $fila['Ventas'],
-                    $fila['UltimaVenta'],
-                    $fila['Categoria']
-                );
-                $cursos[] = $curso;
-            }
-    
-            // Liberar los resultados
-            mysqli_free_result($resultado);
-    
-            // Cerrar la conexión a la base de datos
-            mysqli_close($conexion);
-    
-            return $cursos;
-        } else {
-            // Error al ejecutar la consulta
-            echo 'Error en la consulta: ' . mysqli_error($conexion);
-            mysqli_close($conexion);
-            return null;
-        }
-    }
+if ($accion === 'SE1') {
+    $consulta = "CALL spGestionCursos('SE1', 0, 0, 0, '', '', 0, 0, 0, 0, 0, '2000-05-05', $inicio, $cursosPorPagina, 0)";
+} elseif ($accion === 'SE2') {
+    $consulta = "CALL spGestionCursos('SE2', 0, 0, 0, '', '', 0, 0, 0, 0, 0, '2000-05-05', $inicio, $cursosPorPagina, 0)";
+} elseif ($accion === 'SE3') {
+    $consulta = "CALL spGestionCursos('SE3', 0, 0, 0, '', '', 0, 0, 0, 0, 0, '2000-05-05', $inicio, $cursosPorPagina, 0)";
+} else {
+    // Acción no válida
+    return null;
 }
 
+// Ejecutar la consulta
+$resultado = mysqli_query($conn, $consulta);
+$respuestahtml = "";
+// Verificar si se obtuvieron resultados
+if ($resultado && mysqli_num_rows($resultado) > 0) {
+    // Recorrer los resultados y mostrar los cursos
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+        $idCurso = $fila['ID_curso'];
+        $titulo = $fila['Titulo'];
+        $calificacion = $fila['CalificacionPromedio'];
 
+        // Mostrar el curso en el HTML
+        $respuestahtml.=' <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Cursos populares</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div class="text-dark text-decoration-line-through">
+                                <!-- Product price-->
+                                $40.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                href="#">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>';
+        
+        
+        echo "<div>";
+        echo "<h3>ID: $idCurso</h3>";
+        echo "<p>Título: $titulo</p>";
+        echo "<p>Calificación: $calificacion</p>";
+        echo "</div>";
+    }
+} else {
+    echo "No se encontraron cursos.";
+}
+
+// Liberar los recursos y cerrar la conexión
+mysqli_free_result($resultado);
+$conn->close();
 ?>

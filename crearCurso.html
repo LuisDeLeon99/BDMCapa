@@ -61,7 +61,7 @@
             </div>
         </div>
     </nav>
-    <form id="formcurso" enctype="multipart/form-data">
+    <form id="formcurso" accion="WebServices/categoriafetch.php" method="post" enctype="multipart/form-data">
         <div style="margin:auto; width:50%;">
             <br>
             <h1>Bienvenido a la creación de Curso</h1>
@@ -70,7 +70,7 @@
                 <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Niveles que tendrá el
                     curso</label>
                 <br>
-                <select class="form-select-sm" id="nivelesnum">
+                <select class="form-select-sm" id="nivelesnum" name="nivelesCurso">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -248,7 +248,7 @@
                             <br>
                             <br>
                             <div id="categoriaDiv">
-                                <select class="categoria-select" id="categoria">
+                                <select class="categoria-select" id="categoria" name="categoria">
                                     <option value="" selected>Selecciona una categoría</option>
                                 </select>
                             </div>
