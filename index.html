@@ -299,7 +299,7 @@
         obtenerMenu();
 
         // Obtener los cursos
-        obtenerCursos('SE1', 1);
+        //obtenerCursos('SE1', 1);
 
         // Función para obtener el menú mediante AJAX
         function obtenerMenu() {
@@ -317,25 +317,25 @@
         }
 
         // Función para obtener los cursos mediante AJAX
-        function obtenerCursos(accion, pagina) {
-            $.ajax({
-            url: './obtener_cursos.php',
-            method: 'POST',
-            data: {
-                accion: accion,
-                pagina: pagina
-            },
-            success: function(response) {
+        //function obtenerCursos(accion, pagina) {
+        //    $.ajax({
+        //    url: './obtener_cursos.php',
+        //    method: 'POST',
+        //    data: {
+        //        accion: accion,
+        //        pagina: pagina
+        //    },
+        //    success: function(response) {
                 // Manejar la respuesta del servidor
                 // Aquí puedes actualizar el contenido de tu página con los cursos obtenidos
-                $('#cursos-container').html(response);
-            },
-            error: function() {
+        //        $('#cursos-container').html(response);
+        //    },
+        //    error: function() {
                 // Manejar errores en la solicitud AJAX
-                console.log('Error al obtener los cursos');
-            }
-            });
-        }
+        //        console.log('Error al obtener los cursos');
+        //    }
+        //    });
+       // }
         });
     </script>
     

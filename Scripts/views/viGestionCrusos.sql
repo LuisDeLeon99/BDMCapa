@@ -13,7 +13,8 @@ SELECT
     AVG(Com.Calif) AS CalificacionPromedio,
     COUNT(DV.ID_curso) AS Ventas,
     C.Creacion AS UltimaVenta,
-    Cat.Categoria AS Categoria
+    Cat.Categoria AS Categoria,
+    Cat.IDCat AS IDCat
 FROM
     Curso AS C
     LEFT JOIN Comentarios AS Com ON C.ID_curso = Com.ID_curso
