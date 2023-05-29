@@ -142,9 +142,10 @@
 
                         <div class="form-group">
                             <label for="descripcioncurso" class="form-label mt-4">Descripción del curso</label>
-                            
+
                             <textarea class="form-control" id="descripcioncurso" rows="3"
-                                placeholder="Explicale a la gente de que trata tú curso" name="descripcionCurso"></textarea>
+                                placeholder="Explicale a la gente de que trata tú curso"
+                                name="descripcionCurso"></textarea>
                         </div>
 
                         <div class="form-group">
@@ -153,7 +154,8 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label for="diploma" class="form-label mt-4">Diploma que se recibe al concluir el curso</label>
+                            <label for="diploma" class="form-label mt-4">Diploma que se recibe al concluir el
+                                curso</label>
                             <input class="form-control" type="file" id="diploma" name="diploma">
                         </div>
                         <br>
@@ -177,17 +179,19 @@
                                             <label class="col-form-label mt-4" for="inputNombreCat">Nombre de la
                                                 categoría</label>
                                             <input type="text" class="form-control"
-                                                placeholder="Escribe el nombre de la nueva categoría" id="inputNombreCat"
-                                                name="nombreCat">
+                                                placeholder="Escribe el nombre de la nueva categoría"
+                                                id="inputNombreCat" name="nombreCat">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="inputdescripcionCat" class="form-label mt-4">Descripción de la
                                                 categoría</label>
-                                            <textarea class="form-control" id="inputdescripcionCat" rows="3" name="descripcionCat"></textarea>
+                                            <textarea class="form-control" id="inputdescripcionCat" rows="3"
+                                                name="descripcionCat"></textarea>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" onclick="crearCategoria()" class="btn btn-primary">Guardar</button>
+                                            <button type="button" onclick="crearCategoria()"
+                                                class="btn btn-primary">Guardar</button>
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Cerrar</button>
                                         </div>
@@ -224,74 +228,83 @@
                             </div>
                         </div>
                         <br>
+                        <button type="submit" name="submit" value="UPLOAD" class="btn btn-outline-info"
+                            style="margin:10px 10px 55px 350px; width:20%;" onclick="redirigir()">Crear curso</button>
+
+                        <script>
+                            function redirigir() {
+                                window.location.href = "cargarNiveles.html";
+                            }
+                        </script>
+
     </form>
-    
+
     <script async>
         // Hacer la solicitud AJAX al archivo PHP
         async function obtenerCategorias() {
-    try {
-        const response = await fetch('WebServices/categoriafetch.php', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
+            try {
+                const response = await fetch('WebServices/categoriafetch.php', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (response.ok) {
+                    const categorias = await response.json();
+                    console.log(categorias);
+
+                    // Generar las opciones de categoría dinámicamente
+                    let optionsHTML = '';
+
+                    categorias.forEach(categoria => {
+                        // Agregar cada categoría como una opción al HTML
+                        optionsHTML += `<option value="${categoria.IDCat}">${categoria.Categoria}</option>`;
+                    });
+
+                    // Obtener el elemento select por su ID
+                    const categoriaSelect = document.getElementById('categoria');
+
+                    // Eliminar las opciones existentes
+                    categoriaSelect.innerHTML = '';
+                    // Establecer el contenido HTML en el select
+                    categoriaSelect.innerHTML += optionsHTML;
+                } else {
+                    console.error('Error en la solicitud:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
             }
-        });
-
-        if (response.ok) {
-            const categorias = await response.json();
-            console.log(categorias);
-
-            // Generar las opciones de categoría dinámicamente
-            let optionsHTML = '';
-
-            categorias.forEach(categoria => {
-                // Agregar cada categoría como una opción al HTML
-                optionsHTML += `<option value="${categoria.IDCat}">${categoria.Categoria}</option>`;
-            });
-
-            // Obtener el elemento select por su ID
-            const categoriaSelect = document.getElementById('categoria');
-
-            // Eliminar las opciones existentes
-            categoriaSelect.innerHTML = '';
-            // Establecer el contenido HTML en el select
-            categoriaSelect.innerHTML += optionsHTML;
-        } else {
-            console.error('Error en la solicitud:', response.status, response.statusText);
         }
-    } catch (error) {
-        console.error('Error en la solicitud:', error);
-    }
-}
-    
+
         obtenerCategorias();
 
         async function crearCategoria() {
-        try {
-            const data = {
-                nombreCategoria: document.getElementById('inputNombreCat').value,
-                descripcionCategoria: document.getElementById('inputdescripcionCat').value
-            };
+            try {
+                const data = {
+                    nombreCategoria: document.getElementById('inputNombreCat').value,
+                    descripcionCategoria: document.getElementById('inputdescripcionCat').value
+                };
 
-            const response = await fetch('WebServices/categoriafetch.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
+                const response = await fetch('WebServices/categoriafetch.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
 
-            if (response.ok) {
-                console.log('Categoría creada con éxito');
-                obtenerCategorias();
-                document.getElementById('inputNombreCat').value = '';
-                document.getElementById('inputdescripcionCat').value = '';
-            } else {
-                console.error('Error en la solicitud:', response.status, response.statusText);
+                if (response.ok) {
+                    console.log('Categoría creada con éxito');
+                    obtenerCategorias();
+                    document.getElementById('inputNombreCat').value = '';
+                    document.getElementById('inputdescripcionCat').value = '';
+                } else {
+                    console.error('Error en la solicitud:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
             }
-        } catch (error) {
-            console.error('Error en la solicitud:', error);
-        }
         }
         async function crearCurso() {
             try {
@@ -337,24 +350,24 @@
             crearCurso(); // Llamar a la función crearCurso para enviar los datos
         });
         function getBase64Image(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
 
-            reader.onload = function () {
-                const base64Data = reader.result.split(',')[1];
-                resolve(base64Data);
-            };
+                reader.onload = function () {
+                    const base64Data = reader.result.split(',')[1];
+                    resolve(base64Data);
+                };
 
-            reader.onerror = function (error) {
-                reject(error);
-            };
+                reader.onerror = function (error) {
+                    reject(error);
+                };
 
-            reader.readAsDataURL(file);
-        });
-    }
+                reader.readAsDataURL(file);
+            });
+        }
 
     </script>
-    
+
     </div>
 </body>
 
