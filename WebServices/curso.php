@@ -16,29 +16,38 @@ if (isset($data['tituloCurso'])) {
     $Niveles = $data['nivelesCurso'];
     $Gratis = $data['gratisCurso'];    
     $Titulo = $data['tituloCurso'];
-    $Descripcion = $data['descripcionCurso'];
-    $Imagen = $data['imagenCurso'];
-    $Diploma = $data['diplomaCurso'];
+    $Descripcion = $data['descripcionCurso'];   
     if ( $Gratis) {
         $Costo = 0;
     } else {
         $Costo = $data['costoCurso'];
     }
-
+    // Decodifica las imágenes en formato base64 a datos binarios
+    //$imagenCursoData = file_get_contents($_FILES['imagenCurso']['tmp_name']);
+    //$diplomaData = file_get_contents($_FILES['diploma']['tmp_name']);
+    //$imagenCursoBinario = base64_decode($data['imagenCurso']);
+    //$diplomaBinario = base64_decode($data['diplomaCurso']);
+    $imagenCursoData = base64_decode($data['imagenCurso']);
+    $diplomaData = base64_decode($data['diplomaCurso']);
+    $accion = 'IN';
     $Eliminado = 0; // Valor predeterminado para la columna Eliminado
     $IDCat = $data['idCategoria'];
-    $Creacion = date('Y-m-d'); // Fecha actual
+    $Creacion = '2000-05-05'; // Fecha actual
     $Inicio = 0;
     $Cantidad = 0;
-
+    $idcur = 0;
+    
     // Perform the insertion into the database using the prepared statement
-    $insertQuery = "CALL spGestionCursos('IN', 0, $Niveles, $Costo, '$Titulo', '$Descripcion', '$Imagen', '$Diploma', $Gratis, $Eliminado, $IDCat, '$Creacion', $Inicio, $Cantidad)";
-    $insertResult = $conn->query($insertQuery);
+    $insertQuery = "CALL spGestionCursos(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $insertStmt = $conn->prepare($insertQuery);
+    $insertStmt->bind_param("ssisssbbiissiii", $accion, $idcur, $Niveles, $Costo, $Titulo, $Descripcion, $imagenCursoData, $diplomaData, $Gratis, $Eliminado, $IDCat, $Creacion, $Inicio, $Cantidad, $ID_usuario);
+    $insertResult = $insertStmt->execute();
+    
 
-    if ($insertResult) {
-        echo 'Curso creado con éxito';
+    if ($insertStmt->error) {
+        echo 'Error en la consulta: ' . $insertStmt->error;
     } else {
-        echo 'Error al crear el curso';
+        echo 'Curso creado con éxito';
     }
 }
 

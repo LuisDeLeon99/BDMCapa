@@ -18,12 +18,13 @@ CREATE PROCEDURE spGestionCursos(
     IN IDCat INT,
     IN Creacion DATE,
     IN Inicio INT,
-    IN Cantidad INT
+    IN Cantidad INT,
+    IN ID_usuario INT
 )
 BEGIN
     IF Accion = 'IN' THEN
-        INSERT INTO Curso(Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat, Creacion)
-        VALUES(Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, 0, IDCat, CURDATE());
+        INSERT INTO Curso(Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat, Creacion,ID_usuario)
+        VALUES(Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, 0, IDCat, CURDATE(),ID_usuario);
     END IF;
 
     IF Accion = 'UP' THEN
@@ -37,7 +38,8 @@ BEGIN
             Gratis = Gratis,
             Eliminado = Eliminado,
             IDCat = IDCat,
-            Creacion = Creacion
+            Creacion = Creacion,
+            ID_usuario = ID_usuario
         WHERE ID_curso = ID_curso;
     END IF;
 
@@ -52,7 +54,7 @@ BEGIN
     END IF;
 
     IF Accion = 'SE' THEN
-        SELECT ID_curso, Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat, Creacion
+        SELECT ID_curso, Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat, Creacion, ID_usuario
         FROM Curso WHERE ID_curso = ID_curso;
     END IF;
 

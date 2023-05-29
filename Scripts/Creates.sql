@@ -100,7 +100,7 @@ mulel BOOL NOT NULL,
 DROP TABLE IF EXISTS Curso;
 CREATE TABLE Curso
 (
-ID_curso INT PRIMARY KEY NOT NULL, -- PK 
+ID_curso INT PRIMARY KEY auto_increment, -- PK 
 Niveles INT NOT NULL,
 Costo DECIMAL(10,2) NOT NULL,
 Titulo VARCHAR(30) NOT NULL,
@@ -110,14 +110,15 @@ Diploma BLOB NOT NULL,
 Gratis BOOL NOT NULL,
 Eliminado BOOL NOT NULL,
 Creacion DATE NOT NULL,
-IDCat INT NOT NULL -- FK(Categoria)
+IDCat INT NOT NULL, -- FK(Categoria)
+ID_usuario INT NOT NULL -- FK(usuario)
 );
 
 DROP TABLE IF EXISTS Categoria;
 CREATE TABLE Categoria
 (
 IDCat INT PRIMARY KEY auto_increment, -- PK 
-ID_usuario int, -- FK(usuario)
+ID_usuario int not null, -- FK(usuario)
 Categoria VARCHAR(30) NOT NULL,
 Descripcion VARCHAR(50) NOT NULL,
 creacion date NOT NULL ,
@@ -144,7 +145,8 @@ usel BOOL NOT NULL
 );
 
 ALTER TABLE Curso	
-	ADD CONSTRAINT FK_Curso_IDCat  FOREIGN KEY (IDCat) REFERENCES categoria(IDCat);
+	ADD CONSTRAINT FK_Curso_IDCat  FOREIGN KEY (IDCat) REFERENCES categoria(IDCat),
+    ADD CONSTRAINT FK_Curso_IDCata  FOREIGN KEY (ID_usuario) REFERENCES Usuarios(ID_usuario);
     
     ALTER TABLE niveles
 	ADD CONSTRAINT FK_Curso_IDcur  FOREIGN KEY (ID_curso) REFERENCES Curso(ID_curso);

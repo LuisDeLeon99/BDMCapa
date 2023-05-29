@@ -61,7 +61,7 @@
             </div>
         </div>
     </nav>
-    <form id="formcurso">
+    <form id="formcurso" enctype="multipart/form-data">
         <div style="margin:auto; width:50%;">
             <br>
             <h1>Bienvenido a la creación de Curso</h1>
@@ -233,7 +233,7 @@
 
                         <script>
                             function redirigir() {
-                                window.location.href = "cargarNiveles.html";
+                                //window.location.href = "cargarNiveles.html";
                             }
                         </script>
 
@@ -318,11 +318,11 @@
                     gratisCurso: document.getElementById('optionsRadios1').checked,
                     tituloCurso: document.getElementById('nombrecurso').value,
                     descripcionCurso: document.getElementById('descripcioncurso').value,
-                    imagenCurso: await getBase64Image(imagenCursoFile),
-                    diplomaCurso: await getBase64Image(diplomaFile),
+                    imagenCurso: await getBase64Data(imagenCursoFile),
+                    diplomaCurso: await getBase64Data(diplomaFile),
                     costoCurso: document.getElementById('precioCurso').value,
                     idCategoria: document.getElementById('categoria').value
-                };
+                    };
                 console.log(data);
                 const response = await fetch('WebServices/curso.php', {
                     method: 'POST',
@@ -333,7 +333,10 @@
                 });
 
                 if (response.ok) {
-                    console.log('Curso creado con éxito');
+                    const responseData = await response.text();
+                    console.log(responseData); // Imprimir en la consola
+                    // Mostrar la respuesta en algún elemento HTML
+                    document.getElementById('respuesta').textContent = responseData;
                     // Realiza las acciones adicionales después de crear el curso, si es necesario
                 } else {
                     console.error('Error en la solicitud:', response.status, response.statusText);
@@ -349,21 +352,21 @@
             event.preventDefault(); // Evitar el envío del formulario por defecto
             crearCurso(); // Llamar a la función crearCurso para enviar los datos
         });
-        function getBase64Image(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
+        function getBase64Data(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
 
-                reader.onload = function () {
-                    const base64Data = reader.result.split(',')[1];
-                    resolve(base64Data);
-                };
+            reader.onload = function () {
+            const base64Data = reader.result.split(',')[1]; // Obtener solo los datos base64, excluyendo el encabezado "data:image/jpeg;base64,"
+            resolve(base64Data);
+            };
 
-                reader.onerror = function (error) {
-                    reject(error);
-                };
+            reader.onerror = function (error) {
+            reject(error);
+            };
 
-                reader.readAsDataURL(file);
-            });
+            reader.readAsDataURL(file);
+        });
         }
 
     </script>
