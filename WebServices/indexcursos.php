@@ -2,29 +2,29 @@
 require_once 'conexion.php';
 
 // Parámetros de entrada
-//$accion = isset($_GET['accion']) ? $_GET['accion'] : 'SE1';
-//$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-//$categoria = isset($_GET['categoria']) ? $_GET['pagina'] : 1;
+$accion = isset($_GET['accion']) ? $_GET['accion'] : 'SE1';
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+$categoria = isset($_GET['categoria']) ? $_GET['categoria'] : 1;
 
 // Cálculo de la posición de inicio para la paginación
-$pagina =  1;
-$cursosPorPagina = 12;
-//$inicio = ($pagina - 1) * $cursosPorPagina;
-$inicio = 1;
+
+$cursosPorPagina = 8;
+$inicio = ($pagina - 1) * $cursosPorPagina;
+
 // Consulta para llamar al procedimiento almacenado según la acción y la paginación
 $query = "";
-$accion = 'SE1';
 
-$categoria =  1;
+
+
 
 if ($accion === 'SE1') {
-    //$consulta = "CALL spGestionCursos('SE1', 0, 0, 0, '', '', 0, 0, 0, 0, $categoria, '2000-05-05', $inicio, $cursosPorPagina, 0)";
+    
     $query = "CALL spGestionCursos('SE1','1','5','100','titulo','descripcion','','','1','0','$categoria','2000-05-05','$inicio','$cursosPorPagina','2')";
                 
 } elseif ($accion === 'SE2') {
-    //$consulta = "CALL spGestionCursos('SE2', 0, 0, 0, '', '', 0, 0, 0, 0, $categoria, '2000-05-05', $inicio, $cursosPorPagina, 0)";
+    $query = "CALL spGestionCursos('SE2','1','5','100','titulo','descripcion','','','1','0','$categoria','2000-05-05','$inicio','$cursosPorPagina','2')";
 } elseif ($accion === 'SE3') {
-    //$consulta = "CALL spGestionCursos('SE3', 0, 0, 0, '', '', 0, 0, 0, 0, $categoria, '2000-05-05', $inicio, $cursosPorPagina, 0)";
+    $query = "CALL spGestionCursos('SE3','1','5','100','titulo','descripcion','','','1','0','$categoria','2000-05-05','$inicio','$cursosPorPagina','2')";
 } else {
     // Acción no válida
    
