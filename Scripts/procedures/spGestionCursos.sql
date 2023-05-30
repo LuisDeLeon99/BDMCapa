@@ -50,12 +50,12 @@ BEGIN
     END IF;
 
     IF Accion = 'DE' THEN
-        DELETE FROM Curso WHERE ID_curso = ID_curso; 
+        DELETE FROM Curso WHERE Curso.ID_curso = ID_curso; 
     END IF;
 
     IF Accion = 'SE' THEN
-        SELECT ID_curso, Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat, Creacion, ID_usuario
-        FROM Curso WHERE ID_curso = ID_curso;
+        SELECT Curso.ID_curso, Curso.Niveles, Curso.Costo, Curso.Titulo, Curso.Descripcion, Curso.Imagen, Curso.IDCat, Curso.Creacion, Curso.ID_usuario
+        FROM Curso WHERE Curso.ID_curso = ID_curso;
     END IF;
 
     IF Accion = 'SE1' THEN

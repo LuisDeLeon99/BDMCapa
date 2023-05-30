@@ -1,0 +1,7 @@
+{
+    "name": "my-project/php",
+    "require": {
+        "php": "^8.2.0",
+        "nikic/fast-route": "^1.3"
+    }
+}

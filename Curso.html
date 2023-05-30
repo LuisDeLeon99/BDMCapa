@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="categorias.css">
     <link rel="stylesheet" type="text/css" href="categorias.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -117,7 +119,35 @@
                     card's content.</p>
             </div>
 
-
+            <script>
+                $(document).ready(function() {
+                    // Obtener el menú
+                    obtenerCursos();
+                
+                    // Función para obtener el menú mediante AJAX
+                    function obtenerCursos() {
+                        $.ajax({
+                            url: 'http://localhost:3005/BDMCapa/WebServices/traeCurso.php',
+                            type: 'GET',
+                            dataType: 'json',
+                            data: {},
+                            success: function(response) {
+                                // Utilizar los datos recibidos en el arreglo
+                                if (response && response.length > 0) {
+                                    console.log(response);
+                                    // Actualizar la cantidad total de cursos si es la primera página
+                                } else {
+                                    console.log("La respuesta está vacía.");
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    }
+                });
+            </script>
+                
 
 </body>
 
