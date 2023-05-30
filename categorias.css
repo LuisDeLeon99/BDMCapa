@@ -27,4 +27,15 @@
     width: 200px; /* Puedes ajustar el ancho según tus necesidades */
     margin: 5px 0;
   }
+
+  .container {
+    display: flex; /* Utilizamos flexbox para alinear los divs */
+  }
+  
+  .box {
+    width: 50%; /* Establecemos el ancho de cada div al 50% para que estén uno al lado del otro */
+    height: 200px; /* Establece la altura deseada para los divs */
+    background-color: #ccc; /* Establece un color de fondo para los divs (puedes personalizarlo según tus necesidades) */
+  }
+  
   
