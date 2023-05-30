@@ -1,0 +1,24 @@
+.store-wrapper {
+    display: flex;
+}
+
+.category_list {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+
+.espacioizq {
+    margin-left: 3em;
+}
+
+.espacioder {
+    margin: auto;
+    float: right;
+    clear: both;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
