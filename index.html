@@ -59,34 +59,9 @@
     </header>
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center text-dark">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Cursos populares</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                </div class="text-dark text-decoration-line-through">
-                                <!-- Product price-->
-                                $40.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
-                                href="#">Agregar al carrito</a></div>
-                        </div>
-                    </div>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center "id="contenedorPrincipal">
+                <div class="col mb-5" id="tarjetaindex">
+                    
                 </div>
                 <div class="col mb-5">
                     <div class="card h-100">
@@ -314,6 +289,124 @@
                 console.log('Error al obtener el menú');
             }
             });
+        }
+        
+        $.ajax({
+            url: 'http://localhost:3005/BDMCapa/WebServices/indexcursos.php',
+            type: 'GET',
+            dataType: 'json',
+            success:async function(response) {
+            // Utilizar los datos recibidos en el arreglo
+            if (response && response.length > 0) {                
+                console.log(response);
+                
+            } else {
+            console.log("La respuesta está vacía.");
+            }
+            
+            // Aquí puedes llamar a funciones y pasarles el arreglo de cursos
+            // Ejemplo: llamar a una función y pasarle los cursos como argumento
+            tarjetaCursos(response);
+            },
+            error: function(xhr, status, error) {
+            console.error(error);
+            }
+        });
+        //${tuvariable}
+
+        // Ejemplo de función que recibe el arreglo de cursos como argumento
+        function tarjetaCursos(cursos) {
+            $("#contendor").append(`
+            <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
+                        </div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder ">Curso especial en oferta</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-dark text-decoration-line-through">$20.00</span>
+                                $18.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                    href="#">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+            `) 
+        //     cursos.forEach(function(curso) {
+        //     // Crea un nuevo elemento de tipo <div> con la clase "card"
+        //     var cardDiv = document.createElement('div');
+        //     cardDiv.className = 'card h-100';
+
+        //     // Crea un elemento <img> para la imagen del curso y asigna la fuente correspondiente
+        //     var img = document.createElement('img');
+        //     img.className = 'card-img-top';
+        //     img.src = curso.Imagen; // Asegúrate de tener la propiedad "imagen" en tu objeto de curso
+
+        //     // Crea un elemento <div> para el cuerpo de la tarjeta
+        //     var cardBodyDiv = document.createElement('div');
+        //     cardBodyDiv.className = 'card-body p-4';
+
+        //     // Crea un elemento <h5> para el título del curso
+        //     var titleH5 = document.createElement('h5');
+        //     titleH5.className = 'fw-bolder';
+        //     titleH5.textContent = curso.Titulo; // Asegúrate de tener la propiedad "titulo" en tu objeto de curso
+
+        //     // Crea un elemento <div> para las estrellas de calificación
+        //     var starsDiv = document.createElement('div');
+        //     starsDiv.className = 'd-flex justify-content-center small text-warning mb-2';
+
+        //     // Crea cinco elementos <div> con la clase "bi-star-fill" para representar las estrellas de calificación
+        //     for (var i = 0; i < 5; i++) {
+        //     var starDiv = document.createElement('div');
+        //     starDiv.className = 'bi-star-fill';
+        //     starsDiv.appendChild(starDiv);
+        //     }
+
+        //     // Crea un elemento <div> para el precio del curso
+        //     var priceDiv = document.createElement('div');
+        //     priceDiv.textContent = '$' + curso.Costo; // Asegúrate de tener la propiedad "precio" en tu objeto de curso
+
+        //     // Crea un elemento <div> para el pie de la tarjeta
+        //     var cardFooterDiv = document.createElement('div');
+        //     cardFooterDiv.className = 'card-footer p-4 pt-0 border-top-0 bg-transparent';
+
+        //     // Crea un enlace para "Agregar al carrito"
+        //     var addToCartLink = document.createElement('a');
+        //     addToCartLink.className = 'btn btn-outline-info mt-auto';
+        //     addToCartLink.href = '#';
+        //     addToCartLink.textContent = 'Agregar al carrito';
+
+        //     // Agrega todos los elementos creados al documento HTML
+        //     cardDiv.appendChild(img);
+        //     cardBodyDiv.appendChild(titleH5);
+        //     cardBodyDiv.appendChild(starsDiv);
+        //     cardBodyDiv.appendChild(priceDiv);
+        //     cardFooterDiv.appendChild(addToCartLink);
+        //     cardDiv.appendChild(cardBodyDiv);
+        //     cardDiv.appendChild(cardFooterDiv);
+
+        //     // Agrega la tarjeta al contenedor deseado en tu HTML
+        //     var container = document.getElementById('tarjetaindex'); // Reemplaza 'tuContenedor' con el ID del contenedor deseado
+        //     container.appendChild(cardDiv);
+        // });
         }
 
         // Función para obtener los cursos mediante AJAX

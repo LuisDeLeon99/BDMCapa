@@ -14,23 +14,29 @@ if (!isset($_SESSION['usuario'])) {
 //$data = json_decode($json_data, true);
 
 if ($_POST) {
-    //var_dump($_POST);
+    
+    
     //error_log('muestramelas ' . $_FILES);
     //error_log('muestramelas ' . $_POST);
    
     $ID_usuario = $_SESSION['ID_usuario'];
     $Niveles = $_POST['nivelesCurso'];
     $Gratis = $_POST['optionsRadios'];
-    
+    $Gratis = ($_POST['optionsRadios'] === 'true') ? true : false;
+
     $Titulo = $_POST['nombreCurso'];
-    $Descripcion = $_POST['descripcionCurso'];   
+    $Descripcion = $_POST['descripcionCurso']; 
+    
+    
     if ($Gratis) {
         $Costo = 0.00;
         $Gratis = 1;
     } else {
-        $Costo = floatval($_POST['precio']);
+        $Costostr = floatval($_POST['precio']);
+        $Costo = number_format($Costostr, 2, '.', '');
         $Gratis = 0;
     }
+    
     // Obtener la imagen de presentación del curso
     $Imagen = $_FILES['imagenCurso']['name'];
     $ImagenTmp = $_FILES['imagenCurso']['tmp_name'];

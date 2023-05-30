@@ -60,13 +60,13 @@ BEGIN
 
     IF Accion = 'SE1' THEN
         IF IDCat <> 1 THEN
-            SELECT ID_curso, Titulo,Costo, Categoria,Imagen, CalificacionPromedio,Ventas,UltimaVenta
+            SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta
             FROM viGestionCursos
             WHERE viGestionCursos.IDCat = IDCat
             ORDER BY CalificacionPromedio DESC;
             
         ELSE
-            SELECT ID_curso, Titulo, Costo,Categoria,Imagen, CalificacionPromedio,Ventas,UltimaVenta
+            SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta
             FROM viGestionCursos
             
             ORDER BY CalificacionPromedio DESC
@@ -76,13 +76,13 @@ BEGIN
 
     IF Accion = 'SE2' THEN
         IF IDCat <> 1 THEN
-            SELECT ID_curso, Titulo, Costo,Categoria,Imagen, CalificacionPromedio,Ventas,UltimaVenta
+            SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta
             FROM viGestionCursos
             WHERE viGestionCursos.IDCat = IDCat
             ORDER BY Ventas DESC
             LIMIT Inicio, Cantidad;
         ELSE
-            SELECT ID_curso, Titulo, Costo,Categoria,Imagen, CalificacionPromedio,Ventas,UltimaVenta
+            SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta
             FROM viGestionCursos
             
             ORDER BY Ventas DESC
@@ -92,13 +92,13 @@ BEGIN
 
      IF Accion = 'SE3' THEN
         IF IDCat <> 1 THEN
-            SELECT ID_curso, Titulo, Costo,Categoria,Imagen, CalificacionPromedio,Ventas,UltimaVenta
+            SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta
             FROM viGestionCursos
             WHERE viGestionCursos.IDCat = IDCat
             ORDER BY UltimaVenta DESC
             LIMIT Inicio, Cantidad;
         ELSE
-            SELECT ID_curso, Titulo, Costo,Categoria,Imagen, CalificacionPromedio,Ventas,UltimaVenta
+            SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta
             FROM viGestionCursos
             
             ORDER BY UltimaVenta DESC
