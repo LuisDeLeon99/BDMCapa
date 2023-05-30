@@ -92,7 +92,7 @@
                     <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2"
                         value="false">
                     <label class="form-check-label" for="optionsRadios2">
-                        No, soy culo y avaró
+                        Mi curso tendrá costó
                     </label>
                 </div>
 
@@ -133,7 +133,28 @@
                                 optionsRadios1.value = 'false'; // Establecer el valor a 'false'
                                 optionsRadios2.value = 'true'; // Establecer el valor a 'true'
                             });
-                            });
+                                    precioCursoInput.disabled = true;
+                                    precioCursoInput.value = ''; // Limpiar el valor del campo
+                                });
+                                
+
+                                const inputPrecio = document.getElementById('precioCurso');
+                                // Agrega un evento para validar el valor ingresado
+                                inputPrecio.addEventListener('input', function () {
+                                    // Obtiene el valor actual del campo de entrada
+                                    const valor = parseFloat(inputPrecio.value);
+
+                                    // Verifica si el valor es mayor que 0
+                                    if (valor <= 0 || isNaN(valor)) {
+                                        // Establece el valor a 0 si es menor o igual a 0
+                                        inputPrecio.value = '';
+                                    }
+                                });
+                                if (optionsRadios1.checked) {
+                                    precioCursoInput.disabled = true;
+                                }
+
+                            
                         </script>
 
 
@@ -280,6 +301,9 @@
                                 window.location.href = "cargarNiveles.html";
                             }
                         </script>
+                    </div>
+                </div>
+        </div>
 
     </form>
 

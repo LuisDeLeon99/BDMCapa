@@ -22,3 +22,9 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  .custom-btn {
+    width: 200px; /* Puedes ajustar el ancho según tus necesidades */
+    margin: 5px 0;
+  }
+  
