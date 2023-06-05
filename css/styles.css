@@ -3018,7 +3018,7 @@ progress {
   color: #212529;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: #2b2b2b5e;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
@@ -3228,7 +3228,7 @@ progress {
 }
 .dropdown-item:hover, .dropdown-item:focus {
   color: #1e2125;
-  background-color: #e9ecef;
+  background-color: #ffffff7a;
 }
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
@@ -3322,9 +3322,9 @@ progress {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #0d6efd;
+  color: #000916;
   text-decoration: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-link {
@@ -3341,23 +3341,23 @@ progress {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #2e2e2e;
 }
 .nav-tabs .nav-link {
   margin-bottom: -1px;
-  background: none;
-  border: 1px solid transparent;
+  background: #4a4a4a83;
+  border: 1px black;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-  border-color: #e9ecef #e9ecef #dee2e6;
+  border-color: #b6b6b6 #b6b6b6 #b6b6b6;
   isolation: isolate;
 }
 .nav-tabs .nav-link.disabled {
   color: #6c757d;
-  background-color: transparent;
-  border-color: transparent;
+  background-color: #4a4a4a83;
+  border-color: #4a4a4a83;
 }
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
@@ -3372,7 +3372,7 @@ progress {
 }
 
 .nav-pills .nav-link {
-  background: none;
+  background: #4a4a4a83;
   border: 0;
   border-radius: 0.25rem;
 }

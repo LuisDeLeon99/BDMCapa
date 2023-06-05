@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full-Learning</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="diseñoPantallas">
     <link rel="stylesheet" type="text/css" href="popper.min.js">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    
+
 </head>
 
 <body>
@@ -26,14 +26,14 @@
                 aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarColor02" >
-                <ul class="navbar-nav me-auto" >
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link active" href="index.html">Inicio
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-                    <li  class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="Cursos.html">Categorías</a>
                     </li>
                 </ul>
@@ -41,15 +41,15 @@
                     <input class="form-control me-sm-2" type="search" placeholder="Buscar">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
-                <ul class="navbar-nav me-auto espacioder"id="menu-item" >
-                    
+                <ul class="navbar-nav me-auto espacioder" id="menu-item">
+
                 </ul>
-                  
+
             </div>
         </div>
     </nav>
-     <!-- Header-->
-     <header class="bg-dark py-1">
+    <!-- Header-->
+    <header class="bg-dark py-1">
         <div class="container px-2 px-md-3 my-2">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Enseñanza eficaz</h1>
@@ -57,11 +57,35 @@
             </div>
         </div>
     </header>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">Ordenar por</a>
+            <div class="dropdown-menu" style="">
+                <a class="dropdown-item" href="#">Mejor calificados</a>
+                <a class="dropdown-item" href="#">Más comprados</a>
+                <a class="dropdown-item" href="#">Recién agregados</a>
+                <!-- <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a> -->
+            </div>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">Categorias</a>
+                <div class="dropdown-menu" style="">
+                    <a class="dropdown-item" href="#">1</a>
+                    <a class="dropdown-item" href="#">2</a>
+                    <a class="dropdown-item" href="#">4</a>
+                    <!-- <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a> -->
+                </div>
+    </ul>
     <section class="py-5">
+
         <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center "id="contenedorPrincipal">
-             
-        </div>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center "
+                id="contenedorPrincipal">
+
+            </div>
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
@@ -74,76 +98,76 @@
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     <script>
-        
+
         var pagina = 1;
         var accion = 'SE1';
         var categoria = 1;
         var totalCursos = 0;
-        $(document).ready(function() {
-        // Obtener el menú
-        obtenerMenu();
-        obtenerCursos();
+        $(document).ready(function () {
+            // Obtener el menú
+            obtenerMenu();
+            obtenerCursos();
 
-        // Obtener los cursos
-        //obtenerCursos('SE1', 1);
+            // Obtener los cursos
+            //obtenerCursos('SE1', 1);
 
-        // Función para obtener el menú mediante AJAX
-        function obtenerMenu() {
-            $.ajax({
-            url: './WebServices/menu.php',
-            success: function(response) {
-                // Actualizar el contenido del menú
-                $('#menu-item').html(response);
-            },
-            error: function() {
-                // Manejar errores en la solicitud AJAX
-                console.log('Error al obtener el menú');
+            // Función para obtener el menú mediante AJAX
+            function obtenerMenu() {
+                $.ajax({
+                    url: './WebServices/menu.php',
+                    success: function (response) {
+                        // Actualizar el contenido del menú
+                        $('#menu-item').html(response);
+                    },
+                    error: function () {
+                        // Manejar errores en la solicitud AJAX
+                        console.log('Error al obtener el menú');
+                    }
+                });
             }
-            });
-        }
-        function obtenerCursos() {
-        $.ajax({
-            url: 'http://localhost:3005/BDMCapa/WebServices/indexcursos.php',
-            type: 'GET',
-            dataType: 'json',
-            data: {
-            pagina: pagina,
-            accion: accion,
-            categoria: categoria
-            },
-            success: function(response) {
-            // Utilizar los datos recibidos en el arreglo
-            if (response && response.length > 0) {
-                console.log(response);
-                // Actualizar la cantidad total de cursos si es la primera página
-                if (pagina === 1) {
-                    totalCursos = parseInt(response[0].TotalCurso);
-                }
-                tarjetaCursos(response);
-                // Verificar si se alcanzó el final de la tabla
-                if (response.length < 8 || pagina * 8 >= totalCursos) {
-                $(window).off('scroll'); // Desactivar el evento de scroll
-                }
-                
-            } else {
-                console.log("La respuesta está vacía.");
-            }
-            },
-            error: function(xhr, status, error) {
-            console.error(error);
-            }
-        });
-        }
-        //${tuvariable}
+            function obtenerCursos() {
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/indexcursos.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        pagina: pagina,
+                        accion: accion,
+                        categoria: categoria
+                    },
+                    success: function (response) {
+                        // Utilizar los datos recibidos en el arreglo
+                        if (response && response.length > 0) {
+                            console.log(response);
+                            // Actualizar la cantidad total de cursos si es la primera página
+                            if (pagina === 1) {
+                                totalCursos = parseInt(response[0].TotalCurso);
+                            }
+                            tarjetaCursos(response);
+                            // Verificar si se alcanzó el final de la tabla
+                            if (response.length < 8 || pagina * 8 >= totalCursos) {
+                                $(window).off('scroll'); // Desactivar el evento de scroll
+                            }
 
-        // Ejemplo de función que recibe el arreglo de cursos como argumento
-        function tarjetaCursos(cursos) {
-            cursos.forEach(function(curso) {
-                let costo = curso.Costo;
-                if (costo === "0.00") {
-                    costo = "Gratis";
-                }
-                $("#contenedorPrincipal").append(`
+                        } else {
+                            console.log("La respuesta está vacía.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+            //${tuvariable}
+
+            // Ejemplo de función que recibe el arreglo de cursos como argumento
+            function tarjetaCursos(cursos) {
+                cursos.forEach(function (curso) {
+                    let costo = curso.Costo;
+                    if (costo === "0.00") {
+                        costo = "Gratis";
+                    }
+                    $("#contenedorPrincipal").append(`
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Sale badge-->
@@ -175,39 +199,39 @@
                         </div>
                     </div>
                 `);
-            });
-            
-        }
-        $(window).scroll(function() {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            pagina++;
-            obtenerCursos(); // Carga más cursos al llegar al final de la página
-        }
-        });
+                });
 
-        // Función para obtener los cursos mediante AJAX
-        //function obtenerCursos(accion, pagina) {
-        //    $.ajax({
-        //    url: './obtener_cursos.php',
-        //    method: 'POST',
-        //    data: {
-        //        accion: accion,
-        //        pagina: pagina
-        //    },
-        //    success: function(response) {
-                // Manejar la respuesta del servidor
-                // Aquí puedes actualizar el contenido de tu página con los cursos obtenidos
-        //        $('#cursos-container').html(response);
-        //    },
-        //    error: function() {
-                // Manejar errores en la solicitud AJAX
-        //        console.log('Error al obtener los cursos');
-        //    }
-        //    });
-       // }
+            }
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                    pagina++;
+                    obtenerCursos(); // Carga más cursos al llegar al final de la página
+                }
+            });
+
+            // Función para obtener los cursos mediante AJAX
+            //function obtenerCursos(accion, pagina) {
+            //    $.ajax({
+            //    url: './obtener_cursos.php',
+            //    method: 'POST',
+            //    data: {
+            //        accion: accion,
+            //        pagina: pagina
+            //    },
+            //    success: function(response) {
+            // Manejar la respuesta del servidor
+            // Aquí puedes actualizar el contenido de tu página con los cursos obtenidos
+            //        $('#cursos-container').html(response);
+            //    },
+            //    error: function() {
+            // Manejar errores en la solicitud AJAX
+            //        console.log('Error al obtener los cursos');
+            //    }
+            //    });
+            // }
         });
     </script>
-    
+
 </body>
 
 </html>
