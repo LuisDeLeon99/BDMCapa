@@ -47,46 +47,53 @@
         <br>
         <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Niveles que tendrá el
             curso</label>
-            <h3>Aquí nivel del curso</h3>
+        <h3>Aquí nivel del curso</h3>
+        <br>
+        <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Titulo del curso</label>
+        <h3>Aquí titulo del curso</h3>
+        <br>
+        <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Descripción del curso</label>
+        <h3>Aquí descripción del curso</h3>
+
         <div class="form-group">
             <label for="cargaNiv" class="form-label mt-4">Carga el video del nivel de tu cruso</label>
             <input class="form-control" type="file" id="cargaNiv" name="cargaNiv">
         </div>
-      
-        <button type="submit" name="submit" value="UPLOAD" class="btn btn-outline-info"
-        style="margin:10px 10px 55px 350px; width:20%;" onclick="redirigir()">¡Crear curso!</button>
 
-    <script>
-        function redirigir() {
-            window.location.href = "cursosAgregados.html";
-        }
-        
-                 
-      $(document).ready(function () {
-          // Obtener el menú
-          obtenerMenu();
-         
-          function obtenerMenu() {
-              $.ajax({
-                  url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
-                  success: function (response) {
-                      // Actualizar el contenido del menú
-                      $('#menu-item').html(response);
-                  },
-                  error: function () {
-                      // Manejar errores en la solicitud AJAX
-                      console.log('Error al obtener el menú');
-                  }
-              });
-          }
-         
-      });
-    
-    </script>
+        <button type="submit" name="submit" value="UPLOAD" class="btn btn-outline-info"
+            style="margin:10px 10px 55px 350px; width:20%;" onclick="redirigir()">¡Crear curso!</button>
+
+        <script>
+            function redirigir() {
+                window.location.href = "cursosAgregados.html";
+            }
+
+
+            $(document).ready(function () {
+                // Obtener el menú
+                obtenerMenu();
+
+                function obtenerMenu() {
+                    $.ajax({
+                        url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+                        success: function (response) {
+                            // Actualizar el contenido del menú
+                            $('#menu-item').html(response);
+                        },
+                        error: function () {
+                            // Manejar errores en la solicitud AJAX
+                            console.log('Error al obtener el menú');
+                        }
+                    });
+                }
+
+            });
+
+        </script>
     </div>
     <br>
     <br>
-    
+
     </div>
 </body>
 
