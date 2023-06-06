@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS Pago;
 CREATE TABLE Pago
 (
   ID_pago int primary key auto_increment,
-  Descripcion VARCHAR(40) NOT NULL
+  Descripcion VARCHAR(60) NOT NULL
  
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE Comentarios
 (
 ID_usuario INT NOT NULL, -- FK(usuario)
 ID_curso INT NOT NULL, -- FK(Curso)
-Favor VARCHAR(100)  NOT NULL, 
+Favor VARCHAR(200)  NOT NULL, 
 Calif DECIMAL(2,2) NOT NULL,
 Fecha DATE NOT NULL,
 Hora TIME NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE Mensajes
 IDMen INT PRIMARY KEY auto_increment, 
 ID_alumno INT NOT NULL, -- FK(Usuario)
 ID_instructor INT NOT NULL, -- FK(Usuario)
-Mensaje VARCHAR(100)  NOT NULL, 
+Mensaje VARCHAR(200)  NOT NULL, 
 Fecha DATE NOT NULL,
 Hora TIME NOT NULL
 );
@@ -77,9 +77,8 @@ ID_curso INT  NOT NULL, -- FK(Curso)
 Nivel INT NOT NUll,
 Video LONGBLOB NOT NULL,
 Titulo VARCHAR(30) NOT NULL,
-Descripcion VARCHAR(50) NOT NULL,
-Premium BOOL NOT NULL,
-Completado BOOL NOT NULL
+Descripcion VARCHAR(100) NOT NULL,
+Completado BOOL NOT NULL DEFAULT 0
 );
 
 
@@ -90,7 +89,7 @@ DROP TABLE IF EXISTS Multimedia;
 CREATE TABLE Multimedia
 (
 IDMulti INT PRIMARY KEY NOT NULL, -- PK 
-Descripcion VARCHAR(30),
+Descripcion VARCHAR(60),
 Multimedia LONGBLOB NOT NULL,
 Multimedia2 BLOB NOT NULL,
 mulel BOOL NOT NULL,
@@ -103,8 +102,8 @@ CREATE TABLE Curso
 ID_curso INT PRIMARY KEY auto_increment, -- PK 
 Niveles INT NOT NULL,
 Costo DECIMAL(10,2) NOT NULL,
-Titulo VARCHAR(30) NOT NULL,
-Descripcion VARCHAR(50) NOT NULL,
+Titulo VARCHAR(50) NOT NULL,
+Descripcion VARCHAR(100) NOT NULL,
 Imagen LONGBLOB NOT NULL,
 Diploma LONGBLOB NOT NULL,
 Gratis BOOL NOT NULL,
@@ -120,7 +119,7 @@ CREATE TABLE Categoria
 IDCat INT PRIMARY KEY auto_increment, -- PK 
 ID_usuario int not null, -- FK(usuario)
 Categoria VARCHAR(30) NOT NULL,
-Descripcion VARCHAR(50) NOT NULL,
+Descripcion VARCHAR(100) NOT NULL,
 creacion date NOT NULL ,
 catel BOOL NOT NULL
 );
