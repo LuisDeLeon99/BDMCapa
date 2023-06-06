@@ -5,20 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuenta</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="categorias.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script>
       $(document).ready(function() {
         $.ajax({
-          url: 'WebServices/perfil.php',
+          url: '../WebServices/perfil.php',
           type: 'GET',
           dataType: 'json',
           statusCode: {
             302: function() {
               // Redirigir al usuario a la página de inicio
-              window.location.href = './index.html';
+              window.location.href = '../index.html';
             }
           },
           success: function(response) {
@@ -43,7 +43,7 @@
     <script>
       $(document).ready(function() {
         $.ajax({
-    url: 'WebServices/perfilfoto.php',
+    url: '../WebServices/perfilfoto.php',
     type: 'GET',
     dataType: 'json',
     success: function(response) {
@@ -71,39 +71,19 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.html">Inicio
+                    <a class="nav-link active" href="../index.html">Inicio
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
-                <li  class="nav-item">
-                    <a class="nav-link" href="Cursos.html">Categorías</a>
-                </li>
+                
             </ul>
             <form class="d-flex">
               <input class="form-control me-sm-2" type="search" placeholder="Buscar">
               <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
           </form>
-          <ul class="navbar-nav me-auto espacioder">
+          <ul class="navbar-nav me-auto espacioder" id="menu-item2">
 
-            <li class="nav-item">
-                <a class="nav-link" href="carrito.html">Carrito
-                </a>
-
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="Registro.html">Crear cuenta
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Login.html">Inicia sesión
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Perfil.html">Cuenta
-                </a>
-            </li>
-        </ul>
+          </ul>
               
         </div>
     </div>
@@ -189,16 +169,33 @@
           </div>
         </div>
       </div>
-      <script src="js/scripts.js"></script>
+      
       <script>
         $(document).ready(function() {
-            $.ajax({
-                url: './WebServices/menuPerfil.php',
+          obtenerMenu();  
+          
+          $.ajax({
+                url: '../WebServices/menuPerfil.php',
                 success: function(response) {
                     $('#menu-item').html(response);
                 }
             });
+            function obtenerMenu() {
+           $.ajax({
+               url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+               success: function (response) {
+                   // Actualizar el contenido del menú
+                   $('#menu-item2').html(response);
+               },
+               error: function () {
+                   // Manejar errores en la solicitud AJAX
+                   console.log('Error al obtener el menú');
+               }
+           });
+         }
+
         });
+        
     </script>
 </body>
 </html>

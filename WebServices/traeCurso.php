@@ -14,7 +14,7 @@ if ($result && $result->num_rows == 1) {
     // Modificar la fila según sea necesario
     $row["Imagen"] = base64_encode($row["Imagen"]);
     
-    
+        
     // Devolver la fila en formato JSON al front-end
     header('Content-Type: application/json');
     echo json_encode($row);

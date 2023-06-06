@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="categorias.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
@@ -25,38 +25,18 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Inicio
+                        <a class="nav-link active" href="../index.html">Inicio
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Cursos.html">Categorías</a>
-                    </li>
+                   
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-sm-2" type="search" placeholder="Buscar">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
-                <ul class="navbar-nav me-auto espacioder">
+                <ul class="navbar-nav me-auto espacioder" id="menu-item">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="carrito.html">Carrito
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="Registro.html">Crear cuenta
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Login.html">Inicia sesión
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Perfil.html">Cuenta
-                        </a>
-                    </li>
                 </ul>
 
             </div>
@@ -69,7 +49,7 @@
 
         <div>
             <div class="card-header text-dark text-center">Inicio de sesión</div>
-            <form action="./WebServices/login.php" method="POST">
+            <form action="../WebServices/login.php" method="POST">
                 <div class="form-group text-center">
                     <i class="font-italic text-center"> Usuario: </i>
                     <input type="text" style="margin:auto; width:80%;" class="form-control" name="usuario"
@@ -90,24 +70,25 @@
         </div>
 
         <script>
-            // function login() {
-            //     const user = $("#usuario").val();
-            //     const pass = $("#contrasenia").val();
-            //     const DataToSend = {
-            //         usuario: user,
-            //         pass: pass
-            //     };
-    
-            //     $.ajax({
-            //         url: './WebServices/login.php',
-            //         type: 'POST',
-            //         data: DataToSend,
-            //         success: function(response) {
-            //             console.log(response); // Procesar la respuesta del servidor
-                        
-            //         }
-            //     });
-            // }
+           $(document).ready(function () {
+            // Obtener el menú
+            obtenerMenu();
+           
+            function obtenerMenu() {
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+                    success: function (response) {
+                        // Actualizar el contenido del menú
+                        $('#menu-item').html(response);
+                    },
+                    error: function () {
+                        // Manejar errores en la solicitud AJAX
+                        console.log('Error al obtener el menú');
+                    }
+                });
+            }
+           
+        });
         </script>
         
     </div>

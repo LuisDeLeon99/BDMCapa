@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito</title>
-    <link rel="stylesheet" type="text/css" href="diseñoPantallas.css">
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/disenoPantallas.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 
 <body>
@@ -22,13 +23,11 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Inicio
+                        <a class="nav-link active" href="../index.html">Inicio
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Cursos.html">Categorías</a>
-                    </li>
+                    
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-sm-2" type="search" placeholder="Buscar">
@@ -129,12 +128,25 @@
     </div>
     <script>
         $(document).ready(function () {
-            $.ajax({
-                url: './WebServices/menu.php',
-                success: function (response) {
-                    $('#menu-item').html(response);
-                }
-            });
+            $(document).ready(function () {
+                        // Obtener el menú
+                        obtenerMenu();
+                       
+                        function obtenerMenu() {
+                            $.ajax({
+                                url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+                                success: function (response) {
+                                    // Actualizar el contenido del menú
+                                    $('#menu-item').html(response);
+                                },
+                                error: function () {
+                                    // Manejar errores en la solicitud AJAX
+                                    console.log('Error al obtener el menú');
+                                }
+                            });
+                        }
+                       
+                    });
         });
     </script>
 </body>

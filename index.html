@@ -10,10 +10,10 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <link href="css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="diseñoPantallas">
-    <link rel="stylesheet" type="text/css" href="popper.min.js">
+    <link rel="stylesheet" type="text/css" href="pages/css/bootstrap.min.css">
+    <link href="pages/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="pages/css/disenoPantallas.css">
+    <link rel="stylesheet" type="text/css" href="./popper.min.js">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 </head>
@@ -33,9 +33,9 @@
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Cursos.html">Categorías</a>
-                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="pages/Cursos.html">Categorías</a>
+                    </li> -->
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-sm-2" type="search" placeholder="Buscar">
@@ -96,7 +96,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    
     <script>
 
         var pagina = 1;
@@ -114,7 +114,7 @@
             // Función para obtener el menú mediante AJAX
             function obtenerMenu() {
                 $.ajax({
-                    url: './WebServices/menu.php',
+                    url: 'http://localhost:3005/BDMCapa/WebServices/menu.php',
                     success: function (response) {
                         // Actualizar el contenido del menú
                         $('#menu-item').html(response);

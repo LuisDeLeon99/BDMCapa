@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuevo Curso</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="categorias.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/categorias.css">
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -24,44 +24,24 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Inicio
+                        <a class="nav-link active" href="../index.html">Inicio
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Cursos.html">Categorías</a>
-                    </li>
+                    
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-sm-2" type="search" placeholder="Buscar">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
-                <ul class="navbar-nav me-auto espacioder">
+                <ul class="navbar-nav me-auto espacioder" id="menu-item">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="carrito.html">Carrito
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="Registro.html">Crear cuenta
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Login.html">Inicia sesión
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Perfil.html">Cuenta
-                        </a>
-                    </li>
                 </ul>
 
             </div>
         </div>
     </nav>
-    <form id="formcurso" action="./WebServices/curso.php" method="POST" enctype="multipart/form-data">
+    <form id="formcurso" action="../WebServices/curso.php" method="POST" enctype="multipart/form-data">
         <div style="margin:auto; width:50%;">
             <br>
             <h1>Bienvenido a la creación de Curso</h1>
@@ -310,11 +290,33 @@
 
     </form>
 
+
+    <script>
+        $(document).ready(function () {
+         // Obtener el menú
+         obtenerMenu();
+        
+         function obtenerMenu() {
+             $.ajax({
+                 url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+                 success: function (response) {
+                     // Actualizar el contenido del menú
+                     $('#menu-item').html(response);
+                 },
+                 error: function () {
+                     // Manejar errores en la solicitud AJAX
+                     console.log('Error al obtener el menú');
+                 }
+             });
+         }
+        
+     });
+     </script>
     <script async>
         // Hacer la solicitud AJAX al archivo PHP
         async function obtenerCategorias() {
             try {
-                const response = await fetch('WebServices/categoriafetch.php', {
+                const response = await fetch('../WebServices/categoriafetch.php', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -357,7 +359,7 @@
                     descripcionCategoria: document.getElementById('inputdescripcionCat').value
                 };
 
-                const response = await fetch('WebServices/categoriafetch.php', {
+                const response = await fetch('../WebServices/categoriafetch.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

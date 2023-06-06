@@ -65,7 +65,7 @@ if ($_POST) {
         die("Error al ejecutar la consulta: " . mysqli_error($conn));
     } else {
         // Registro exitoso, redirigir a index.html
-        //header("Location: ../index.html");
+        header("Location: ../pages/cargarNiveles.html");
         exit();
     }
     // Perform the insertion into the database using the prepared statement
