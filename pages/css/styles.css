@@ -3341,7 +3341,7 @@ progress {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid #2e2e2e;
+  border-bottom: none;
 }
 .nav-tabs .nav-link {
   margin-bottom: -1px;
