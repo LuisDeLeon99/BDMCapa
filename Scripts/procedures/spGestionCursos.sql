@@ -105,6 +105,10 @@ BEGIN
             LIMIT Inicio, Cantidad;
         END IF;
     END IF;
+    IF Accion = 'SE4' THEN
+        SELECT Curso.ID_curso
+        FROM Curso WHERE Titulo = Curso.Titulo;
+    END IF;
 END //
 
 DELIMITER ;

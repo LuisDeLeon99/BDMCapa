@@ -14,57 +14,13 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <!-- <div class="container-fluid">
-            <a class="navbar-brand" href="#">Full-Learning</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../index.html">Inicio
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
-                    
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Buscar">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
-                <ul class="navbar-nav me-auto espacioder" id="menu-item">
-
-                </ul>
-
-            </div> -->
-        </div>
+        
     </nav>
-    <form id="formNiveles"></form>
+    <form id="formNiveles" method="POST" action="../WebServices/nivel.php" enctype="multipart/form-data">
+        <div id="contenedorPrincipal" style="margin:auto; width:50%;"></div>
+    </form>
     <div style="margin:auto; width:50%;">
-        <br>
-        <h1>Solo un paso más...</h1>
-        <br>
-        <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">El nivel es</label>
-        <h3>Nivel 1</h3>
-        <br>
-        <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Titulo del nivel</label>
-        <input type="text" class="form-control" placeholder="Como se llama el nivel?"
-                                id="nombrenivel" name="nombreNivel">
-        <br>
-        <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Descripción del nivel</label>
-        <textarea class="form-control" id="descripcionnivel" rows="3"
-                                placeholder="¿Que contiene este nivel?"
-                                name="descripcionNivel"></textarea>
-
-        <div class="form-group">
-            <label for="cargaNiv" class="form-label mt-4">Carga el video del nivel de tu cruso</label>
-            <input class="form-control" type="file" id="cargaNiv" name="cargaNiv">
-        </div>
-
-        <button type="submit" name="submit" value="UPLOAD" class="btn btn-outline-info"
-            style="margin:10px 10px 55px 350px; width:20%;" onclick="redirigir()">¡Crear curso!</button>
-
+       
         <script>
             function redirigir() {
                 window.location.href = "cursosAgregados.html";
@@ -73,8 +29,16 @@
 
             $(document).ready(function () {
                 // Obtener el menú
+                
+                const urlParams = new URLSearchParams(window.location.search);
+                const Value = urlParams.get('3K32:Da');
+                const urlParams2 = new URLSearchParams(window.location.search);
+                const Value2 = urlParams.get('or3Zfl4w');
+                const urlParams3 = new URLSearchParams(window.location.search);
+                const Value3 = urlParams.get('cantidad');
                 obtenerMenu();
-
+                formniveles(Value,Value2,Value3);
+                setupVideoPreview("videoCurso", "videoPreview");
                 function obtenerMenu() {
                     $.ajax({
                         url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
@@ -91,6 +55,106 @@
 
             });
 
+        </script>
+        <script async>
+            
+                                
+            function getBase64Data(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+    
+                    reader.onload = function () {
+                        const base64Data = reader.result.split(',')[1]; // Obtener solo los datos base64, excluyendo el encabezado "data:image/jpeg;base64,"
+                        resolve(base64Data);
+                    };
+    
+                    reader.onerror = function (error) {
+                        reject(error);
+                    };
+    
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            function setupVideoPreview(inputId, previewId) {
+            const inpFile = document.getElementById(inputId);
+            const videoPreview = document.getElementById(previewId);
+            const videoElement = videoPreview.querySelector(".video-preview__video");
+            const previewDefaultText = videoPreview.querySelector(".video-preview__default-text");
+
+            inpFile.addEventListener("change", function () {
+                const file = this.files[0];
+                if (file) {
+                const fileName = file.name;
+                const fileExtension = fileName.split(".").pop().toLowerCase();
+                const allowedExtensions = ["mp4", "mov", "avi"];
+
+                if (allowedExtensions.includes(fileExtension)) {
+                    const reader = new FileReader();
+                    previewDefaultText.style.display = "none";
+                    videoPreview.style.display = "block";
+                    videoElement.style.display = "block";
+
+                    reader.addEventListener("load", function () {
+                    // Convierte el contenido del archivo a Base64
+                    const base64Video = reader.result;
+                    document.getElementById("base64Preview").value = base64Video;
+
+                    videoElement.setAttribute("src", base64Video);
+                    });
+                    reader.readAsDataURL(file);
+                } else {
+                    // El archivo seleccionado no tiene una extensión permitida
+                    alert("Por favor, seleccione un archivo de video en formato MP4, MOV o AVI.");
+                    inpFile.value = ""; // Borra la selección del archivo
+                }
+                } else {
+                // No se ha seleccionado ningún archivo
+                videoPreview.style.display = "none";
+                videoElement.style.display = "none";
+                previewDefaultText.style.display = "block";
+                }
+            });
+            }
+            function formniveles(niv,niv2,niv3) {
+            
+                $("#contenedorPrincipal").append(`
+                <br>
+                <h1>Solo un paso más...</h1>
+                <br>
+                <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">El nivel es</label>
+                <h3>Nivel ${niv3}</h3>
+                <br>
+                <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Titulo del nivel</label>
+                <input type="text" class="form-control" placeholder="Como se llama el nivel?"
+                      id="nombrenivel" name="nombreNivel">
+                <br>
+                <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Descripción del nivel</label>
+                <textarea class="form-control" id="descripcionnivel" rows="3"
+                  placeholder="¿Que contiene este nivel?"
+                  name="descripcionNivel"></textarea>
+                  <br>                      
+                <div class="form-group">
+                    <input class="form-control" type="file" id="videoCurso" name="videoCurso" accept="video/*" required
+                        title="Es necesario subir un video" />
+                    <div class="video-preview" id="videoPreview" style="display: none;">
+                        <video src="" class="video-preview__video" controls style="margin:auto; width:30%;"></video>
+                        <span class="video-preview__default-text">Preview</span>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" name="submit" value="UPLOAD" class="btn btn-outline-info"
+                    style="margin:10px 10px 55px 350px; width:20%;" onclick="redirigir()">¡Crear curso!</button>
+                    <input type="hidden" name="max" value="${niv}"> 
+                    <input type="hidden" id="base64Preview" name="base64Preview">
+                    <input type="hidden" name="curso" value="${niv2}">
+                    <input type="hidden" name="niveles" value="${niv3}">
+                `);
+                
+
+            }
+
+           
         </script>
     </div>
     <br>

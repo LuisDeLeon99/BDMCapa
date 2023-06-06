@@ -1,6 +1,5 @@
 <?php
-//error_reporting(E_ALL);
-//ini_set('display_errors', 1);
+
 session_start();
 require_once 'conexion.php';
 
@@ -10,15 +9,9 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-//$json_data = file_get_contents('php://input');
-//$data = json_decode($json_data, true);
 
 if ($_POST) {
-    
-    
-    //error_log('muestramelas ' . $_FILES);
-    //error_log('muestramelas ' . $_POST);
-   
+       
     $ID_usuario = $_SESSION['ID_usuario'];
     $Niveles = $_POST['nivelesCurso'];
     $Gratis = $_POST['optionsRadios'];
@@ -27,6 +20,22 @@ if ($_POST) {
     $Titulo = $_POST['nombreCurso'];
     $Descripcion = $_POST['descripcionCurso']; 
     
+    // Verificar si el título ya existe en la base de datos
+    $stmt = $conn->prepare("CALL spVerificarTitulo(?, @pTituloExistente)");
+    $stmt->bind_param("s", $Titulo);
+    $stmt->execute();
+
+    // Obtener el resultado de la verificación del título
+    $result = $conn->query("SELECT @pTituloExistente AS TituloExistente");
+    $row = $result->fetch_assoc();
+    $TituloExistente = $row['TituloExistente'];
+
+    // Verificar si el título ya existe
+    if ($TituloExistente > 0) {
+        // El título ya existe, mostrar un mensaje de error o realizar la acción correspondiente
+        echo "El título del curso ya existe. Por favor, elige otro título.";
+        exit();
+    }
     
     if ($Gratis) {
         $Costo = 0.00;
@@ -65,22 +74,15 @@ if ($_POST) {
         die("Error al ejecutar la consulta: " . mysqli_error($conn));
     } else {
         // Registro exitoso, redirigir a index.html
-        header("Location: ../pages/cargarNiveles.html");
+        $query = "CALL spGestionCursos('SE4','$idcur','$Niveles','$Costo','$Titulo','$Descripcion','$ImagenContenido','$Diploma','$Gratis','$Eliminado','$IDCat','$Creacion','$Inicio','$Cantidad','$ID_usuario')";
+        $result = $conn->query($query);
+        $Cantidad = 1;
+        $row = $result->fetch_assoc();
+        $idcur = $row['ID_curso'];
+        header("Location: ../pages/cargarNiveles.html?3K32:Da=" . urlencode($Niveles) . "&or3Zfl4w=" . urlencode($idcur) . "&cantidad=" . urlencode($Cantidad));
         exit();
     }
-    // Perform the insertion into the database using the prepared statement
-    //$insertQuery = "CALL spGestionCursos(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    //$insertStmt = $conn->prepare($insertQuery);
-    //$insertStmt->bind_param("ssisssbbiiisiii", $accion, $idcur, $Niveles, $Costo, $Titulo, $Descripcion, $ImagenData, $DiplomaData, $Gratis, $Eliminado, $IDCat, $Creacion, $Inicio, $Cantidad, $ID_usuario);
-    //$insertResult = $insertStmt->execute();
-
-    //if ($insertStmt->error) {
-    //    $error_message = 'Error en la consulta: ' . $insertStmt->error;
-    //    echo "<script>console.log('$error_message');</script>";
-    //    error_log('Error en la consulta: ' . $insertStmt->error);
-    //} else {
-    //    echo 'Curso creado con éxito';
-   // }
+   
 }
 
 

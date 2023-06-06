@@ -74,16 +74,12 @@ CREATE TABLE Niveles
 (
 IDNiv INT  PRIMARY KEY auto_increment, 
 ID_curso INT  NOT NULL, -- FK(Curso)
-Nivel INT NOT NUll,
+Nivel INT NOT NUll unique,
 Video LONGBLOB NOT NULL,
 Titulo VARCHAR(30) NOT NULL,
 Descripcion VARCHAR(100) NOT NULL,
 Completado BOOL NOT NULL DEFAULT 0
 );
-
-
-
-
 
 DROP TABLE IF EXISTS Multimedia;
 CREATE TABLE Multimedia
@@ -102,7 +98,7 @@ CREATE TABLE Curso
 ID_curso INT PRIMARY KEY auto_increment, -- PK 
 Niveles INT NOT NULL,
 Costo DECIMAL(10,2) NOT NULL,
-Titulo VARCHAR(50) NOT NULL,
+Titulo VARCHAR(50) NOT NULL unique,
 Descripcion VARCHAR(100) NOT NULL,
 Imagen LONGBLOB NOT NULL,
 Diploma LONGBLOB NOT NULL,
