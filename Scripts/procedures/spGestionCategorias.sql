@@ -8,8 +8,8 @@ CREATE PROCEDURE spGestionCategorias(
     IN p_Accion CHAR(3),
     IN p_IDCat INT ,
     IN p_ID_usuario INT,
-    IN p_Categoria VARCHAR(30),
-    IN p_Descripcion VARCHAR(50),
+    IN p_Categoria VARCHAR(50),
+    IN p_Descripcion VARCHAR(200),
     IN p_Creacion DATE,
     IN p_Catel BOOLEAN
 )

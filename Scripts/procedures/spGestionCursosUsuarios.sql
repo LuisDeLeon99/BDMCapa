@@ -17,7 +17,7 @@ CREATE PROCEDURE spGestionCursosUsuarios(
 BEGIN
     IF p_Accion = 'IN' THEN
         INSERT INTO CursosUsuarios (ID_curso, ID_alumno, ID_instructor, Progreso, Diploma, Fecha, FechaF)
-        VALUES (p_ID_curso, p_ID_alumno, p_ID_instructor, p_Progreso, p_Diploma, p_Fecha, p_FechaF);
+        VALUES (p_ID_curso, p_ID_alumno, p_ID_instructor, 0, '', CURDATE(), null);
     END IF;
     
     IF p_Accion = 'UP' THEN

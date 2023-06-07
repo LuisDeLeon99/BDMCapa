@@ -9,7 +9,7 @@ ID_instructor INT NOT NULL, -- FK(Usuario)
 Progreso DECIMAL(5,2)  NOT NULL,
 Diploma BLOB NOT NULL, 
 Fecha DATE NOT NULL,
-FechaF DATE NOT NULL,
+FechaF DATE,
 PRIMARY KEY (ID_curso, ID_alumno)
 );
 
@@ -74,10 +74,10 @@ CREATE TABLE Niveles
 (
 IDNiv INT  PRIMARY KEY auto_increment, 
 ID_curso INT  NOT NULL, -- FK(Curso)
-Nivel INT NOT NUll unique,
+Nivel INT NOT NUll,
 Video LONGBLOB NOT NULL,
-Titulo VARCHAR(30) NOT NULL,
-Descripcion VARCHAR(100) NOT NULL,
+Titulo VARCHAR(60) NOT NULL,
+Descripcion VARCHAR(200) NOT NULL,
 Completado BOOL NOT NULL DEFAULT 0
 );
 
@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS Multimedia;
 CREATE TABLE Multimedia
 (
 IDMulti INT PRIMARY KEY NOT NULL, -- PK 
-Descripcion VARCHAR(60),
+Descripcion VARCHAR(200),
 Multimedia LONGBLOB NOT NULL,
 Multimedia2 BLOB NOT NULL,
 mulel BOOL NOT NULL,
@@ -99,7 +99,7 @@ ID_curso INT PRIMARY KEY auto_increment, -- PK
 Niveles INT NOT NULL,
 Costo DECIMAL(10,2) NOT NULL,
 Titulo VARCHAR(50) NOT NULL unique,
-Descripcion VARCHAR(100) NOT NULL,
+Descripcion VARCHAR(200) NOT NULL,
 Imagen LONGBLOB NOT NULL,
 Diploma LONGBLOB NOT NULL,
 Gratis BOOL NOT NULL,
@@ -114,8 +114,8 @@ CREATE TABLE Categoria
 (
 IDCat INT PRIMARY KEY auto_increment, -- PK 
 ID_usuario int not null, -- FK(usuario)
-Categoria VARCHAR(30) NOT NULL,
-Descripcion VARCHAR(100) NOT NULL,
+Categoria VARCHAR(50) NOT NULL,
+Descripcion VARCHAR(200) NOT NULL,
 creacion date NOT NULL ,
 catel BOOL NOT NULL
 );

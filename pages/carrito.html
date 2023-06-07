@@ -27,16 +27,13 @@
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
-                    
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-sm-2" type="search" placeholder="Buscar">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
                 <ul class="navbar-nav me-auto espacioder" id="menu-item">
-
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -57,7 +54,6 @@
                                     <button type="button" class="btn btn-outline-light btn-lg espacioder">
                                         <span class="glyphicon glyphicon-share-alt"></span> Continuar comprando
                                     </button>
-
                                 </div>
                                 <br>
                             </div>
@@ -68,10 +64,10 @@
                     <div class="panel-footer bg-transparent">
                         <div class="row text-center">
                             <div class="col-xs-9" id="precio">
-                                
+                                <div id="metodosPago" class="form-select-sm"></div>
                             </div>
                             <div class="col-xs-3">
-                                <button type="button" class="btn btn-dark btn-lg">
+                                <button type="button" class="btn btn-dark btn-lg" id="comprar-btn">
                                     Comprar
                                 </button>
                             </div>
@@ -81,42 +77,66 @@
             </div>
         </div>
     </div>
+
     <script>
+       var precio;
+       var cursosResponse;
+       function comprar(metodoPago,precio,cursosResponse) {
+            
+            var data = {
+                metodoPago: metodoPago,
+                precio: precio,
+                cursosResponse: cursosResponse
+
+            };
+
+            $.ajax({
+                url: 'http://localhost:3005/BDMCapa/WebServices/comprar.php',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                contentType: 'application/json', 
+                success: function (response) {
+                    if (response && response.length > 0) {
+                        console.log(response);
+                    } else {
+                        console.log("La respuesta está vacía.");
+                    }
+                },
+                error: function () {
+                    console.log('Error al obtener el menú');
+                }
+            });
+        }
+
         $(document).ready(function () {
-           
-           // Obtener el menú
-           obtenerMenu();
-           obtenerCursos()
-           function obtenerMenu() {
-               $.ajax({
-                   url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
-                   success: function (response) {
-                       // Actualizar el contenido del menú
-                       $('#menu-item').html(response);
-                   },
-                   error: function () {
-                       // Manejar errores en la solicitud AJAX
-                       console.log('Error al obtener el menú');
-                   }
-               });
-           }
-           
-           function obtenerCursos() {
+            obtenerMenu();
+            obtenerCursos();
+
+            function obtenerMenu() {
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+                    success: function (response) {
+                        $('#menu-item').html(response);
+                    },
+                    error: function () {
+                        console.log('Error al obtener el menú');
+                    }
+                });
+            }
+
+            function obtenerCursos() {
                 $.ajax({
                     url: 'http://localhost:3005/BDMCapa/WebServices/cursosCarrito.php',
                     type: 'GET',
                     dataType: 'json',
-                    data: {
-                        
-                    },
                     success: function (response) {
-                        // Utilizar los datos recibidos en el arreglo
                         if (response && response.length > 0) {
                             console.log(response);
-                          
                             var sumaCostos = response[0].SumaCostos;
-                            tarjetaCursos(response,sumaCostos);                           
-                            
+                            precio = response[0].SumaCostos;
+                            cursosResponse = response;
+                            tarjetaCursos(response, sumaCostos);
                         } else {
                             console.log("La respuesta está vacía.");
                         }
@@ -125,38 +145,53 @@
                         console.error(error);
                     }
                 });
+
+                
             }
 
-            function tarjetaCursos(cursos,precio) {
+            var metodoPago = 'Tarjeta de débito'; // Valor predeterminado
+            var metodosPago = ['Tarjeta de crédito', 'Tarjeta de débito', 'Transferencia bancaria', 'PayPal', 'Criptomoneda'];
+            var listboxHTML = '<label for="metodoPago">Método de pago:</label>';
+            listboxHTML += '<select id="metodoPago" class="form-control">';
+            for (var i = 0; i < metodosPago.length; i++) {
+                var selected = (metodosPago[i] === metodoPago) ? 'selected' : ''; // Verifica si el método de pago coincide con el valor predeterminado
+                listboxHTML += '<option value="' + metodosPago[i] + '" ' + selected + '>' + metodosPago[i] + '</option>';
+            }
+            listboxHTML += '</select>';
+            $("#metodosPago").html(listboxHTML);
+
+            function tarjetaCursos(cursos, precio) {
                 cursos.forEach(function (curso) {
                     let costo = curso.Costo;
                     if (costo === "0.00") {
                         costo = "Gratis";
                     }
                     $("#contenedorPrincipal").append(`
-                    <div class="col-xs-2">
-                        <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
-                    </div>
+                        <div class="col-xs-2">
+                            <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
+                        </div>
                         <div class="col-xs-4">
                             <h4 class="product-name text-dark"><strong>${curso.Titulo}</strong></h4>
-                            
                         </div>
                         <div class="card-body">
                             <div class="text-dark espacioder">
-                                <h3><strong>$ ${curso.Costo} </h3>
+                                <h3><strong>$ ${curso.Costo}</strong></h3>
                             </div>
-
                         </div>
                         <hr>
-                `);
+                    `);
                 });
                 $("#precio").append(`
-                <h2 class="text-right text-dark">Total <strong>$${precio}</strong></h2>
+                    <h2 class="text-right text-dark">Total <strong>$${precio}</strong></h2>
                 `);
             }
 
+            $("#comprar-btn").on("click", function () {
+                var metodoPago = $("#metodoPago").val();
+                comprar(metodoPago,precio,cursosResponse);
+            });
+
         });
-       
     </script>
 </body>
 

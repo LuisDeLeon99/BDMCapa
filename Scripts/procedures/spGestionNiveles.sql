@@ -10,8 +10,8 @@ CREATE PROCEDURE spGestionNiveles(
     IN p_ID_curso INT,
     IN p_Nivel INT,
     IN p_Video LONGBLOB,
-    IN p_Titulo VARCHAR(30),
-    IN p_Descripcion VARCHAR(100),
+    IN p_Titulo VARCHAR(60),
+    IN p_Descripcion VARCHAR(200),
     IN p_Completado BOOL
 )
 BEGIN

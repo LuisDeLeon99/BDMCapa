@@ -1,12 +1,10 @@
 use bdm;
 
 INSERT INTO Pago (Descripcion) VALUES
-('Efectivo'),
 ('Tarjeta de crédito'),
 ('Tarjeta de débito'),
 ('Transferencia bancaria'),
 ('PayPal'),
-('Cheque'),
 ('Criptomoneda');
 
 INSERT INTO Usuarios (Usuario, Nombre, Apaterno, Amaterno, Pass, Rol, Imagen, Genero, Fecha, Fechan, Correo, err, usel) VALUES

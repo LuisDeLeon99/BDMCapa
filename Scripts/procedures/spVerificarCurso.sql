@@ -5,7 +5,7 @@ DROP PROCEDURE IF EXISTS spVerificarTitulo;
 DELIMITER //
 
 CREATE PROCEDURE spVerificarTitulo(
-    IN pTitulo VARCHAR(30),
+    IN pTitulo VARCHAR(50),
     OUT pTituloExistente INT
 )
 BEGIN
