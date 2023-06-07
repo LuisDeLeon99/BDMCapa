@@ -99,12 +99,16 @@
                 success: function (response) {
                     if (response && response.length > 0) {
                         console.log(response);
+                       
                     } else {
                         console.log("La respuesta está vacía.");
+                        location.reload()
+                        window.location.href = 'http://localhost:3005/BDMCapa/index.html';
                     }
                 },
                 error: function () {
                     console.log('Error al obtener el menú');
+                    
                 }
             });
         }
@@ -139,6 +143,7 @@
                             tarjetaCursos(response, sumaCostos);
                         } else {
                             console.log("La respuesta está vacía.");
+                            
                         }
                     },
                     error: function (xhr, status, error) {

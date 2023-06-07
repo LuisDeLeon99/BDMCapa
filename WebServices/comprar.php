@@ -53,12 +53,6 @@ if (isset($_SESSION['usuario'])) {
     }
     $idVentasResult->free();
     
-    $response = array(
-        'status' => 'error',
-        'message' => 'compra realizada.'
-    );
-    
-    
     $cantidad = 1;
     $results_array = array();
     
@@ -75,7 +69,12 @@ if (isset($_SESSION['usuario'])) {
       
 
     }
-    
+
+    $response = array(
+        'status' => 'success',
+        'message' => 'compra realizada.'
+    );
+    unset($_SESSION['carrito']);
     header('Content-Type: application/json');
     echo json_encode($response);
 }
