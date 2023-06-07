@@ -116,6 +116,12 @@ BEGIN
 		FROM viGestionCursos 
 		WHERE viGestionCursos.ID_curso = p_ID_curso;
 	END IF;
+    
+    IF p_Accion = 'SE6' THEN
+    SELECT viGestionCursos.ID_curso, viGestionCursos.Costo, viGestionCursos.Titulo, viGestionCursos.Imagen, viGestionCursos.ID_usuario			
+		FROM viGestionCursos 
+		WHERE viGestionCursos.ID_usuario = p_ID_usuario;
+	END IF;
 END //
 
 DELIMITER ;

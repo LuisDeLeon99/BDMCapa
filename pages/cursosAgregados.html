@@ -69,63 +69,12 @@
                     </script>
                     <div class="panel-body">
 
-                        <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/150x100">
-                        </div>
-                        <div class="col-xs-4">
-                            <h4 class="product-name text-dark"><strong>Nombre del curso</strong></h4>
-                            <h8 class="text-dark">Descripción del curso</h8>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-dark espacioder">
-                                <h3><strong>25.00 </h3>
-                            </div>
-
-                        </div>
-
-                        <hr>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/150x100">
-                                </div>
-                                <div class="col-xs-4">
-                                    <h4 class="product-name text-dark"><strong>Nombre del curso</strong></h4>
-                                    <h8 class="text-dark">Descripción del curso</h8>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-dark espacioder">
-                                        <h3><strong>25.00 </h3>
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="panel-body" id="contenedorPrincipal">
                         </div>
                         <hr>
-                        <hr>
-                        <div class="row">
-                            <div class="text-center">
-
-                                <h4 class="text-right">¿Agregaste más cursos?</h4>
-
-                                <div class="espacioder">
-                                    <button type="button" class="btn btn-light espacioder">
-                                        Actualizar lista
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
-                    <!-- <div class="panel-footer bg-transparent">
-                        <div class="row text-center">
-                            <div class="col-xs-9">
-                                <h2 class="text-right text-dark">Total <strong>$150.00</strong></h2>
-                            </div>
-                            <div class="col-xs-3">
-                                <button type="button" class="btn btn-dark btn-lg">
-                                    Comprar
-                                </button>
-                            </div>
-                        </div>
-                    </div> -->
+                    
                 </div>
             </div>
         </div>
@@ -135,6 +84,7 @@
             $(document).ready(function () {
             // Obtener el menú
             obtenerMenu();
+            obtenerCursos()
            
             function obtenerMenu() {
                 $.ajax({
@@ -148,6 +98,75 @@
                         console.log('Error al obtener el menú');
                     }
                 });
+            }
+
+            function obtenerCursos() {
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/cursosPerfil.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response && response.length > 0) {
+                            console.log(response);
+                            
+                            rol = response[0].Rol;
+                            cursosResponse = response;
+                            tarjetaCursos(response, rol);
+                        } else {
+                            console.log("La respuesta está vacía.");
+                            
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+
+                
+            }
+
+            function tarjetaCursos(cursos, rol) {
+                cursos.forEach(function (curso) {
+                    let costo = curso.Costo;
+                    if (costo === "0.00") {
+                        costo = "Gratis";
+                    }
+                    
+                    if (rol === "Instructor") {
+                    $("#contenedorPrincipal").append(`
+                        <div class="col-xs-2">
+                            <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
+                        </div>
+                        <div class="col-xs-4">
+                            <h4 class="product-name text-dark"><strong>${curso.Titulo}</strong></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-dark espacioder">
+                                <h3><strong>$ ${curso.Costo}</strong></h3>
+                            </div>
+                        </div>
+                        <hr>
+                    `);                    
+                    }
+
+                    if (rol === "Alumno") {
+                    $("#contenedorPrincipal").append(`
+                        <div class="col-xs-2">
+                            <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
+                        </div>
+                        <div class="col-xs-4">
+                            <h4 class="product-name text-dark"><strong>${curso.Titulo}</strong></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-dark espacioder">
+                                <h3><strong>$ ${curso.Costo}</strong></h3>
+                            </div>
+                        </div>
+                        <hr>
+                    `);                    
+                    }
+                });
+                
             }
            
         });

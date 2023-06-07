@@ -4,7 +4,7 @@ DROP FUNCTION IF EXISTS calcularPromedioCalificaciones;
 
 DELIMITER //
 
-CREATE FUNCTION calcularPromedioCalificaciones(ID_curso INT) RETURNS DECIMAL(5,2)
+CREATE FUNCTION calcularPromedioCalificaciones(ID_curso INT) RETURNS DECIMAL(5,2) DETERMINISTIC
 BEGIN
     DECLARE promedio DECIMAL(5,2);
     
