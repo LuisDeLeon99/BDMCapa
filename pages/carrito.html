@@ -128,26 +128,94 @@
     </div>
     <script>
         $(document).ready(function () {
-            $(document).ready(function () {
-                        // Obtener el menú
-                        obtenerMenu();
-                       
-                        function obtenerMenu() {
-                            $.ajax({
-                                url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
-                                success: function (response) {
-                                    // Actualizar el contenido del menú
-                                    $('#menu-item').html(response);
-                                },
-                                error: function () {
-                                    // Manejar errores en la solicitud AJAX
-                                    console.log('Error al obtener el menú');
-                                }
-                            });
+           
+           // Obtener el menú
+           obtenerMenu();
+          
+           function obtenerMenu() {
+               $.ajax({
+                   url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+                   success: function (response) {
+                       // Actualizar el contenido del menú
+                       $('#menu-item').html(response);
+                   },
+                   error: function () {
+                       // Manejar errores en la solicitud AJAX
+                       console.log('Error al obtener el menú');
+                   }
+               });
+           }
+           
+           function obtenerCursos() {
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/indexcursos.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        
+                    },
+                    success: function (response) {
+                        // Utilizar los datos recibidos en el arreglo
+                        if (response && response.length > 0) {
+                            console.log(response);
+                            // Actualizar la cantidad total de cursos si es la primera página
+                           
+                            tarjetaCursos(response);                           
+                            
+                        } else {
+                            console.log("La respuesta está vacía.");
                         }
-                       
-                    });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+            function tarjetaCursos(cursos) {
+                cursos.forEach(function (curso) {
+                    let costo = curso.Costo;
+                    if (costo === "0.00") {
+                        costo = "Gratis";
+                    }
+                    $("#contenedorPrincipal").append(`
+                    <div class="col mb-5" data-id="${curso.ID_curso}">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="data:image/jpeg;base64,${curso.Imagen}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center text-dark">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">${curso.Titulo}</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-dark text-decoration-line-through">$300.00</span>
+                                    ${costo}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto btn-agregar-carrito" href="#" data-id-curso="${curso.ID_curso}">Agregar al carrito</a></div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+                });
+
+            }
+
         });
+       
     </script>
 </body>
 

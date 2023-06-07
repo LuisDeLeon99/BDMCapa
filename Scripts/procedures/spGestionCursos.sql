@@ -5,107 +5,107 @@ DROP PROCEDURE IF EXISTS spGestionCursos;
 DELIMITER //
 
 CREATE PROCEDURE spGestionCursos(
-    IN Accion CHAR(3),
-    IN ID_curso INT,
-    IN Niveles INT,
-    IN Costo DECIMAL(10,2),
-    IN Titulo VARCHAR(30),
-    IN Descripcion VARCHAR(50),
-    IN Imagen LONGBLOB,
-    IN Diploma LONGBLOB,
-    IN Gratis BOOLEAN,
-    IN Eliminado BOOLEAN,
-    IN IDCat INT,
-    IN Creacion DATE,
-    IN Inicio INT,
-    IN Cantidad INT,
-    IN ID_usuario INT
+    IN p_Accion CHAR(3),
+    IN p_ID_curso INT,
+    IN p_Niveles INT,
+    IN p_Costo DECIMAL(10,2),
+    IN p_Titulo VARCHAR(30),
+    IN p_Descripcion VARCHAR(50),
+    IN p_Imagen LONGBLOB,
+    IN p_Diploma LONGBLOB,
+    IN p_Gratis BOOLEAN,
+    IN p_Eliminado BOOLEAN,
+    IN p_IDCat INT,
+    IN p_Creacion DATE,
+    IN p_Inicio INT,
+    IN p_Cantidad INT,
+    IN p_ID_usuario INT
 )
 BEGIN
-    IF Accion = 'IN' THEN
+    IF p_Accion = 'IN' THEN
         INSERT INTO Curso(Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, Eliminado, IDCat, Creacion,ID_usuario)
-        VALUES(Niveles, Costo, Titulo, Descripcion, Imagen, Diploma, Gratis, 0, IDCat, CURDATE(),ID_usuario);
+        VALUES(p_Niveles, p_Costo, p_Titulo, p_Descripcion, p_Imagen, p_Diploma, p_Gratis, 0, p_IDCat, CURDATE(), p_ID_usuario);
     END IF;
 
-    IF Accion = 'UP' THEN
+    IF p_Accion = 'UP' THEN
         UPDATE Curso
-        SET Niveles = Niveles,
-            Costo = Costo,
-            Titulo = Titulo,
-            Descripcion = Descripcion,
-            Imagen = Imagen,
-            Diploma = Diploma,
-            Gratis = Gratis,
-            Eliminado = Eliminado,
-            IDCat = IDCat,
-            Creacion = Creacion,
-            ID_usuario = ID_usuario
-        WHERE ID_curso = ID_curso;
+        SET Niveles = p_Niveles,
+            Costo = p_Costo,
+            Titulo = p_Titulo,
+            Descripcion = p_Descripcion,
+            Imagen = p_Imagen,
+            Diploma = p_Diploma,
+            Gratis = p_Gratis,
+            Eliminado = p_Eliminado,
+            IDCat = p_IDCat,
+            Creacion = p_Creacion,
+            ID_usuario = p_ID_usuario
+        WHERE ID_curso = p_ID_curso;
     END IF;
 
-    IF Accion = 'BO' THEN
+    IF p_Accion = 'BO' THEN
         UPDATE Curso
         SET Eliminado = 1
-        WHERE ID_curso = ID_curso;
+        WHERE ID_curso = p_ID_curso;
     END IF;
 
-    IF Accion = 'DE' THEN
-        DELETE FROM Curso WHERE Curso.ID_curso = ID_curso; 
+    IF p_Accion = 'DE' THEN
+        DELETE FROM Curso WHERE Curso.ID_curso = p_ID_curso; 
     END IF;
 
-    IF Accion = 'SE' THEN
+    IF p_Accion = 'SE' THEN
         SELECT Curso.ID_curso, Curso.Niveles, Curso.Costo, Curso.Titulo, Curso.Descripcion, Curso.Imagen, Curso.IDCat, Curso.Creacion, Curso.ID_usuario
-        FROM Curso WHERE Curso.ID_curso = ID_curso;
+        FROM Curso WHERE Curso.ID_curso = p_ID_curso;
     END IF;
 
-    IF Accion = 'SE1' THEN
-        IF IDCat <> 1 THEN
+    IF p_Accion = 'SE1' THEN
+        IF p_IDCat <> 1 THEN
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
-            WHERE viGestionCursos.IDCat = IDCat
+            WHERE viGestionCursos.IDCat = p_IDCat
             ORDER BY CalificacionPromedio DESC
-            LIMIT Inicio, Cantidad;
+            LIMIT p_Inicio, p_Cantidad;
         ELSE
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
             
             ORDER BY CalificacionPromedio DESC
-            LIMIT Inicio, Cantidad;
+            LIMIT p_Inicio, p_Cantidad;
         END IF;
     END IF;
 
-    IF Accion = 'SE2' THEN
-        IF IDCat <> 1 THEN
+    IF p_Accion = 'SE2' THEN
+        IF p_IDCat <> 1 THEN
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
-            WHERE viGestionCursos.IDCat = IDCat
+            WHERE viGestionCursos.IDCat = p_IDCat
             ORDER BY Ventas DESC
-            LIMIT Inicio, Cantidad;
+            LIMIT p_Inicio, p_Cantidad;
         ELSE
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
             
             ORDER BY Ventas DESC
-            LIMIT Inicio, Cantidad;
+            LIMIT p_Inicio, p_Cantidad;
         END IF;
     END IF;
 
-     IF Accion = 'SE3' THEN
-        IF IDCat <> 1 THEN
+     IF p_Accion = 'SE3' THEN
+        IF p_IDCat <> 1 THEN
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
-            WHERE viGestionCursos.IDCat = IDCat
+            WHERE viGestionCursos.IDCat = p_IDCat
             ORDER BY UltimaVenta DESC
-            LIMIT Inicio, Cantidad;
+            LIMIT p_Inicio, p_Cantidad;
         ELSE
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
             
             ORDER BY UltimaVenta DESC
-            LIMIT Inicio, Cantidad;
+            LIMIT p_Inicio, p_Cantidad;
         END IF;
     END IF;
-    IF Accion = 'SE4' THEN
+    IF p_Accion = 'SE4' THEN
         SELECT Curso.ID_curso
         FROM Curso WHERE Titulo = Curso.Titulo;
     END IF;

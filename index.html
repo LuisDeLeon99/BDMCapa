@@ -148,7 +148,11 @@
                             if (response.length < 8 || pagina * 8 >= totalCursos) {
                                 $(window).off('scroll'); // Desactivar el evento de scroll
                             }
-
+                            // Asociar evento de clic a los enlaces "Agregar al carrito"
+                            $('.btn-agregar-carrito').click(function() {
+                            var idCurso = $(this).data('id-curso');
+                            agregarAlCarrito(idCurso);
+                            });
                         } else {
                             console.log("La respuesta está vacía.");
                         }
@@ -158,9 +162,41 @@
                     }
                 });
             }
-            //${tuvariable}
+            
+            function agregarAlCarrito(cursoID) {
+                // Aquí puedes realizar las acciones necesarias para agregar el curso al carrito
+                // Puedes utilizar el parámetro "cursoID" para obtener el ID del curso seleccionado
+                // Por ejemplo:
+                
+                // Realizar una petición AJAX para agregar el curso al carrito
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/agregarCarrito.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                    cursoID: cursoID
+                    // Otros datos relacionados con el curso que deseas enviar al servidor
+                    },
+                    success: function(response) {
+                    // Manejar la respuesta del servidor después de agregar el curso al carrito
+                    if (response.status === 'success') {
+                        // Muestra el popup de éxito
+                        alert('¡Curso agregado al carrito correctamente!');
+                        console.log('Curso agregado al carrito:', response);
+                    } else {
+                        // Muestra el mensaje de error en caso de que ocurra un error
+                        alert(response.message);
+                    }     
+                    
+                    },
+                    error: function(xhr, status, error) {
+                    console.error('Error al agregar el curso al carrito:', error);
+                    alert('No hay sesión activa. Por favor, inicia sesión antes de agregar cursos al carrito.');
+                    // Manejar el error de alguna manera
+                    }
+                });
+            }
 
-            // Ejemplo de función que recibe el arreglo de cursos como argumento
             function tarjetaCursos(cursos) {
                 cursos.forEach(function (curso) {
                     let costo = curso.Costo;
@@ -168,7 +204,7 @@
                         costo = "Gratis";
                     }
                     $("#contenedorPrincipal").append(`
-                    <div class="col mb-5">
+                    <div class="col mb-5" data-id="${curso.ID_curso}">
                         <div class="card h-100">
                             <!-- Sale badge-->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
@@ -194,7 +230,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto" href="#">Agregar al carrito</a></div>
+                                <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto btn-agregar-carrito" href="#" data-id-curso="${curso.ID_curso}">Agregar al carrito</a></div>
                             </div>
                         </div>
                     </div>

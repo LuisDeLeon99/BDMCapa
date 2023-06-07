@@ -5,62 +5,62 @@ DROP PROCEDURE IF EXISTS spGestionUsuarios;
 DELIMITER //
 
 CREATE PROCEDURE spGestionUsuarios(
-    IN Accion CHAR(3),
-    IN ID_usuario INT,
-    IN Usuario VARCHAR(30),
-    IN Nombre VARCHAR(30),
-    IN Ap VARCHAR(30),
-    IN Am VARCHAR(30),
-    IN Pass VARCHAR(30),
-    IN Rol INT,
-    IN Imagen LONGBLOB,
-    IN Genero BOOLEAN,
-	IN Correo VARCHAR(30),
-    IN Fecha Date, 
-    IN Fechan Date,
-    IN err INT,
-    IN usel boolean
+    IN p_Accion CHAR(3),
+    IN p_ID_usuario INT,
+    IN p_Usuario VARCHAR(30),
+    IN p_Nombre VARCHAR(30),
+    IN p_Ap VARCHAR(30),
+    IN p_Am VARCHAR(30),
+    IN p_Pass VARCHAR(30),
+    IN p_Rol INT,
+    IN p_Imagen LONGBLOB,
+    IN p_Genero BOOLEAN,
+	IN p_Correo VARCHAR(30),
+    IN p_Fecha DATE, 
+    IN p_Fechan DATE,
+    IN p_err INT,
+    IN p_usel BOOLEAN
     
 )
 BEGIN
-    IF Accion = 'IN' THEN
-        SET Fecha = NOW();
+    IF p_Accion = 'IN' THEN
+        SET p_Fecha = NOW();
         
         INSERT INTO Usuarios(Usuario,Nombre, Apaterno, Amaterno, Pass, Rol, Imagen, Genero, Correo, Fecha, Fechan, err,usel )
-        VALUES( Usuario,Nombre, Ap, Am, Pass, Rol, Imagen, Genero, Correo, CURDATE(), Fechan,0,0 );
+        VALUES( p_Usuario, p_Nombre, p_Ap, p_Am, p_Pass, p_Rol, p_Imagen, p_Genero, p_Correo, CURDATE(), p_Fechan, 0, 0 );
     END IF;
     
-    IF Accion = 'UP' THEN
+    IF p_Accion = 'UP' THEN
         UPDATE Usuarios
-        SET Usuario = Usuario,
-            Nombre = Nombre,
-            Apaterno = Ap,
-            Apaterno = Am,
-            Pass = Pass,
-            Rol = Rol,
-            Imagen = Imagen,
-            Genero = Genero,
-            Correo = Correo,
+        SET Usuario = p_Usuario,
+            Nombre = p_Nombre,
+            Apaterno = p_Ap,
+            Apaterno = p_Am,
+            Pass = p_Pass,
+            Rol = p_Rol,
+            Imagen = p_Imagen,
+            Genero = p_Genero,
+            Correo = p_Correo,
             Fecha = CURDATE(),
-            Fechan = Fechan
+            Fechan = p_Fechan
             
-        WHERE ID_usuario = ID_usuario;
+        WHERE ID_usuario = p_ID_usuario;
     END IF;
     
-     IF Accion = 'BO' THEN
+     IF p_Accion = 'BO' THEN
         UPDATE Usuarios
         SET usel = 1                
-        WHERE ID_usuario = ID_usuario;
+        WHERE ID_usuario = p_ID_usuario;
     END IF;
     
-    IF Accion = 'DE' THEN
-        DELETE FROM Usuarios WHERE ID_usuario = ID_usuario; 
+    IF p_Accion = 'DE' THEN
+        DELETE FROM Usuarios WHERE ID_usuario = p_ID_usuario; 
     END IF;  
     
     
-    IF Accion = 'SE' THEN
+    IF p_Accion = 'SE' THEN
         SELECT ID_usuario, Nombre, Ap, Am, Pass, Rol, Imagen, Genero, Correo, Fecha, Fechan, err
-        FROM Usuarios WHERE ID_usuario = ID_usuario;
+        FROM Usuarios WHERE ID_usuario = p_ID_usuario;
     END IF;
     
     
