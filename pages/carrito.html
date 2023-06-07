@@ -63,57 +63,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-body">
-
-                        <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/150x100">
-                        </div>
-                        <div class="col-xs-4">
-                            <h4 class="product-name text-dark"><strong>Nombre del curso</strong></h4>
-                            <h8 class="text-dark">Descripción del curso</h8>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-dark espacioder">
-                                <h3><strong>25.00 </h3>
-                            </div>
-
-                        </div>
-
-                        <hr>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/150x100">
-                                </div>
-                                <div class="col-xs-4">
-                                    <h4 class="product-name text-dark"><strong>Nombre del curso</strong></h4>
-                                    <h8 class="text-dark">Descripción del curso</h8>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-dark espacioder">
-                                        <h3><strong>25.00 </h3>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <hr>
-                        <div class="row">
-                            <div class="text-center">
-
-                                <h4 class="text-right">¿Agregaste más cursos?</h4>
-
-                                <div class="espacioder">
-                                    <button type="button" class="btn btn-light espacioder">
-                                        Actualizar carrito
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="panel-body" id="contenedorPrincipal">
                     </div>
                     <div class="panel-footer bg-transparent">
                         <div class="row text-center">
-                            <div class="col-xs-9">
-                                <h2 class="text-right text-dark">Total <strong>$150.00</strong></h2>
+                            <div class="col-xs-9" id="precio">
+                                
                             </div>
                             <div class="col-xs-3">
                                 <button type="button" class="btn btn-dark btn-lg">
@@ -131,7 +86,7 @@
            
            // Obtener el menú
            obtenerMenu();
-          
+           obtenerCursos()
            function obtenerMenu() {
                $.ajax({
                    url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
@@ -148,7 +103,7 @@
            
            function obtenerCursos() {
                 $.ajax({
-                    url: 'http://localhost:3005/BDMCapa/WebServices/indexcursos.php',
+                    url: 'http://localhost:3005/BDMCapa/WebServices/cursosCarrito.php',
                     type: 'GET',
                     dataType: 'json',
                     data: {
@@ -158,9 +113,9 @@
                         // Utilizar los datos recibidos en el arreglo
                         if (response && response.length > 0) {
                             console.log(response);
-                            // Actualizar la cantidad total de cursos si es la primera página
-                           
-                            tarjetaCursos(response);                           
+                          
+                            var sumaCostos = response[0].SumaCostos;
+                            tarjetaCursos(response,sumaCostos);                           
                             
                         } else {
                             console.log("La respuesta está vacía.");
@@ -172,46 +127,32 @@
                 });
             }
 
-            function tarjetaCursos(cursos) {
+            function tarjetaCursos(cursos,precio) {
                 cursos.forEach(function (curso) {
                     let costo = curso.Costo;
                     if (costo === "0.00") {
                         costo = "Gratis";
                     }
                     $("#contenedorPrincipal").append(`
-                    <div class="col mb-5" data-id="${curso.ID_curso}">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="data:image/jpeg;base64,${curso.Imagen}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center text-dark">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">${curso.Titulo}</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    <span class="text-dark text-decoration-line-through">$300.00</span>
-                                    ${costo}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto btn-agregar-carrito" href="#" data-id-curso="${curso.ID_curso}">Agregar al carrito</a></div>
-                            </div>
-                        </div>
+                    <div class="col-xs-2">
+                        <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
                     </div>
+                        <div class="col-xs-4">
+                            <h4 class="product-name text-dark"><strong>${curso.Titulo}</strong></h4>
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="text-dark espacioder">
+                                <h3><strong>$ ${curso.Costo} </h3>
+                            </div>
+
+                        </div>
+                        <hr>
                 `);
                 });
-
+                $("#precio").append(`
+                <h2 class="text-right text-dark">Total <strong>$${precio}</strong></h2>
+                `);
             }
 
         });

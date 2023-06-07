@@ -109,6 +109,13 @@ BEGIN
         SELECT Curso.ID_curso
         FROM Curso WHERE Titulo = Curso.Titulo;
     END IF;
+    
+    IF p_Accion = 'SE5' THEN
+    SELECT viGestionCursos.ID_curso, viGestionCursos.Costo, viGestionCursos.Titulo, viGestionCursos.Imagen, viGestionCursos.ID_usuario,
+			(SELECT SUM(Costo) FROM viGestionCursos ) AS SumaCostos
+		FROM viGestionCursos 
+		WHERE viGestionCursos.ID_curso = p_ID_curso;
+	END IF;
 END //
 
 DELIMITER ;

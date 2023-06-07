@@ -9,7 +9,7 @@ SELECT
     C.Descripcion,
     C.Costo,
     C.Imagen,
-    
+    C.ID_usuario,
     AVG(Com.Calif) AS CalificacionPromedio,
     
     COUNT(DV.ID_curso) AS Ventas,
