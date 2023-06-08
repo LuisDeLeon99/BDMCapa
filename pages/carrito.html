@@ -157,7 +157,7 @@
             var metodoPago = 'Tarjeta de débito'; // Valor predeterminado
             var metodosPago = ['Tarjeta de crédito', 'Tarjeta de débito', 'Transferencia bancaria', 'PayPal', 'Criptomoneda'];
             var listboxHTML = '<label for="metodoPago">Método de pago:</label>';
-            listboxHTML += '<select id="metodoPago" class="form-control">';
+            listboxHTML += '<select id="metodoPago" class="form-group">';
             for (var i = 0; i < metodosPago.length; i++) {
                 var selected = (metodosPago[i] === metodoPago) ? 'selected' : ''; // Verifica si el método de pago coincide con el valor predeterminado
                 listboxHTML += '<option value="' + metodosPago[i] + '" ' + selected + '>' + metodosPago[i] + '</option>';
