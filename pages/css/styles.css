@@ -338,9 +338,9 @@ button:focus:not(:focus-visible) {
   cursor: pointer;
 }
 
-select {
+/* select {
   word-wrap: normal;
-}
+} */
 select:disabled {
   opacity: 1;
 }
