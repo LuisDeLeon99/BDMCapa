@@ -39,8 +39,7 @@ BEGIN
         vi.Curso,
         vi.AlumnosInscritos,
         vi.NivelPromedio,
-        vi.IngresosCurso,
-        vi.FormaPago,
+        vi.IngresosCurso,        
         (
             SELECT SUM(IngresosCurso)
             FROM viCursosUsuarios
