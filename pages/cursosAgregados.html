@@ -47,18 +47,8 @@
                 <div class="card-body">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <div class="row">
-                                <div class="col-xs-6 text-ligth">
-                                    <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que agregaste</h1>
-                                </div>
-                                <hr>
-                                <div class="col-xs-6">
-                                    <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir()">
-                                        <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso
-                                    </button>
-
-                                </div>
-                                <br>
+                            <div class="row" id="boton">
+                              
                             </div>
                         </div>
                     </div>
@@ -126,16 +116,18 @@
             }
 
             function tarjetaCursos(cursos, rol) {
+                var ejecutado = false;
                 cursos.forEach(function (curso) {
                     let costo = curso.Costo;
+                    
                     if (costo === "0.00") {
                         costo = "Gratis";
                     }
-                    
-                    if (rol === "Instructor") {
+                    //aqui va la primera parte del reporte de instructor
+                    if (rol === "Instructor"&& curso.procedencia == "0" ) {
                     $("#contenedorPrincipal").append(`
                         <div class="col-xs-2">
-                            <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
+                            <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.ImagenCurso}">
                         </div>
                         <div class="col-xs-4">
                             <h4 class="product-name text-dark"><strong>${curso.Titulo}</strong></h4>
@@ -146,9 +138,30 @@
                             </div>
                         </div>
                         <hr>
-                    `);                    
+                    `);
+                    if(!ejecutado){
+                        $("#boton").append(`
+                            <div class="col-xs-6 text-ligth">
+                                <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que agregaste</h1>
+                            </div>
+                            <hr>
+                            <div class="col-xs-6">
+                                <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir()">
+                                    <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso
+                                </button
+                            </div>
+                            <br>
+                        `);
+                        ejecutado = true;
+                        }                                       
                     }
-
+                    //aqui la segunda
+                    if (rol === "Instructor"&& curso.procedencia == "1" ) {
+                    $("#contenedorPrincipal2").append(`
+                        
+                    `);                                        
+                    }
+                     //aqui el kardex
                     if (rol === "Alumno") {
                     $("#contenedorPrincipal").append(`
                         <div class="col-xs-2">
@@ -166,6 +179,7 @@
                     `);                    
                     }
                 });
+                
                 
             }
            

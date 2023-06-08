@@ -70,55 +70,9 @@
 
     <div class="card mb-3" style="margin:auto; width:95%;">
 
-        <div style="margin:auto; width:85%;" class="card mb-3 bg-dark py-1">
+        <div style="margin:auto; width:85%;" class="card mb-3 bg-dark py-1" id="contenedorPrincipal">
 
-            <h3 class="card-header">Nombre del curso</h3>
-            <!-- 
-            <div class="card-body">
-                <h5 class="card-title">Aprende como un experto</h5>
-                <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-            </div> -->
-            <div class="container">
-                <div>
-                    <div>
-                        <h4 class="card-title text-muted">¿De que trata el curso?</h4>
-                        <p class="card-text">Aquí descripción del curso, espero funcione a la primera lptm</p>
-                    </div>
-                </div>
-
-                <div class="card border-dark mb-3" style="margin-left:auto; width:25%;">
-                    <div class="card-body">
-                        <div class="center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%"
-                                height="200" aria-label="Placeholder: Image cap" focusable="false" role="img"
-                                preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
-                                style="font-size:1.125rem;text-anchor:middle">
-                                <rect width="100%" height="100%" fill="#868e96"></rect>
-                                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                            </svg>
-                        </div>
-                        <div style="margin:auto;">
-                            <h4 class="card-title">Precio</h4>
-                            <div>
-                                <button type="button" class="btn btn-info btn-lg custom-btn"> Agregar al carrito
-                                </button>
-                                <br>
-                                <button type="button" class="btn btn-light btn-lg custom-btn"> Comprar ahora </button>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="card-text">Aquí podría ir algo</p>
-
-
-                </div>
-
-            </div>
-
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-            </div>
+            
 
         </div>
         <div class="card mb-5 center bg-light"style="margin:auto; width:75%;">
@@ -129,23 +83,52 @@
             </div>
             
         </div>
-      
+
+        <div class="card mb-5 center bg-light disqus-container">
+            <div id="disqus_thread"></div>
+        </div>
+        
+        
         <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            
+            var disqus_config = function () {
+            this.page.url = 'http://localhost:3005/BDMCapa/pages/Curso.html';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'ID_DE_LA_PAGINA'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://http-localhost-3005-bdmcapa.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const cursoId = urlParams.get('curso');
             $(document).ready(function () {
                 // Obtener el menú
                 obtenerCursos();
 
                 // Función para obtener el menú mediante AJAX
                 function obtenerCursos() {
+                    
                     $.ajax({
                         url: 'http://localhost:3005/BDMCapa/WebServices/traeCurso.php',
                         type: 'GET',
                         dataType: 'json',
-                        data: {},
+                        data: { cursoId: cursoId },
                         success: function (response) {
                             // Utilizar los datos recibidos en el arreglo
-                            if (response && response.length > 0) {
+                            if (response) {
                                 console.log(response);
+                                
+                                tarjetaCursos(response);
                                 // Actualizar la cantidad total de cursos si es la primera página
                             } else {
                                 console.log("La respuesta está vacía.");
@@ -156,10 +139,53 @@
                         }
                     });
                 }
+                function tarjetaCursos(curso) {
+                 
+                 
+                 // Aquí va el código HTML de la tarjeta de curso
+                 $("#contenedorPrincipal").append(`
+                     <h3 class="card-header">Nombre del curso</h3>
+                     <div class="container">
+                         <div>
+                             <div>
+                                 <h4 class="card-title text-muted">¿De qué trata el curso?</h4>
+                                 <p class="card-text">Aquí descripción del curso, espero funcione a la primera lptm</p>
+                             </div>
+                         </div>
+                         <div class="card border-dark mb-3" style="margin-left:auto; width:25%;">
+                             <div class="card-body">
+                                 <div class="center">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%"
+                                         height="200" aria-label="Placeholder: Image cap" focusable="false" role="img"
+                                         preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
+                                         style="font-size:1.125rem;text-anchor:middle">
+                                         <rect width="100%" height="100%" fill="#868e96"></rect>
+                                         <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+                                     </svg>
+                                 </div>
+                                 <div style="margin:auto;">
+                                     <h4 class="card-title">Precio</h4>
+                                     <div>
+                                         <button type="button" class="btn btn-info btn-lg custom-btn">Agregar al carrito</button>
+                                         <br>
+                                         <button type="button" class="btn btn-light btn-lg custom-btn">Comprar ahora</button>
+                                         <br>
+                                     </div>
+                                 </div>
+                             </div>
+                             <p class="card-text">Aquí podría ir algo</p>
+                         </div>
+                     </div>
+                     <div class="card-body">
+                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                             card's content.</p>
+                     </div>
+                 `);
+                }
             });
         </script>
 
-
+<script id="dsq-count-scr"  src="//http-localhost-3005-bdmcapa.disqus.com/count.js" async></script>
 </body>
 
 </html>

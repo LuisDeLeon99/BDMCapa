@@ -13,11 +13,12 @@ if (isset($_SESSION['rol'])) {
     // Array para almacenar los resultados
     $results_array = array();
     $totalCosto = 0;
+    $totalCostoDecimal = number_format($totalCosto, 2, '.', '');
     $ID_usuario = $_SESSION['ID_usuario'];
- 
+    $Creacion = '2000-05-05'; 
     if ($_SESSION['rol'] == 'Instructor'){
         $rol =  $_SESSION['rol'];
-         $query = "CALL spGestionCursos('SE6','0','5','100','titulo','descripcion','','','1','0','0','2000-05-05','0','0',' $ID_usuario')";
+        $query = "CALL spGestionCursosUsuarios('SE','0','5','$ID_usuario','$totalCostoDecimal','','$Creacion','$Creacion')";
     
          // Ejecutar la consulta
          if ($conn->multi_query($query)) {
@@ -28,7 +29,8 @@ if (isset($_SESSION['rol'])) {
                  if ($result !== false && $result->num_rows > 0) {
                      // Recorrer los resultados y guardarlos en el array
                      while ($row = $result->fetch_assoc()) {
-                         $row["Imagen"] = base64_encode($row["Imagen"]);
+                         $row["ImagenCurso"] = base64_encode($row["ImagenCurso"]);
+                         $row["procedencia"] = "0";
                          $results_array[] = $row;
                          
                        
@@ -46,20 +48,48 @@ if (isset($_SESSION['rol'])) {
     
             $results_array[0]["Rol"] = $rol;
 
-        if (!empty($results_array)) {
-            // Devolver los resultados en formato JSON al front-end
-            header('Content-Type: application/json');
-            echo json_encode($results_array);
-        } else {
-            // No se encontraron resultados
-            echo '{"error": "error"}';
-        }
+            // Ejecutar el segundo procedimiento almacenado
+    $query2 = "CALL spGestionCursosUsuarios('SE2','0','5','$ID_usuario','$totalCostoDecimal','','$Creacion','$Creacion')";
+    
+    if ($conn->multi_query($query2)) {
+        do {
+            // Obtener el resultado actual
+            $result = $conn->store_result();
+    
+            if ($result !== false && $result->num_rows > 0) {
+                // Recorrer los resultados y guardarlos en el arreglo $results_array2
+                while ($row = $result->fetch_assoc()) {
+                    $row["procedencia"] = "1";
+                    $results_array2[] = $row;
+                }
+            }
+    
+            // Liberar los resultados
+            if ($result !== false) {
+                $result->free();
+            }
+    
+            // Avanzar al siguiente conjunto de resultados
+        } while ($conn->more_results() && $conn->next_result());
+    }
+    
+    if (!empty($results_array)) {
+        // Combinar los arreglos $results_array y $results_array2
+        $combined_results = array_merge($results_array, $results_array2);
+        
+        // Devolver los resultados combinados en formato JSON al front-end
+        header('Content-Type: application/json');
+        echo json_encode($combined_results);
+    } else {
+        // No se encontraron resultados
+        echo '{"error": "error"}';
+    }
 
     }
 
     if ($_SESSION['rol'] == 'Alumno'){
-            
-        $query = "CALL spGestionCursos('SE6','0','5','100','titulo','descripcion','','','1','0','0','2000-05-05','0','0',' $ID_usuario')";
+        $rol =  $_SESSION['rol'];   
+        $query = "CALL spGestionCursosUsuarios('SE3','0','$ID_usuario','0','$totalCostoDecimal','','$Creacion','$Creacion')";
    
         // Ejecutar la consulta
         if ($conn->multi_query($query)) {
@@ -70,7 +100,7 @@ if (isset($_SESSION['rol'])) {
                 if ($result !== false && $result->num_rows > 0) {
                     // Recorrer los resultados y guardarlos en el array
                     while ($row = $result->fetch_assoc()) {
-                        $row["Imagen"] = base64_encode($row["Imagen"]);
+                        
                         $results_array[] = $row;
                         
                       

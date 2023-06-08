@@ -39,12 +39,45 @@ BEGIN
         vi.Curso,
         vi.AlumnosInscritos,
         vi.NivelPromedio,
-        vi.IngresosCurso,        
+        vi.IngresosCurso,
+        vi.ImagenCurso,
         (
             SELECT SUM(IngresosCurso)
             FROM viCursosUsuarios
         ) AS TotalVentas
-    FROM viCursosUsuarios vi;
+    FROM viCursosUsuarios vi
+    WHERE vi.Instructor = p_ID_instructor;
+END IF;
+
+IF p_Accion = 'SE2' THEN
+    SELECT
+       va.ID_curso,
+        va.Curso,
+        va.Alumno,
+        va.FechaInscripcion,
+        va.NivelAvance,
+        va.PrecioPagado,
+        va.FormaPago,
+        va.PromedioCalificaciones
+       
+    FROM viDetalleAlumnos va
+    ;
+END IF;
+
+IF p_Accion = 'SE3' THEN
+   SELECT
+        vk.ID_alumno,
+        vk.ID_curso,
+        vk.Curso,
+        vk.Categoria,
+        vk.Alumno,
+        vk.FechaInscripcion,
+        vk.FechaTerminacion,
+        vk.ProgresoCurso,
+        vk.EstadoCurso       
+    FROM viKardex vk
+    WHERE vk.ID_alumno = p_ID_alumno;
+    
 END IF;
 
 END //

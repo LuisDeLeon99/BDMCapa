@@ -6,6 +6,8 @@ CREATE VIEW viCursosUsuarios AS
 SELECT
     cu.ID_curso,
     c.Titulo AS Curso,
+    c.Imagen AS ImagenCurso,
+    cu.ID_instructor AS Instructor,
     COUNT(DISTINCT cu.ID_alumno) AS AlumnosInscritos,
     AVG(cu.Progreso) AS NivelPromedio,
     SUM(dv.Subtotal) AS IngresosCurso,
