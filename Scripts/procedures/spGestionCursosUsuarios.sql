@@ -33,6 +33,21 @@ BEGIN
         DELETE FROM CursosUsuarios
         WHERE ID_curso = p_ID_curso AND ID_alumno = p_ID_alumno;
     END IF;
+    IF p_Accion = 'SE' THEN
+    SELECT
+        vi.ID_curso,
+        vi.Curso,
+        vi.AlumnosInscritos,
+        vi.NivelPromedio,
+        vi.IngresosCurso,
+        vi.FormaPago,
+        (
+            SELECT SUM(IngresosCurso)
+            FROM viCursosUsuarios
+        ) AS TotalVentas
+    FROM viCursosUsuarios vi;
+END IF;
+
 END //
 
 DELIMITER ;
