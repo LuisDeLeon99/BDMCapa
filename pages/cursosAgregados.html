@@ -48,7 +48,15 @@
                     <div class="panel-heading">
                         <div class="panel-title">
                             <div class="row" id="boton">
-                              
+                                <div class="col-xs-6 text-ligth">
+                                    <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que agregaste</h1>
+                                </div>
+                                <hr>
+                                <div class="col-xs-6">
+                                    <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir()">
+                                        <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -154,15 +162,7 @@
                     `);
                     if(!ejecutado){
                         $("#boton").append(`
-                            <div class="col-xs-6 text-ligth">
-                                <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que agregaste</h1>
-                            </div>
-                            <hr>
-                            <div class="col-xs-6">
-                                <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir()">
-                                    <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso
-                                </button
-                            </div>
+                          
                             <br>
                         `);
                         ejecutado = true;

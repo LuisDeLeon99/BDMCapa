@@ -36,6 +36,10 @@ BEGIN
         SELECT IDNiv, ID_curso, Nivel, Video, Titulo, Descripcion, Completado
         FROM Niveles WHERE IDNiv = p_IDNiv;
     END IF;
+    IF p_Accion = 'SE2' THEN
+        SELECT IDNiv, ID_curso, Nivel, Video, Titulo, Descripcion, Completado
+        FROM Niveles WHERE ID_curso = p_ID_curso;
+    END IF;
 END //
 
 DELIMITER ;

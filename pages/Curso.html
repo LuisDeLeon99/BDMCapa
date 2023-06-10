@@ -141,30 +141,28 @@
                 }
                 function tarjetaCursos(curso) {
                  
-                 
+                 console.log(curso)
                  // Aquí va el código HTML de la tarjeta de curso
                  $("#contenedorPrincipal").append(`
-                     <h3 class="card-header">Nombre del curso</h3>
+                     <h3 class="card-header">${curso.Titulo}</h3>
                      <div class="container">
                          <div>
                              <div>
                                  <h4 class="card-title text-muted">¿De qué trata el curso?</h4>
-                                 <p class="card-text">Aquí descripción del curso, espero funcione a la primera lptm</p>
+                                 <p class="card-text">${curso.Descripcion}</p>
                              </div>
                          </div>
+                         <div class="flex">
+                                 <h6 class="card-text espacioder">Este curso se agrego</h6>
+                                 <p class="card-text">${curso.Creacion}</p>
+                             </div>
                          <div class="card border-dark mb-3" style="margin-left:auto; width:25%;">
                              <div class="card-body">
                                  <div class="center">
-                                     <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%"
-                                         height="200" aria-label="Placeholder: Image cap" focusable="false" role="img"
-                                         preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180"
-                                         style="font-size:1.125rem;text-anchor:middle">
-                                         <rect width="100%" height="100%" fill="#868e96"></rect>
-                                         <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                                     </svg>
+                                     <img class="card-img-top" src="data:image/jpeg;base64,${curso.Imagen}" alt="...">
                                  </div>
                                  <div style="margin:auto;">
-                                     <h4 class="card-title">Precio</h4>
+                                     <h4 class="card-title">$${curso.Costo}</h4>
                                      <div>
                                          <button type="button" class="btn btn-info btn-lg custom-btn">Agregar al carrito</button>
                                          <br>
@@ -173,13 +171,21 @@
                                      </div>
                                  </div>
                              </div>
-                             <p class="card-text">Aquí podría ir algo</p>
+                             <p class="card-text"></p>
                          </div>
                      </div>
                      <div class="card-body">
-                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                             card's content.</p>
+                         <p class="card-text"></p>
                      </div>
+                     <div class="card mb-5 center bg-light"style="margin:auto; width:75%;">
+            <div class="center">
+                <h4 class="card-title text-dark">Nivel
+                </h4>
+                <a href="http://localhost:3005/BDMCapa/pages/Curso.html?curso=${curso.ID_curso}" >
+                <p class="card-text text-dark">${curso.Niveles}</p>
+            </a>
+                     
+            </div>
                  `);
                 }
             });
