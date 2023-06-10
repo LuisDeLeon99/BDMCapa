@@ -84,29 +84,12 @@
             
         </div>
 
-        <div class="card mb-5 center bg-light disqus-container">
-            <div id="disqus_thread"></div>
+        <div class="card mb-5 center bg-light disqus-container" id="dis">
+            
         </div>
         
         
-        <script>
-            /**
-            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-            
-            var disqus_config = function () {
-            this.page.url = 'http://localhost:3005/BDMCapa/pages/Curso.html';  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = 'ID_DE_LA_PAGINA'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            
-            (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-            s.src = 'https://http-localhost-3005-bdmcapa.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
         
         <script>
             const urlParams = new URLSearchParams(window.location.search);
@@ -129,7 +112,12 @@
                                 console.log(response);
                                 
                                 tarjetaCursos(response);
-                                // Actualizar la cantidad total de cursos si es la primera página
+                                dis(response);
+                            }   // Actualizar la cantidad total de cursos si es la primera página
+                            if (response.error) {
+                                // Si hay un error, muestra el mensaje de error y redirige al usuario
+                                console.log(response.message);
+                                window.location.href = response.redirect_url;
                             } else {
                                 console.log("La respuesta está vacía.");
                             }
@@ -141,10 +129,10 @@
                 }
                 function tarjetaCursos(curso) {
                  
-                 console.log(curso)
+                 
                  // Aquí va el código HTML de la tarjeta de curso
                  $("#contenedorPrincipal").append(`
-                     <h3 class="card-header">${curso.Titulo}</h3>
+                    <h3 class="card-header">${curso.Titulo}</h3>
                      <div class="container">
                          <div>
                              <div>
@@ -159,10 +147,10 @@
                          <div class="card border-dark mb-3" style="margin-left:auto; width:25%;">
                              <div class="card-body">
                                  <div class="center">
-                                     <img class="card-img-top" src="data:image/jpeg;base64,${curso.Imagen}" alt="...">
+                                    <img class="card-img-top" src="data:image/jpeg;base64,${curso.Imagen}" alt="...">
                                  </div>
                                  <div style="margin:auto;">
-                                     <h4 class="card-title">$${curso.Costo}</h4>
+                                    <h4 class="card-title">$${curso.Costo}</h4>
                                      <div>
                                          <button type="button" class="btn btn-info btn-lg custom-btn">Agregar al carrito</button>
                                          <br>
@@ -175,21 +163,43 @@
                          </div>
                      </div>
                      <div class="card-body">
-                         <p class="card-text"></p>
+                        <p class="card-text"></p>
                      </div>
                      <div class="card mb-5 center bg-light"style="margin:auto; width:75%;">
-            <div class="center">
-                <h4 class="card-title text-dark">Nivel
-                </h4>
-                <a href="http://localhost:3005/BDMCapa/pages/Curso.html?curso=${curso.ID_curso}" >
-                <p class="card-text text-dark">${curso.Niveles}</p>
-            </a>
-                     
-            </div>
+                        <div class="center">
+                            <h4 class="card-title text-dark">Nivel
+                            </h4>
+                            <a href="http://localhost:3005/BDMCapa/pages/Curso.html?curso=${curso.ID_curso}" >
+                            <p class="card-text text-dark">${curso.Niveles}</p>
+                        </a>
+                                
+                        </div>
+                 `);
+                 $("#dis").append(`
+                 <div id="disqus_thread" data-disqus-identifier="${curso.ID_curso}"></div>        
                  `);
                 }
             });
         </script>
+        <script>
+            function dis(curso) {
+            
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            var disqus_config = function () {
+            this.page.url = 'http://localhost:3005/BDMCapa/pages/Curso.html';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = curso.ID_curso; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://http-localhost-3005-bdmcapa.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();}
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 <script id="dsq-count-scr"  src="//http-localhost-3005-bdmcapa.disqus.com/count.js" async></script>
 </body>
