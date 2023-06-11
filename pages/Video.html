@@ -37,7 +37,9 @@
             </div>
         </div>
     </nav>
-    <div id="contenedorPrincipal"></div>
+    <div class="card text-white bg-black mb-3" id="contenedorPrincipal">
+        
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -82,11 +84,17 @@
              
              // Aquí va el código HTML de la tarjeta de curso
              $("#contenedorPrincipal").append(`
+             
                 <div class="tarjeta-curso">
                     <video controls>
                         <source src="data:video/mp4;base64,${curso.Video}" type="video/mp4">
                         Tu navegador no admite la reproducción de video.
                     </video>
+                    <div class="col-xs-6">
+                                    <button type="button" class="btn btn-outline-light btn-lg" onclick="">
+                                         Siguiente nivel
+                                    </button>
+                                </div>
                 </div>
              `);
           
