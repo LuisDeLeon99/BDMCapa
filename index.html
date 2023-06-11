@@ -61,23 +61,19 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                 aria-expanded="false">Ordenar por</a>
-            <div class="dropdown-menu" style="">
-                <a class="dropdown-item" href="#">Mejor calificados</a>
-                <a class="dropdown-item" href="#">Más comprados</a>
-                <a class="dropdown-item" href="#">Recién agregados</a>
-                <!-- <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a> -->
-            </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item ordenar-item" href="#" data-accion="mejor-calificados">Mejor calificados</a>
+                    <a class="dropdown-item ordenar-item" href="#" data-accion="mas-comprados">Más comprados</a>
+                    <a class="dropdown-item ordenar-item" href="#" data-accion="recien-agregados">Recién agregados</a>
+                </div>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Categorias</a>
-                <div class="dropdown-menu" style="">
-                    <a class="dropdown-item" href="#">1</a>
-                    <a class="dropdown-item" href="#">2</a>
-                    <a class="dropdown-item" href="#">4</a>
-                    <!-- <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a> -->
+                <div class="dropdown-menu"  id="categoria" aria-labelledby="dropdownMenuButton">
+                    
+                    <!-- Aquí se generarán dinámicamente las opciones de categoría -->
                 </div>
+            </li>
     </ul>
     <section class="py-5">
 
@@ -103,8 +99,43 @@
         var accion = 'SE1';
         var categoria = 1;
         var totalCursos = 0;
+        var busqueda ='';
         $(document).ready(function () {
             // Obtener el menú
+            $('.ordenar-item').click(function(event) {
+            event.preventDefault();
+            
+            // Obtener el valor del atributo "data-accion"
+            var accion = $(this).data('accion');
+            if(accion === 'mejor-calificados' ) accion = 'SE1';
+            if(accion === 'mas-comprados' ) accion = 'SE2';
+            if(accion === 'recien-agregados' ) accion = 'SE3';
+            // Llamar a la función obtenerCursos con la nueva acción
+            $('#contenedorPrincipal').empty();
+            obtenerCursos(1, accion, categoria, busqueda);    
+         });
+         $('#categoria').on('click', '.dropdown-item', function (event) {
+        event.preventDefault();
+
+        // Obtener el valor de la categoría seleccionada
+         categoria = $(this).data('categoria');
+         $('#contenedorPrincipal').empty();
+        // Llamar a la función obtenerCursos con la acción actualizada y la nueva categoría seleccionada
+        obtenerCursos(pagina, accion, categoria, busqueda);
+        });
+
+        $('form').submit(function (event) {
+        event.preventDefault();
+        
+        // Obtener el valor del campo de búsqueda
+        var searchTerm = $('input[type="search"]').val().trim();
+        
+        // Actualizar la variable de búsqueda
+        busqueda = searchTerm;
+        $('#contenedorPrincipal').empty();
+        // Llamar a la función obtenerCursos con la acción actualizada, la nueva búsqueda y la categoría
+        obtenerCursos(pagina, accion, categoria, busqueda);
+        }); 
             obtenerMenu();
             obtenerCursos();
 
@@ -125,7 +156,8 @@
                     }
                 });
             }
-            function obtenerCursos() {
+            
+            function obtenerCursos(pagina, accion, categoria, busqueda) {
                 $.ajax({
                     url: 'http://localhost:3005/BDMCapa/WebServices/indexcursos.php',
                     type: 'GET',
@@ -133,7 +165,8 @@
                     data: {
                         pagina: pagina,
                         accion: accion,
-                        categoria: categoria
+                        categoria: categoria,
+                        busqueda: busqueda
                     },
                     success: function (response) {
                         // Utilizar los datos recibidos en el arreglo
@@ -268,6 +301,64 @@
             //    });
             // }
         });
+    </script>
+    <script async>
+        // Hacer la solicitud AJAX al archivo PHP
+        async function obtenerCategorias() {
+            try {
+                const response = await fetch('./WebServices/categoriafetch.php', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (response.ok) {
+                    const categorias = await response.json();
+                    console.log(categorias);
+
+                    // Generar las opciones de categoría dinámicamente
+                    let optionsHTML = '';
+
+                    categorias.forEach(categoria => {
+                        // Agregar cada categoría como una opción al HTML
+                        optionsHTML += `<a class="dropdown-item categoria-item" href="#" data-categoria="${categoria.IDCat}">${categoria.Categoria}</a>`;
+                    });
+
+                    // Obtener el elemento select por su ID
+                    const categoriaSelect = document.getElementById('categoria');
+
+                    // Eliminar las opciones existentes
+                    categoriaSelect.innerHTML = '';
+                    // Establecer el contenido HTML en el select
+                    categoriaSelect.innerHTML += optionsHTML;
+                } else {
+                    console.error('Error en la solicitud:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+            }
+        }
+
+        obtenerCategorias();
+
+        const categoriaItems = document.querySelectorAll('.dropdown-menu .categoria-item');
+
+        // Agregar un controlador de eventos de clic a cada opción de categoría
+        categoriaItems.forEach(categoriaItem => {
+            categoriaItem.addEventListener('click', function(event) {
+        event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+
+        // Obtener el valor de la categoría seleccionada
+        const categoriaSeleccionada = this.getAttribute('data-categoria');
+
+        // Realizar la acción deseada con la categoría seleccionada
+        console.log('Categoría seleccionada:', categoriaSeleccionada);
+
+        // Puedes agregar aquí el código adicional para realizar la acción deseada al seleccionar una categoría
+        // Por ejemplo, puedes redirigir a una página específica o mostrar contenido relacionado con la categoría seleccionada
+    });
+});
     </script>
 
 </body>

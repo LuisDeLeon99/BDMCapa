@@ -5,7 +5,7 @@ require_once 'conexion.php';
 $accion = isset($_GET['accion']) ? $_GET['accion'] : 'SE1';
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : 1;
-
+$busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : '';
 // Cálculo de la posición de inicio para la paginación
 
 $cursosPorPagina = 8;
@@ -17,31 +17,17 @@ $query = "";
 
 
 
-if ($accion === 'SE1') {
+
     
-    $query = "CALL spGestionCursos('SE1','1','5','100','titulo','descripcion','','','1','0','$categoria','2000-05-05','$inicio','$cursosPorPagina','2')";
+    $query = "CALL spGestionCursos('$accion','1','5','100','$busqueda','descripcion','','','1','0','$categoria','2000-05-05','$inicio','$cursosPorPagina','2')";
                 
-} elseif ($accion === 'SE2') {
-    $query = "CALL spGestionCursos('SE2','1','5','100','titulo','descripcion','','','1','0','$categoria','2000-05-05','$inicio','$cursosPorPagina','2')";
-} elseif ($accion === 'SE3') {
-    $query = "CALL spGestionCursos('SE3','1','5','100','titulo','descripcion','','','1','0','$categoria','2000-05-05','$inicio','$cursosPorPagina','2')";
-} else {
-    // Acción no válida
-   
-}
+
 
 
 // Ejecutar la consulta
 $result = $conn->query($query);
 //$cursos = array();
-//if ($result && mysqli_num_rows($result) > 0){
-//    while ($row = mysqli_fetch_assoc($result)) {
-//        $cursos[] = $row;
-//    }
-//    $cursos_json = json_encode($cursos);
-//    header('Content-Type: application/json');
-//    echo $cursos_json;
-//}
+
 
 if ($result->num_rows > 0) {
     // Array para almacenar los resultados

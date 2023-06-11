@@ -11,9 +11,8 @@ SELECT
     C.Imagen,
     C.ID_usuario,
     AVG(Com.Calif) AS CalificacionPromedio,
-    
     COUNT(DV.ID_curso) AS Ventas,
-    C.Creacion AS UltimaVenta,
+    MAX(V.Fecha) AS UltimaVenta,
     Cat.Categoria AS Categoria,
     Cat.IDCat AS IDCat,
     (SELECT COUNT(*) FROM Curso WHERE Eliminado = 0) AS TotalCurso

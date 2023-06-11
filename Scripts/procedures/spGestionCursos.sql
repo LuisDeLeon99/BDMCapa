@@ -62,13 +62,13 @@ BEGIN
         IF p_IDCat <> 1 THEN
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
-            WHERE viGestionCursos.IDCat = p_IDCat
+            WHERE viGestionCursos.IDCat = p_IDCat AND viGestionCursos.Titulo LIKE CONCAT('%', p_Titulo, '%')
             ORDER BY CalificacionPromedio DESC
             LIMIT p_Inicio, p_Cantidad;
         ELSE
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
-            
+            WHERE  viGestionCursos.Titulo LIKE CONCAT('%', p_Titulo, '%')
             ORDER BY CalificacionPromedio DESC
             LIMIT p_Inicio, p_Cantidad;
         END IF;
@@ -78,13 +78,13 @@ BEGIN
         IF p_IDCat <> 1 THEN
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
-            WHERE viGestionCursos.IDCat = p_IDCat
+            WHERE viGestionCursos.IDCat = p_IDCat AND viGestionCursos.Titulo LIKE CONCAT('%', p_Titulo, '%')
             ORDER BY Ventas DESC
             LIMIT p_Inicio, p_Cantidad;
         ELSE
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
-            
+            WHERE  viGestionCursos.Titulo LIKE CONCAT('%', p_Titulo, '%')
             ORDER BY Ventas DESC
             LIMIT p_Inicio, p_Cantidad;
         END IF;
@@ -94,13 +94,13 @@ BEGIN
         IF p_IDCat <> 1 THEN
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
-            WHERE viGestionCursos.IDCat = p_IDCat
+            WHERE viGestionCursos.IDCat = p_IDCat AND viGestionCursos.Titulo LIKE CONCAT('%', p_Titulo, '%')
             ORDER BY UltimaVenta DESC
             LIMIT p_Inicio, p_Cantidad;
         ELSE
             SELECT viGestionCursos.ID_curso, viGestionCursos.Titulo,viGestionCursos.Costo, Categoria,viGestionCursos.Imagen, CalificacionPromedio,Ventas,UltimaVenta,Totalcurso
             FROM viGestionCursos
-            
+            WHERE  viGestionCursos.Titulo LIKE CONCAT('%', p_Titulo, '%')
             ORDER BY UltimaVenta DESC
             LIMIT p_Inicio, p_Cantidad;
         END IF;
@@ -122,6 +122,8 @@ BEGIN
 		FROM viGestionCursos 
 		WHERE viGestionCursos.ID_usuario = p_ID_usuario;
 	END IF;
+    
+    
 END //
 
 DELIMITER ;
