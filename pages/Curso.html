@@ -77,9 +77,7 @@
         </div>
         <div class="card mb-5 center bg-light"style="margin:auto; width:75%;">
             <div class="center">
-                <h4 class="card-title text-dark">Nivel
-                </h4>
-                <p class="card-text text-dark">Aquí podrían ir los niveles del curso.</p>
+                
             </div>
             
         </div>
@@ -132,25 +130,25 @@
                  
                  // Aquí va el código HTML de la tarjeta de curso
                  $("#contenedorPrincipal").append(`
-                    <h3 class="card-header">${curso.Titulo}</h3>
+                    <h3 class="card-header">${curso[0].Titulo}</h3>
                      <div class="container">
                          <div>
                              <div>
                                  <h4 class="card-title text-muted">¿De qué trata el curso?</h4>
-                                 <p class="card-text">${curso.Descripcion}</p>
+                                 <p class="card-text">${curso[0].Descripcion}</p>
                              </div>
                          </div>
                          <div class="flex">
                                  <h6 class="card-text espacioder">Este curso se agrego</h6>
-                                 <p class="card-text">${curso.Creacion}</p>
+                                 <p class="card-text">${curso[0].Creacion}</p>
                              </div>
                          <div class="card border-dark mb-3" style="margin-left:auto; width:25%;">
                              <div class="card-body">
                                  <div class="center">
-                                    <img class="card-img-top" src="data:image/jpeg;base64,${curso.Imagen}" alt="...">
+                                    <img class="card-img-top" src="data:image/jpeg;base64,${curso[0].Imagen}" alt="...">
                                  </div>
                                  <div style="margin:auto;">
-                                    <h4 class="card-title">$${curso.Costo}</h4>
+                                    <h4 class="card-title">$${curso[0].Costo}</h4>
                                      <div>
                                          <button type="button" class="btn btn-info btn-lg custom-btn">Agregar al carrito</button>
                                          <br>
@@ -167,16 +165,31 @@
                      </div>
                      <div class="card mb-5 center bg-light"style="margin:auto; width:75%;">
                         <div class="center">
-                            <h4 class="card-title text-dark">Nivel
+                            <h4 class="card-title text-dark">Niveles del curso: ${curso[0].Niveles}
                             </h4>
-                            <a href="http://localhost:3005/BDMCapa/pages/Curso.html?curso=${curso.ID_curso}" >
-                            <p class="card-text text-dark">${curso.Niveles}</p>
+                            
+                            
                         </a>
                                 
                         </div>
                  `);
+                 
+
+                for (let i = 1; i < curso.length; i++) {
+                    $("#contenedorPrincipal").append(`
+                        <div class="card mb-5 center bg-light" style="margin:auto; width:75%;">
+                            <div class="center">
+                                <h4 class="card-title text-dark">Nivel ${i}</h4>
+                                <a href="http://localhost:3005/BDMCapa/pages/Video.html?curso=${curso[i].ID_curso}&nivel=${curso[i].IDNiv}">
+                                    <p class="card-text text-dark">${curso[i].Titulo}</p>
+                                </a>
+                            </div>
+                        </div>
+                    `);
+                }
+                
                  $("#dis").append(`
-                 <div id="disqus_thread" data-disqus-identifier="${curso.ID_curso}"></div>        
+                 <div id="disqus_thread" data-disqus-identifier="${curso[0].ID_curso}"></div>        
                  `);
                 }
             });

@@ -14,7 +14,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
+        <div class="container-fluid" >
             <a class="navbar-brand" href="#">Full-Learning</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
                 aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,8 +37,62 @@
             </div>
         </div>
     </nav>
+    <div id="contenedorPrincipal"></div>
 
-    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const cursoId = urlParams.get('curso');
+        const nivelId = urlParams.get('nivel');
+        $(document).ready(function () {
+            // Obtener el menú
+            obtenerCursos();
+
+            // Función para obtener el menú mediante AJAX
+            function obtenerCursos() {
+                
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/video.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: { cursoId: cursoId,
+                        nivelId: nivelId },
+                    success: function (response) {
+                        // Utilizar los datos recibidos en el arreglo
+                        if (response) {
+                            console.log(response);
+                           
+                            tarjetaCursos(response);
+                            
+                        }   // Actualizar la cantidad total de cursos si es la primera página
+                        if (response.error) {
+                            // Si hay un error, muestra el mensaje de error y redirige al usuario
+                            console.log(response.message);
+                            window.location.href = response.redirect_url;
+                        } else {
+                            console.log("La respuesta está vacía.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+            function tarjetaCursos(curso) {
+             
+             
+             // Aquí va el código HTML de la tarjeta de curso
+             $("#contenedorPrincipal").append(`
+                <div class="tarjeta-curso">
+                    <video controls>
+                        <source src="data:video/mp4;base64,${curso.Video}" type="video/mp4">
+                        Tu navegador no admite la reproducción de video.
+                    </video>
+                </div>
+             `);
+          
+            }
+        });
+    </script>
 </body>
 
 </html>
