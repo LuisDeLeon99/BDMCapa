@@ -169,6 +169,7 @@
                             // Aquí va la primera parte del reporte de instructor
                             if (rol === "Instructor" && curso.procedencia == "0") {
                                 $("#contenedorPrincipal").append(`
+                                <div class="panel-heading">
                 <div class="row" id="boton">
                     <div class="col-xs-6 text-ligth">
                         <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que has vendido</h1>
@@ -198,6 +199,7 @@
                 </div>
                 
                 <hr>
+            </div>
             `);
 
                                 if (!ejecutado) {
