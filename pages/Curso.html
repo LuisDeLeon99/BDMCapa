@@ -163,7 +163,7 @@
                      <div class="card-body">
                         <p class="card-text"></p>
                      </div>
-                     <div class="card mb-5 center bg-light"style="margin:auto; width:75%;">
+                     <div class="card mb-5 center bg-light"style="width: 350px;">
                         <div class="center">
                             <h4 class="card-title text-dark">Niveles del curso: ${curso[0].Niveles}
                             </h4>
@@ -174,14 +174,13 @@
                         </div>
                  `);
                  
-
                     for (let i = 1; i < curso.length; i++) {
                         $("#contenedorPrincipal").append(`
-                            <div class="card mb-5 center bg-light" style="margin:auto; width:75%;">
+                            <div class="card mb-5 center bg-light" style="width: 450px;">
                                 <div class="center">
                                     <h4 class="card-title text-dark">Nivel ${i}</h4>
                                     <a href="http://localhost:3005/BDMCapa/pages/Video.html?curso=${curso[i].ID_curso}&nivel=${curso[i].IDNiv}" class="curso-link" data-curso-id="${curso[i].ID_curso}" data-nivel-id="${curso[i].IDNiv}">
-                                        <p class="card-text text-dark">${curso[i].Titulo}</p>
+                                        <h5 class="text-dark"><strong>${curso[i].Titulo}</strong></h5>
                                     </a>
                                 </div>
                             </div>
