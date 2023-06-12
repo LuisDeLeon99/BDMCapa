@@ -192,15 +192,16 @@
                  <div id="disqus_thread" data-disqus-identifier="${curso[0].ID_curso}"></div>        
                  `);
                 }
-                $('.curso-link').on('click', function(event) {
-                    event.preventDefault(); // Previene la redirección predeterminada
-
-                    const cursoId = $(this).data('curso-id');
-                    const nivelId = $(this).data('nivel-id');
-
-                    // Realizar la llamada AJAX para verificar si el usuario tiene el curso comprado
-                    $.ajax({
-                    url: 'http://localhost:3005/BDMCapa/WebServices/cursocomprado.php', // Ruta al script PHP que verifica la información en la base de datos
+                $("#contenedorPrincipal").on('click', '.curso-link', function(event) {
+                event.preventDefault(); // Previene la redirección predeterminada
+                
+                const enlaceOriginal = $(this).attr('href');
+                const cursoId = $(this).data('curso-id');
+                const nivelId = $(this).data('nivel-id');
+                
+                // Realizar la llamada AJAX para verificar si el usuario tiene el curso comprado
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/cursocomprado.php',
                     type: 'POST',
                     dataType: 'json',
                     data: {
@@ -208,19 +209,23 @@
                         nivelId: nivelId
                     },
                     success: function(response) {
-                        if (response.tieneCursoComprado) {
-                        // El usuario tiene el curso comprado, redireccionar al enlace original
-                        window.location.href = event.currentTarget.href;
+                        console.log(response);
+                        if (response.comprado) {
+                            // El usuario tiene el curso comprado, redireccionar al enlace original
+                            
+                            window.location.href = enlaceOriginal;
                         } else {
-                        // El usuario no tiene el curso comprado, cambiar el enlace a otra página
-                        alert("No puedes acceder a esta página sin comprar el curso.");
+                            // El usuario no tiene el curso comprado, mostrar un mensaje de error
+                            alert("No puedes acceder a esta página sin comprar el curso.");
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.error(error);
+                        var response = JSON.parse(xhr.responseText);
+                            var errorMessage = response.message;
+                        alert(errorMessage);
                     }
-                    });
                 });
+            });
             });
         </script>
         <script>
