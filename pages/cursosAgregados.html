@@ -48,10 +48,10 @@
                     <div class="panel-heading">
                         <div class="panel-title" id="contenedorPrincipal">
 
-                            <div  id="contenedorPrincipal">
+                            <div id="contenedorPrincipal">
 
                             </div>
-    
+
 
                         </div>
 
@@ -153,17 +153,17 @@
                     // abrirAcordeon();
 
                     function tarjetaCursos(cursos, rol) {
-    var ejecutado = false;
-    cursos.forEach(function (curso) {
-        let costo = curso.Costo;
+                        var ejecutado = false;
+                        cursos.forEach(function (curso) {
+                            let costo = curso.Costo;
 
-        if (costo === "0.00") {
-            costo = "Gratis";
-        }
+                            if (costo === "0.00") {
+                                costo = "Gratis";
+                            }
 
-        // Aquí va la primera parte del reporte de instructor
-        if (rol === "Instructor" && curso.procedencia == "0") {
-            $("#contenedorPrincipal").append(`
+                            // Aquí va la primera parte del reporte de instructor
+                            if (rol === "Instructor" && curso.procedencia == "0") {
+                                $("#contenedorPrincipal").append(`
                 <div class="row" id="boton">
                     <div class="col-xs-6 text-ligth">
                         <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que has vendido</h1>
@@ -195,15 +195,15 @@
                 <hr>
             `);
 
-            if (!ejecutado) {
-                $("#boton").append(`<br>`);
-                ejecutado = true;
-            }
-        }
+                                if (!ejecutado) {
+                                    $("#boton").append(`<br>`);
+                                    ejecutado = true;
+                                }
+                            }
 
-        // Aquí la segunda parte para el reporte de instructor
-        if (rol === "Instructor" && curso.procedencia == "1") {
-            $("#contenedorPrincipal.card:last-child").append(`
+                            // Aquí la segunda parte para el reporte de instructor
+                            if (rol === "Instructor" && curso.procedencia == "1") {
+                                $("#contenedorPrincipal.card:last-child").append(`
             <div class="accordion bg-black small-accordion" style="width: 450px;" id="accordionExample">
                     <div class="accordion-item bg-dark">
                         <h2 class="accordion-header" id="headingOne">
@@ -246,11 +246,11 @@
                     </div>
                 </div>
             `);
-        }
+                            }
 
-        // Aquí el kardex para el alumno
-        if (rol === "Alumno") {
-            $("#contenedorPrincipal").append(`
+                            // Aquí el kardex para el alumno
+                            if (rol === "Alumno") {
+                                $("#contenedorPrincipal").append(`
                 <div class="row" id="boton">
                     <div class="col-xs-6 text-ligth">
                         <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Kardex</h1>
@@ -285,20 +285,21 @@
                 </div>
                 <hr>
             `);
-        }
-    });
+                            }
+                        });
 
-    // Aquí se registra el evento de clic en los botones del acordeón
-    var accordionItems = document.querySelectorAll('.accordion-item');
-    accordionItems.forEach(function (item) {
-        var button = item.querySelector('.accordion-button');
-        button.addEventListener('click', function () {
-            button.classList.toggle('collapsed');
-            var collapsePanel = item.querySelector(button.getAttribute('data-bs-target'));
-            collapsePanel.classList.toggle('show');
-        });
-    });
-}
+                        // Aquí se registra el evento de clic en los botones del acordeón
+                        var accordionItems = document.querySelectorAll('.accordion-item');
+                        accordionItems.forEach(function (item) {
+                            var button = item.querySelector('.accordion-button');
+                            button.addEventListener('click', function () {
+                                button.classList.toggle('collapsed');
+                                var collapsePanel = item.querySelector(button.getAttribute('data-bs-target'));
+                                collapsePanel.classList.toggle('show');
+                            });
+                        });
+                    }
+
 
 
                 });
