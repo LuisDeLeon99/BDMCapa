@@ -22,10 +22,9 @@ BEGIN
 
     IF p_Accion = 'UP' THEN
         UPDATE Niveles
-        SET Video = p_Video,
-            Titulo = p_Titulo,
-            Descripcion = p_Descripcion
-        WHERE Nivel = p_Nivel AND ID_curso = p_ID_curso;
+        SET Completado = 1
+            
+        WHERE IDNiv = p_IDNiv AND ID_curso = p_ID_curso;
     END IF;
 
     IF p_Accion = 'DE' THEN

@@ -1,5 +1,17 @@
 use bdm;
 
+DROP TABLE IF EXISTS NivelesUsuarios;
+CREATE TABLE NivelesUsuarios
+(
+  ID_alumno INT NOT NULL, -- FK(Usuarios)
+  ID_curso INT NOT NULL, -- FK(Curso)
+  ID_nivel INT NOT NULL, -- FK(Niveles)
+  Completado BOOL NOT NULL,
+  FechaCompletado DATE,
+  CONSTRAINT PK_NivelesUsuarios PRIMARY KEY (ID_alumno, ID_curso, ID_nivel)
+  
+);
+
 DROP TABLE IF EXISTS CursosUsuarios;
 CREATE TABLE CursosUsuarios
 (
@@ -165,8 +177,14 @@ ALTER TABLE Curso
     ALTER TABLE CursosUsuarios
 	ADD CONSTRAINT FK_Curso_IDUs7 FOREIGN KEY (ID_instructor) REFERENCES usuarios(ID_usuario),
 	ADD CONSTRAINT FK_Curso_IDU6s FOREIGN KEY (ID_curso) REFERENCES Curso(ID_curso),
-    ADD CONSTRAINT FK_Curso_IDU6fs FOREIGN KEY (ID_alumno) REFERENCES usuarios(ID_usuario);	
-    
+    ADD CONSTRAINT FK_Curso_IDU6fs FOREIGN KEY (ID_alumno) REFERENCES usuarios(ID_usuario);
+	 
+     ALTER TABLE NivelesUsuarios
+  ADD  CONSTRAINT FK_NivelesUsuarios_IDAlumno FOREIGN KEY (ID_alumno) REFERENCES Usuarios(ID_usuario),
+  ADD CONSTRAINT FK_NivelesUsuarios_IDCurso FOREIGN KEY (ID_curso) REFERENCES Curso(ID_curso),
+  ADD CONSTRAINT FK_NivelesUsuarios_IDNivel FOREIGN KEY (ID_nivel) REFERENCES Niveles(IDNiv);
+  
+  
     ALTER TABLE Multimedia	
 	ADD CONSTRAINT FK_Curso_IDCatgt  FOREIGN KEY (ID_curso) REFERENCES Curso(ID_curso);
     

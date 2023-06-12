@@ -4,26 +4,38 @@ DROP TRIGGER IF EXISTS trgCalcularProgreso;
 
 DELIMITER //
 
-CREATE TRIGGER trgCalcularProgreso AFTER UPDATE ON Niveles
+CREATE TRIGGER trgCalcularProgreso AFTER UPDATE ON NivelesUsuarios
 FOR EACH ROW
 BEGIN
     DECLARE total_niveles INT;
     DECLARE niveles_completados INT;
     DECLARE progreso DECIMAL(5,2);
     
-    -- Obtener el número total de niveles del curso
-    SELECT Niveles INTO total_niveles FROM Curso WHERE ID_curso = NEW.ID_curso;
     
-    -- Obtener la cantidad total de niveles completados por el alumno en ese curso
-    SELECT COUNT(*) INTO niveles_completados FROM Niveles WHERE ID_curso = NEW.ID_curso AND completado = 1;
+    SELECT COUNT(*) INTO total_niveles FROM NivelesUsuarios WHERE ID_curso = NEW.ID_curso;
     
-    -- Calcular el progreso en base a los niveles completados
+   
+    SELECT COUNT(*) INTO niveles_completados FROM NivelesUsuarios WHERE ID_curso = NEW.ID_curso AND Completado = 1;
+    
+    
     SET progreso = (niveles_completados * 100.0) / total_niveles;
     
-    -- Actualizar el campo "Progreso" en la tabla CursosUsuarios
-    UPDATE CursosUsuarios SET Progreso = progreso WHERE ID_curso = NEW.ID_curso AND ID_alumno = (
-        SELECT ID_alumno FROM CursosUsuarios WHERE ID_curso = NEW.ID_curso AND ID_instructor = NEW.ID_instructor
+    
+    CREATE TEMPORARY TABLE IF NOT EXISTS TempCursosUsuarios AS (
+        SELECT ID_curso, ID_alumno
+        FROM CursosUsuarios
+        WHERE ID_curso = NEW.ID_curso
     );
+    
+    
+    UPDATE CursosUsuarios
+    SET Progreso = progreso
+    WHERE ID_curso = NEW.ID_curso AND ID_alumno IN (
+        SELECT ID_alumno FROM TempCursosUsuarios
+    );
+    
+    
+    DROP TEMPORARY TABLE IF EXISTS TempCursosUsuarios;
 END //
 
 DELIMITER ;

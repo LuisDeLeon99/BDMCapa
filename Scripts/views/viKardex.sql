@@ -12,7 +12,7 @@ SELECT
     cu.Fecha AS FechaInscripcion,
     cu.FechaF AS FechaTerminacion,
     CASE
-        WHEN cu.Progreso = 1 THEN 'Completo'
+        WHEN nu.Completado = 100 THEN 'Completo'
         ELSE 'Incompleto'
     END AS ProgresoCurso,
     CASE
@@ -23,6 +23,6 @@ FROM CursosUsuarios cu
 JOIN Usuarios u ON cu.ID_alumno = u.ID_usuario
 JOIN Curso c ON cu.ID_curso = c.ID_curso
 JOIN Categoria cat ON c.IDCat = cat.IDCat
-LEFT JOIN Niveles n ON cu.ID_curso = n.ID_curso AND cu.Progreso = n.Nivel
+LEFT JOIN NivelesUsuarios nu ON cu.ID_curso = nu.ID_curso AND cu.ID_alumno = nu.ID_alumno
 GROUP BY cu.ID_alumno, cu.ID_curso, c.Titulo, cat.Categoria;
 

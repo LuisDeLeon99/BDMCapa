@@ -84,21 +84,45 @@
              
              // Aquí va el código HTML de la tarjeta de curso
              $("#contenedorPrincipal").append(`
-             
                 <div class="tarjeta-curso">
                     <video controls>
                         <source src="data:video/mp4;base64,${curso.Video}" type="video/mp4">
                         Tu navegador no admite la reproducción de video.
                     </video>
                     <div class="col-xs-6">
-                                    <button type="button" class="btn btn-outline-light btn-lg" onclick="">
-                                         Siguiente nivel
-                                    </button>
-                                </div>
+                        <button type="button" class="btn btn-outline-light btn-lg btn-siguiente-nivel">
+                            Siguiente nivel
+                        </button>
+                    </div>
                 </div>
-             `);
+            `);
+
           
             }
+        });
+        $("#contenedorPrincipal").on('click', '.btn-siguiente-nivel', function() {
+            // Obtener los valores necesarios para enviar al archivo PHP
+            const cursoId = urlParams.get('curso');
+            const nivelId = urlParams.get('nivel');
+
+            // Realizar la llamada AJAX al archivo PHP
+            $.ajax({
+                url: 'http://localhost:3005/BDMCapa/WebServices/siguientenivel.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    cursoId: cursoId,
+                    nivelId: nivelId
+                },
+                success: function(response) {
+                    // Maneja la respuesta del servidor en caso de éxito
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Maneja el error en caso de fallo de la llamada AJAX
+                    console.error(error);
+                }
+            });
         });
     </script>
 </body>
