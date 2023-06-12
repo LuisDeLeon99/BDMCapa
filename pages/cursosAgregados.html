@@ -53,12 +53,13 @@
                     <div class="card-body">
                         <div class="panel-heading">
                             <div class="panel-title" id="contenedorCursosVen"></div>
+                            <div class="panel-title" id="contenedorKardex"></div>
                             <div class="panel-title" id="contenedorPrincipal">
 
                                 <div class="panel-title"
                                     id="contenedorPrincipal2"></div>
 
-                                    <div class="panel-title"
+                                <div class="panel-title"
                                     id="contenedorAcordeon"></div>
                             </div>
 
@@ -66,6 +67,7 @@
                         <div class="panel-title"
                             id="contenedorPrincipal2"></div>
                     </div>
+                
                     <script>
                             function redirigir() {
                                 window.location.href = "crearCurso.html";
@@ -136,27 +138,42 @@
 
                     function tarjetaCursos(cursos, rol) {
                         var ejecutado = false;
+                    if (rol === "Alumno") {
+                        $("#contenedorKardex").append(`
 
+                        <div class="row" id="boton">
+                            <div class="col-xs-6 text-ligth">
+                                <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Kardex</h1>
+                            </div>
+                            <hr>
+                            <div class="col-xs-6">
+                                <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir2()">
+                                    <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso al carrito
+                                </button>
+                            </div>
+                        </div>
+                       `); 
+                    }else{
                         $("#contenedorCursosVen").append(`
                                
-                <div class="row" id="boton">
-                    <div class="col-xs-6 text-ligth">
-                        <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que has vendido</h1>
-                    </div>
-                    <hr>
-                    <div class="col-xs-6">
-                        <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir()">
-                            <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso
-                        </button>
-                    </div>
-                </div> 
-                `);
+                               <div class="row" id="boton">
+                                   <div class="col-xs-6 text-ligth">
+                                       <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que has vendido</h1>
+                                   </div>
+                                   <hr>
+                                   <div class="col-xs-6">
+                                       <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir()">
+                                           <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso
+                                       </button>
+                                   </div>
+                               </div>                            
+                               `);
 
-                $("#contenedorAcordeon").append(`
+                             
+                    }
+               
 
                 
-                
-                `);
                         cursos.forEach(function (curso) {
                             let costo = curso.Costo;
 
@@ -166,6 +183,7 @@
 
                             // Aquí va la primera parte del reporte de instructor
                             if (rol === "Instructor" && curso.procedencia == "0") {
+                                
                                 $("#contenedorPrincipal").append(`
                                 <hr>
              <div class="panel-heading">
@@ -197,6 +215,7 @@
 
                             // Aquí la segunda parte para el reporte de instructor
                             if (rol === "Instructor" && curso.procedencia == "1") {
+               
         const acordeonHTML = `
             <div class="accordion bg-black small-accordion" style="width: 350px;" id="accordionExample">
                 <div class="accordion-item bg-dark">
@@ -248,18 +267,9 @@
 
                             // Aquí el kardex para el alumno
                             if (rol === "Alumno") {
+   
                                 $("#contenedorPrincipal").append(`
-                <div class="row" id="boton">
-                    <div class="col-xs-6 text-ligth">
-                        <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Kardex</h1>
-                    </div>
-                    <hr>
-                    <div class="col-xs-6">
-                        <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir2()">
-                            <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso al carrito
-                        </button>
-                    </div>
-                </div>
+
 
                 <div class="col-xs-2">
                     <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.ImagenCurso}">
@@ -285,6 +295,7 @@
             `);
                             }
                         });
+                      
 
                         // Aquí se registra el evento de clic en los botones del acordeón
                         var accordionItems = document.querySelectorAll('.accordion-item');
