@@ -36,3 +36,13 @@
     display: flex;
     
 }
+
+.small-accordion .accordion-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.small-accordion .accordion-body {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+}
