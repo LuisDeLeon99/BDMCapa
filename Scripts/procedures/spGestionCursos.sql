@@ -123,6 +123,12 @@ BEGIN
 		WHERE viGestionCursos.ID_usuario = p_ID_usuario;
 	END IF;
     
+    IF p_Accion = 'SE7' THEN
+    SELECT viComprasUsuario.ID_usuario, viComprasUsuario.ID_curso	
+		FROM viComprasUsuario 
+		WHERE viComprasUsuario.ID_usuario = p_ID_usuario and viComprasUsuario.ID_curso = p_ID_curso;
+	END IF;
+    
     
 END //
 
