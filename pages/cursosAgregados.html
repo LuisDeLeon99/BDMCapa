@@ -172,7 +172,7 @@
                                 </div>
                             </div>
                     
-                    <div class="col-xs-2">
+                       <div class="col-xs-2">
                             <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.ImagenCurso}">
                         </div>
                         <div class="col-xs-4">
@@ -189,7 +189,7 @@
                             <h4 class="product-name text-light">Total de ingresos del curso: <strong>$${curso.TotalVentas}</strong></h4>
                         </div>
                         
-                        <div class="accordion bg-black small-accordion" style="width: 450px;"id="accordionExample">
+                            <div class="accordion bg-black small-accordion" style="width: 450px;"id="accordionExample">
                                 <div class="accordion-item bg-dark">
                                     <h2 class="accordion-header" id="headingOne">
                                         <button class="accordion-button collapsed bg-transparent text-light" type="button"
@@ -225,7 +225,16 @@
                                     </div>
                                 </div>
                             </div>
-                           
+                            var accordionItems = document.querySelectorAll('.accordion-item');
+        accordionItems.forEach(function (item) {
+            var button = item.querySelector('.accordion-button');
+            button.addEventListener('click', function () {
+                button.classList.toggle('collapsed');
+                var collapsePanel = item.querySelector(button.getAttribute('data-bs-target'));
+                collapsePanel.classList.toggle('show');
+            });
+        });
+    
                         <hr>
                     `);
                                 if (!ejecutado) {
