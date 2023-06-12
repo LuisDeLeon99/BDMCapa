@@ -52,37 +52,45 @@
                     style="max-width: 100rem;">
                     <div class="card-body">
                         <div class="panel-heading">
+                            <div class="panel-title" id="contenedorCursosVen"></div>
+                            <div class="panel-title" id="contenedorKardex"></div>
                             <div class="panel-title" id="contenedorPrincipal">
 
-                                
+                                <div class="panel-title"
+                                    id="contenedorPrincipal2"></div>
 
+                                <div class="panel-title"
+                                    id="contenedorAcordeon"></div>
                             </div>
-                            <div class="panel-title"
+
+                        </div>
+                        <div class="panel-title"
                             id="contenedorPrincipal2"></div>
                     </div>
-                            <script>
+                
+                    <script>
                             function redirigir() {
                                 window.location.href = "crearCurso.html";
                             }
                         </script>
-                            <script>
+                    <script>
                             function redirigir2() {
                                 window.location.href = "../index.html";
                             }
                         </script>
-                            <div class="panel-body">
+                    <div class="panel-body">
 
-                            <div class="panel-body" id="contenedorPrincipal">
-                              
+                        <div class="panel-body" id="contenedorPrincipal">
+
                             <hr>
 
                         </div>
 
-                        </div>
                     </div>
                 </div>
             </div>
-            <script>
+        </div>
+        <script>
             $(document).ready(function () {
                 $(document).ready(function () {
                     // Obtener el menú
@@ -128,37 +136,44 @@
 
                     }
 
-                    // function abrirAcordeon() {
-                    //     // Obtener todos los elementos de acordeón
-                    //     var accordionItems = document.querySelectorAll('.accordion-item');
-
-                    //     // Iterar sobre cada elemento de acordeón
-                    //     accordionItems.forEach(function (item) {
-                    //         // Obtener el botón de acordeón dentro de cada elemento
-                    //         var button = item.querySelector('.accordion-button');
-
-                    //         // Agregar un evento de clic al botón de acordeón
-                    //         button.addEventListener('click', function () {
-                    //             // Alternar la clase 'collapsed' en el botón de acordeón
-                    //             button.classList.toggle('collapsed');
-
-                    //             // Obtener el panel de colapso asociado al botón de acordeón
-                    //             var collapsePanel = item.querySelector(button.getAttribute('data-bs-target'));
-
-                    //             // Alternar la clase 'show' en el panel de colapso
-                    //             collapsePanel.classList.toggle('show');
-                    //         });
-                    //     });
-
-                    //     // Simular un clic en el botón del acordeón
-                    //     var firstAccordionButton = document.querySelector('.accordion-button');
-                    //     firstAccordionButton.click();
-                    // }
-
-                    // abrirAcordeon();
-
                     function tarjetaCursos(cursos, rol) {
                         var ejecutado = false;
+                    if (rol === "Alumno") {
+                        $("#contenedorKardex").append(`
+
+                        <div class="row" id="boton">
+                            <div class="col-xs-6 text-ligth">
+                                <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Kardex</h1>
+                            </div>
+                            <hr>
+                            <div class="col-xs-6">
+                                <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir2()">
+                                    <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso al carrito
+                                </button>
+                            </div>
+                        </div>
+                       `); 
+                    }else{
+                        $("#contenedorCursosVen").append(`
+                               
+                               <div class="row" id="boton">
+                                   <div class="col-xs-6 text-ligth">
+                                       <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que has vendido</h1>
+                                   </div>
+                                   <hr>
+                                   <div class="col-xs-6">
+                                       <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir()">
+                                           <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso
+                                       </button>
+                                   </div>
+                               </div>                            
+                               `);
+
+                             
+                    }
+               
+
+                
                         cursos.forEach(function (curso) {
                             let costo = curso.Costo;
 
@@ -168,20 +183,10 @@
 
                             // Aquí va la primera parte del reporte de instructor
                             if (rol === "Instructor" && curso.procedencia == "0") {
+                                
                                 $("#contenedorPrincipal").append(`
-                                <div class="panel-heading">
-                <div class="row" id="boton">
-                    <div class="col-xs-6 text-ligth">
-                        <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que has vendido</h1>
-                    </div>
-                    <hr>
-                    <div class="col-xs-6">
-                        <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir()">
-                            <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso
-                        </button>
-                    </div>
-                </div>
-                
+                                <hr>
+             <div class="panel-heading">
                 <div class="col-xs-2">
                     <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.ImagenCurso}">
                 </div>
@@ -198,7 +203,7 @@
                     <h4 class="product-name text-light">Total de ingresos del curso: <strong>$${curso.IngresosCurso}</strong></h4>
                 </div>
                 
-                <hr>
+              
             </div>
             `);
 
@@ -210,65 +215,61 @@
 
                             // Aquí la segunda parte para el reporte de instructor
                             if (rol === "Instructor" && curso.procedencia == "1") {
-                                $("#contenedorPrincipal2").append(`
+               
+        const acordeonHTML = `
             <div class="accordion bg-black small-accordion" style="width: 350px;" id="accordionExample">
-                    <div class="accordion-item bg-dark">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed bg-transparent text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                aria-expanded="false" aria-controls="collapseOne">
-                                <h6><strong> Detalle de cada alumno inscrito:</strong></h6>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse"
-                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body bg-dark">
-                                <div class="col-xs-4">
-                                    <h6 class="product-name text-light">
-                                        Alumno: <strong>${curso.Alumno}</strong>
-                                    </h6>
-                                </div>
-                                <div class="col-xs-4">
-                                    <h6 class="product-name text-light">
-                                        Fecha de inscripción: <strong>${curso.FechaInscripcion}</strong>
-                                    </h6>
-                                </div>
-                                <div class="col-xs-4">
-                                    <h6 class="product-name text-light">
-                                        Nivel de avance: <strong>${curso.NivelAvance}</strong>
-                                    </h6>
-                                </div>
-                                <div class="col-xs-4">
-                                    <h6 class="product-name text-light">
-                                        Precio pagado por alumno: <strong>${curso.PrecioPagado}</strong>
-                                    </h6>
-                                </div>
-                                <div class="col-xs-4">
-                                    <h6 class="product-name text-light">
-                                        Forma de pago: <strong>${curso.FormaPago}</strong>
-                                    </h6>
-                                </div>
+                <div class="accordion-item bg-dark">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed bg-transparent text-light" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                            aria-expanded="false" aria-controls="collapseOne">
+                            <h6><strong> Detalle de cada alumno inscrito:</strong></h6>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse"
+                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body bg-dark">
+                            <div class="col-xs-4">
+                                <h6 class="product-name text-light">
+                                    Alumno: <strong>${curso.Alumno}</strong>
+                                </h6>
+                            </div>
+                            <div class="col-xs-4">
+                                <h6 class="product-name text-light">
+                                    Fecha de inscripción: <strong>${curso.FechaInscripcion}</strong>
+                                </h6>
+                            </div>
+                            <div class="col-xs-4">
+                                <h6 class="product-name text-light">
+                                    Nivel de avance: <strong>${curso.NivelAvance}</strong>
+                                </h6>
+                            </div>
+                            <div class="col-xs-4">
+                                <h6 class="product-name text-light">
+                                    Precio pagado por alumno: <strong>${curso.PrecioPagado}</strong>
+                                </h6>
+                            </div>
+                            <div class="col-xs-4">
+                                <h6 class="product-name text-light">
+                                    Forma de pago: <strong>${curso.FormaPago}</strong>
+                                </h6>
                             </div>
                         </div>
                     </div>
                 </div>
-            `);
-                            }
+            </div>
+        `;
+
+        const panelHeading = $("#contenedorPrincipal").find(".panel-heading");
+        panelHeading.append(acordeonHTML);
+    }
+
 
                             // Aquí el kardex para el alumno
                             if (rol === "Alumno") {
+   
                                 $("#contenedorPrincipal").append(`
-                <div class="row" id="boton">
-                    <div class="col-xs-6 text-ligth">
-                        <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Kardex</h1>
-                    </div>
-                    <hr>
-                    <div class="col-xs-6">
-                        <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir2()">
-                            <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso al carrito
-                        </button>
-                    </div>
-                </div>
+
 
                 <div class="col-xs-2">
                     <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.ImagenCurso}">
@@ -294,6 +295,7 @@
             `);
                             }
                         });
+                      
 
                         // Aquí se registra el evento de clic en los botones del acordeón
                         var accordionItems = document.querySelectorAll('.accordion-item');
@@ -312,6 +314,6 @@
                 });
             });
         </script>
-        </body>
+    </body>
 
-    </html>
+</html>
