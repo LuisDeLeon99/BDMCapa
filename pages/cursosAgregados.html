@@ -1,83 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis cursos creados</title>
-    <link rel="stylesheet" type="text/css" href="css/disenoPantallas.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link href="css/styles.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mis cursos creados</title>
+        <link rel="stylesheet" type="text/css" href="css/disenoPantallas.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link href="css/styles.css" rel="stylesheet" />
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Full-Learning</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../index.html">Inicio
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Full-Learning</a>
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                    aria-controls="navbarColor02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="../index.html">Inicio
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
 
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Buscar">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
-                <ul class="navbar-nav me-auto espacioder" id="menu-item">
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-sm-2" type="search"
+                            placeholder="Buscar">
+                        <button class="btn btn-secondary my-2 my-sm-0"
+                            type="submit">Buscar</button>
+                    </form>
+                    <ul class="navbar-nav me-auto espacioder" id="menu-item">
 
-                </ul>
+                    </ul>
 
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <div class="container">
-        <div class="row">
-            <div class="card text-white bg-black mb-3" style="max-width: 100rem;">
-                <div class="card-body">
-                    <div class="panel-heading">
-                        <div class="panel-title" id="contenedorPrincipal">
+        <div class="container">
+            <div class="row">
+                <div class="card text-white bg-black mb-3"
+                    style="max-width: 100rem;">
+                    <div class="card-body">
+                        <div class="panel-heading">
+                            <div class="panel-title" id="contenedorPrincipal">
 
-                            <div id="contenedorPrincipal">
+                                
 
                             </div>
-
-
-                        </div>
-
-                        <script>
+                            <div class="panel-title"
+                            id="contenedorPrincipal2"></div>
+                    </div>
+                            <script>
                             function redirigir() {
                                 window.location.href = "crearCurso.html";
                             }
                         </script>
-                        <script>
+                            <script>
                             function redirigir2() {
                                 window.location.href = "../index.html";
                             }
                         </script>
-                        <div class="panel-body">
+                            <div class="panel-body">
 
                             <div class="panel-body" id="contenedorPrincipal">
-                            </div>
+                              
                             <hr>
 
                         </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <script>
+            <script>
             $(document).ready(function () {
                 $(document).ready(function () {
                     // Obtener el menú
@@ -189,7 +194,7 @@
                     <h4 class="product-name text-light">Nivel promedio cursado de cada alumno: <strong>${curso.NivelPromedio}</strong></h4>
                 </div>
                 <div class="col-xs-4">
-                    <h4 class="product-name text-light">Total de ingresos del curso: <strong>$${curso.TotalVentas}</strong></h4>
+                    <h4 class="product-name text-light">Total de ingresos del curso: <strong>$${curso.IngresosCurso}</strong></h4>
                 </div>
                 
                 <hr>
@@ -203,50 +208,49 @@
 
                             // Aquí la segunda parte para el reporte de instructor
                             if (rol === "Instructor" && curso.procedencia == "1") {
-                                $("#contenedorPrincipal.card:last-child").append(`
-    <div class="accordion bg-black small-accordion" style="width: 450px;" id="accordionExample">
-        <div class="accordion-item bg-dark">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button collapsed bg-transparent text-light" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                    aria-expanded="false" aria-controls="collapseOne">
-                    <h6><strong> Detalle de cada alumno inscrito:</strong></h6>
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse"
-                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body bg-dark">
-                    <div class="col-xs-4">
-                        <h6 class="product-name text-light">
-                            Alumno: <strong>${curso.Alumno}</strong>
-                        </h6>
-                    </div>
-                    <div class="col-xs-4">
-                        <h6 class="product-name text-light">
-                            Fecha de inscripción: <strong>${curso.FechaInscripcion}</strong>
-                        </h6>
-                    </div>
-                    <div class="col-xs-4">
-                        <h6 class="product-name text-light">
-                            Nivel de avance: <strong>${curso.NivelAvance}</strong>
-                        </h6>
-                    </div>
-                    <div class="col-xs-4">
-                        <h6 class="product-name text-light">
-                            Precio pagado por alumno: <strong>${curso.PrecioPagado}</strong>
-                        </h6>
-                    </div>
-                    <div class="col-xs-4">
-                        <h6 class="product-name text-light">
-                            Forma de pago: <strong>${curso.FormaPago}</strong>
-                        </h6>
+                                $("#contenedorPrincipal2").append(`
+            <div class="accordion bg-black small-accordion" style="width: 350px;" id="accordionExample">
+                    <div class="accordion-item bg-dark">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed bg-transparent text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                                <h6><strong> Detalle de cada alumno inscrito:</strong></h6>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse"
+                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body bg-dark">
+                                <div class="col-xs-4">
+                                    <h6 class="product-name text-light">
+                                        Alumno: <strong>${curso.Alumno}</strong>
+                                    </h6>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h6 class="product-name text-light">
+                                        Fecha de inscripción: <strong>${curso.FechaInscripcion}</strong>
+                                    </h6>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h6 class="product-name text-light">
+                                        Nivel de avance: <strong>${curso.NivelAvance}</strong>
+                                    </h6>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h6 class="product-name text-light">
+                                        Precio pagado por alumno: <strong>${curso.PrecioPagado}</strong>
+                                    </h6>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h6 class="product-name text-light">
+                                        Forma de pago: <strong>${curso.FormaPago}</strong>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-`);
-
+            `);
                             }
 
                             // Aquí el kardex para el alumno
@@ -306,6 +310,6 @@
                 });
             });
         </script>
-</body>
+        </body>
 
-</html>
+    </html>
