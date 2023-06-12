@@ -48,7 +48,10 @@
                     <div class="panel-heading">
                         <div class="panel-title" id="contenedorPrincipal">
 
-
+                            <div  id="contenedorPrincipal">
+                                
+                            </div>
+    
 
                         </div>
 
@@ -189,7 +192,19 @@
                     <h4 class="product-name text-light">Total de ingresos del curso: <strong>$${curso.TotalVentas}</strong></h4>
                 </div>
                 
-                <div class="accordion bg-black small-accordion" style="width: 450px;" id="accordionExample">
+                <hr>
+            `);
+
+            if (!ejecutado) {
+                $("#boton").append(`<br>`);
+                ejecutado = true;
+            }
+        }
+
+        // Aquí la segunda parte para el reporte de instructor
+        if (rol === "Instructor" && curso.procedencia == "1") {
+            $("#contenedorPrincipal2").append(`
+            <div class="accordion bg-black small-accordion" style="width: 450px;" id="accordionExample">
                     <div class="accordion-item bg-dark">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button collapsed bg-transparent text-light" type="button"
@@ -230,19 +245,6 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-            `);
-
-            if (!ejecutado) {
-                $("#boton").append(`<br>`);
-                ejecutado = true;
-            }
-        }
-
-        // Aquí la segunda parte para el reporte de instructor
-        if (rol === "Instructor" && curso.procedencia == "1") {
-            $("#contenedorPrincipal2").append(`
-                <!-- Aquí va el código HTML para el segundo reporte de instructor -->
             `);
         }
 
