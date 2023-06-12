@@ -21,7 +21,7 @@
 .center {
     margin-left: auto;
     margin-right: auto;
-  }
+}
 
 .disqus-container {
     margin: auto;
@@ -32,9 +32,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.fechacrea{
+.fechacrea {
     display: flex;
-    
+
 }
 
 .small-accordion .accordion-button {
@@ -45,4 +45,8 @@
 .small-accordion .accordion-body {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
+    /* width: 150px; */
+    /* Modifica el ancho según tus necesidades */
+    /* height: 30px; */
+    /* Modifica el largo según tus necesidades */
 }
