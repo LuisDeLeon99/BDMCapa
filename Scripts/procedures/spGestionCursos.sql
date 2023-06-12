@@ -107,7 +107,7 @@ BEGIN
     END IF;
     IF p_Accion = 'SE4' THEN
         SELECT Curso.ID_curso
-        FROM Curso WHERE Titulo = Curso.Titulo;
+        FROM Curso WHERE Titulo = p_Titulo;
     END IF;
     
     IF p_Accion = 'SE5' THEN
