@@ -175,23 +175,52 @@
                  `);
                  
 
-                for (let i = 1; i < curso.length; i++) {
-                    $("#contenedorPrincipal").append(`
-                        <div class="card mb-5 center bg-light" style="margin:auto; width:75%;">
-                            <div class="center">
-                                <h4 class="card-title text-dark">Nivel ${i}</h4>
-                                <a href="http://localhost:3005/BDMCapa/pages/Video.html?curso=${curso[i].ID_curso}&nivel=${curso[i].IDNiv}">
-                                    <p class="card-text text-dark">${curso[i].Titulo}</p>
-                                </a>
+                    for (let i = 1; i < curso.length; i++) {
+                        $("#contenedorPrincipal").append(`
+                            <div class="card mb-5 center bg-light" style="margin:auto; width:75%;">
+                                <div class="center">
+                                    <h4 class="card-title text-dark">Nivel ${i}</h4>
+                                    <a href="http://localhost:3005/BDMCapa/pages/Video.html?curso=${curso[i].ID_curso}&nivel=${curso[i].IDNiv}" class="curso-link" data-curso-id="${curso[i].ID_curso}" data-nivel-id="${curso[i].IDNiv}">
+                                        <p class="card-text text-dark">${curso[i].Titulo}</p>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    `);
-                }
+                        `);
+                    }
                 
                  $("#dis").append(`
                  <div id="disqus_thread" data-disqus-identifier="${curso[0].ID_curso}"></div>        
                  `);
                 }
+                $('.curso-link').on('click', function(event) {
+                    event.preventDefault(); // Previene la redirección predeterminada
+
+                    const cursoId = $(this).data('curso-id');
+                    const nivelId = $(this).data('nivel-id');
+
+                    // Realizar la llamada AJAX para verificar si el usuario tiene el curso comprado
+                    $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/cursocomprado.php', // Ruta al script PHP que verifica la información en la base de datos
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        cursoId: cursoId,
+                        nivelId: nivelId
+                    },
+                    success: function(response) {
+                        if (response.tieneCursoComprado) {
+                        // El usuario tiene el curso comprado, redireccionar al enlace original
+                        window.location.href = event.currentTarget.href;
+                        } else {
+                        // El usuario no tiene el curso comprado, cambiar el enlace a otra página
+                        alert("No puedes acceder a esta página sin comprar el curso.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                    });
+                });
             });
         </script>
         <script>
