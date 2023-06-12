@@ -48,87 +48,111 @@
                     <div class="panel-heading">
                         <div class="panel-title" id="contenedorPrincipal">
 
+
+
                         </div>
-                    </div>
-                    <script>
-                        function redirigir() {
-                            window.location.href = "crearCurso.html";
-                        }
-                    </script>
-                    <script>
-                        function redirigir2() {
-                            window.location.href = "../index.html";
-                        }
-                    </script>
-                    <div class="panel-body">
+                        <script>
+                            // Obtener todos los elementos de acordeón
+                            var accordionItems = document.querySelectorAll('.accordion-item');
 
-                        <div class="panel-body" id="contenedorPrincipal">
+                            // Iterar sobre cada elemento de acordeón
+                            accordionItems.forEach(function (item) {
+                                // Obtener el botón de acordeón dentro de cada elemento
+                                var button = item.querySelector('.accordion-button');
+
+                                // Agregar un evento de clic al botón de acordeón
+                                button.addEventListener('click', function () {
+                                    // Alternar la clase 'collapsed' en el botón de acordeón
+                                    button.classList.toggle('collapsed');
+
+                                    // Obtener el panel de colapso asociado al botón de acordeón
+                                    var collapsePanel = item.querySelector(button.getAttribute('data-bs-target'));
+
+                                    // Alternar la clase 'show' en el panel de colapso
+                                    collapsePanel.classList.toggle('show');
+                                });
+                            });
+                        </script>
+
+                        <script>
+                            function redirigir() {
+                                window.location.href = "crearCurso.html";
+                            }
+                        </script>
+                        <script>
+                            function redirigir2() {
+                                window.location.href = "../index.html";
+                            }
+                        </script>
+                        <div class="panel-body">
+
+                            <div class="panel-body" id="contenedorPrincipal">
+                            </div>
+                            <hr>
+
                         </div>
-                        <hr>
 
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        $(document).ready(function () {
+        <script>
             $(document).ready(function () {
-                // Obtener el menú
-                obtenerMenu();
-                obtenerCursos()
+                $(document).ready(function () {
+                    // Obtener el menú
+                    obtenerMenu();
+                    obtenerCursos()
 
-                function obtenerMenu() {
-                    $.ajax({
-                        url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
-                        success: function (response) {
-                            // Actualizar el contenido del menú
-                            $('#menu-item').html(response);
-                        },
-                        error: function () {
-                            // Manejar errores en la solicitud AJAX
-                            console.log('Error al obtener el menú');
-                        }
-                    });
-                }
-
-                function obtenerCursos() {
-                    $.ajax({
-                        url: 'http://localhost:3005/BDMCapa/WebServices/cursosPerfil.php',
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (response) {
-                            if (response && response.length > 0) {
-                                console.log(response);
-
-                                rol = response[0].Rol;
-                                cursosResponse = response;
-                                tarjetaCursos(response, rol);
-                            } else {
-                                console.log("La respuesta está vacía.");
-
+                    function obtenerMenu() {
+                        $.ajax({
+                            url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+                            success: function (response) {
+                                // Actualizar el contenido del menú
+                                $('#menu-item').html(response);
+                            },
+                            error: function () {
+                                // Manejar errores en la solicitud AJAX
+                                console.log('Error al obtener el menú');
                             }
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
+                        });
+                    }
+
+                    function obtenerCursos() {
+                        $.ajax({
+                            url: 'http://localhost:3005/BDMCapa/WebServices/cursosPerfil.php',
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response && response.length > 0) {
+                                    console.log(response);
+
+                                    rol = response[0].Rol;
+                                    cursosResponse = response;
+                                    tarjetaCursos(response, rol);
+                                } else {
+                                    console.log("La respuesta está vacía.");
+
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
 
 
-                }
+                    }
 
-                function tarjetaCursos(cursos, rol) {
-                    var ejecutado = false;
-                    cursos.forEach(function (curso) {
-                        let costo = curso.Costo;
+                    function tarjetaCursos(cursos, rol) {
+                        var ejecutado = false;
+                        cursos.forEach(function (curso) {
+                            let costo = curso.Costo;
 
-                        if (costo === "0.00") {
-                            costo = "Gratis";
-                        }
-                        //aqui va la primera parte del reporte de instructor
-                        if (rol === "Instructor" && curso.procedencia == "0") {
-                            $("#contenedorPrincipal").append(`
+                            if (costo === "0.00") {
+                                costo = "Gratis";
+                            }
+                            //aqui va la primera parte del reporte de instructor
+                            if (rol === "Instructor" && curso.procedencia == "0") {
+                                $("#contenedorPrincipal").append(`
                     <div class="row" id="boton">
                                 <div class="col-xs-6 text-ligth">
                                     <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que has vendido</h1>
@@ -157,6 +181,38 @@
                         <div class="col-xs-4">
                             <h4 class="product-name text-light">Total de ingresos del curso: <strong>${curso.TotalVentas}</strong></h4>
                         </div>
+                        <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                            aria-expanded="false" aria-controls="collapseOne">
+                                            Detalle cada alumno inscrito:
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                                        <div class="accordion-body">
+                                            <div class="col-xs-4">
+                                            <h4 class="product-name text-light">Alumno:<strong>${curso.Alumno}</strong></h4>
+                                            </div>
+                                            <div class="col-xs-4">
+                                            <h4 class="product-name text-light">Fecha de inscripción:<strong>${curso.FechaInscripcion}</strong></h4>
+                                            </div>
+                                            <div class="col-xs-4">
+                                            <h4 class="product-name text-light">Nivel de avance:<strong>${curso.NivelAvance}</strong></h4>
+                                            </div>
+                                            <div class="col-xs-4">
+                                            <h4 class="product-name text-light">Precio pagado por alumno:<strong>${curso.PrecioPagado}</strong></h4>
+                                            </div>
+                                            <div class="col-xs-4">
+                                            <h4 class="product-name text-light">Forma de pago:<strong>${curso.FormaPago}</strong></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         <div class="col-xs-4">
                             <h4 class="product-name text-light">Detalle cada alumno inscrito</h4>
                         </div>
@@ -167,23 +223,23 @@
                         </div>
                         <hr>
                     `);
-                            if (!ejecutado) {
-                                $("#boton").append(`
+                                if (!ejecutado) {
+                                    $("#boton").append(`
                           
                             <br>
                         `);
-                                ejecutado = true;
+                                    ejecutado = true;
+                                }
                             }
-                        }
-                        //aqui la segunda
-                        if (rol === "Instructor" && curso.procedencia == "1") {
-                            $("#contenedorPrincipal2").append(`
+                            //aqui la segunda
+                            if (rol === "Instructor" && curso.procedencia == "1") {
+                                $("#contenedorPrincipal2").append(`
                         
                     `);
-                        }
-                        //aqui el kardex
-                        if (rol === "Alumno") {
-                            $("#contenedorPrincipal").append(`
+                            }
+                            //aqui el kardex
+                            if (rol === "Alumno") {
+                                $("#contenedorPrincipal").append(`
                             <div class="row" id="boton">
                                 <div class="col-xs-6 text-ligth">
                                     <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Kardex </h1>
@@ -218,15 +274,15 @@
                         </div>
                         <hr>
                     `);
-                        }
-                    });
+                            }
+                        });
 
 
-                }
+                    }
 
+                });
             });
-        });
-    </script>
+        </script>
 </body>
 
 </html>
