@@ -133,7 +133,7 @@
                         window.location.href = url; // Redirige a la siguiente página
                     } 
                     if (response.progreso == 100 ) {
-
+                        obtenerDiploma()
                     }else {
                         // Realiza otra acción si el progreso es 100
                         // Agrega tu código aquí
@@ -214,16 +214,16 @@
                  });
 
             function obtenerDiploma() {
-                var cursoId = 1; // Reemplaza con el valor correcto
-                var nivelId = 1; // Reemplaza con el valor correcto
+                const urlParams = new URLSearchParams(window.location.search);
+                const cursoId = urlParams.get('curso'); // Reemplaza con el valor correcto
 
                 $.ajax({
-                    url: 'http://localhost:3005/BDMCapa/WebServices/video.php', // Reemplaza con la ruta correcta hacia tu archivo PHP
+                    url: 'http://localhost:3005/BDMCapa/Diploma/ejemplo.php', // Reemplaza con la ruta correcta hacia tu archivo PHP
                     type: 'POST',
                     dataType: 'json',
                     data: {
-                        cursoId: cursoId,
-                        nivelId: nivelId
+                        cursoId: cursoId
+                        
                     },
                     success: function(response) {
                         if (response && response.file_url) {
