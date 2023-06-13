@@ -210,15 +210,18 @@
                 <div class="col-xs-4">
                     <h4 class="product-name text-light">Nivel promedio cursado de cada alumno: <strong>${curso.NivelPromedio}</strong></h4>
                 </div>
+                <div class="col-xs-4 espacioder">
+                    <button type="button" class="btn btn-dark" id="borrarCur">Eliminar Curso</button>
+                    </div>
+                </div>
                 <div class="col-xs-4">
                     <h4 class="product-name text-light">Total de ingresos del curso: <strong>$${curso.IngresosCurso}</strong></h4>
                 </div>
-                <div class="col-xs-4">
-                    <button type="button" class="btn btn-link" onclick="redirigirDetallesAlumno(${curso.ID_curso})">Detalles del alumno...</button>
-                </div>
-                <div class="col-xs-4">
-                <button type="button" class="btn btn-dark" id="borrarCur">Eliminar Curso</button>
-                </div>
+                
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-link" onclick="redirigirDetallesAlumno(${curso.ID_curso})"> <h4>Detalles del alumno...</h4></button>
+                    </div>
+                  
             </div>
             `);
 
@@ -250,49 +253,7 @@
                        
                             }
                             // Aquí la segunda parte para el reporte de instructor
-                            if (rol === "Instructor" && curso.procedencia == "1") {
-               
-        const acordeonHTML = `
-            <div class="accordion bg-black small-accordion" style="width: 350px;" id="accordionExample">
-                <div class="accordion-item bg-dark">
-                    
-                    <div id="collapseOne" class="accordion-collapse collapse"
-                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body bg-dark">
-                            <div class="col-xs-4">
-                                <h6 class="product-name text-light">
-                                    Alumno: <strong>${curso.Alumno}</strong>
-                                </h6>
-                            </div>
-                            <div class="col-xs-4">
-                                <h6 class="product-name text-light">
-                                    Fecha de inscripción: <strong>${curso.FechaInscripcion}</strong>
-                                </h6>
-                            </div>
-                            <div class="col-xs-4">
-                                <h6 class="product-name text-light">
-                                    Nivel de avance: <strong>${curso.NivelAvance}</strong>
-                                </h6>
-                            </div>
-                            <div class="col-xs-4">
-                                <h6 class="product-name text-light">
-                                    Precio pagado por alumno: <strong>${curso.PrecioPagado}</strong>
-                                </h6>
-                            </div>
-                            <div class="col-xs-4">
-                                <h6 class="product-name text-light">
-                                    Forma de pago: <strong>${curso.FormaPago}</strong>
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        const panelHeading = $("#contenedorPrincipal").find(".panel-heading");
-        panelHeading.append(acordeonHTML);
-    }
+                            
 
 
                             // Aquí el kardex para el alumno
