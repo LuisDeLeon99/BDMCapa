@@ -42,33 +42,114 @@
                 </ul>
 
             </div>
+            
         </div>
+        
     </nav>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Alumno</th>
+                    <th scope="col">Fecha de Inscripcion</th>
+                    <th scope="col">Nivel de avance</th>
+                    <th scope="col">Precio pagado</th>
+                    <th scope="col">Forma de pago</th>
+                </tr>
+            </thead>
+            <tbody id="contenedorPrincipal">
+                <!-- Las filas se generarán dinámicamente aquí -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+      
+        $(document).ready(function () {
+            $(document).ready(function () {
+                // Obtener el menú
+                obtenerMenu();
+                obtenerCursos()
 
+                function obtenerMenu() {
+                    $.ajax({
+                        url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+                        success: function (response) {
+                            // Actualizar el contenido del menú
+                            $('#menu-item').html(response);
+                        },
+                        error: function () {
+                            // Manejar errores en la solicitud AJAX
+                            console.log('Error al obtener el menú');
+                        }
+                    });
+                }
+                
+                function obtenerCursos() {
+                    const params = new URLSearchParams(window.location.search);
+                    const idCurso = params.get('idCurso');
+                    
+                    $.ajax({
+                        url: 'http://localhost:3005/BDMCapa/WebServices/detallesCurso.php',
+                        type: 'POST',
+                        dataType: 'json',
+                        headers: {
+                            cursoId: idCurso
+                        },
+                        success: function (response) {
+                            if (response && response.length > 0) {
+                                console.log(response);
+
+                                
+                                cursosResponse = response;
+                                tarjetaCursos(response);
+                            } else {
+                                console.log("La respuesta está vacía.");
+
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+
+
+                }
+
+                function tarjetaCursos(cursos) {
+                    
+                    cursos.forEach(function (curso) {
+                        let costo = curso.Costo;
+
+                        if (costo === "0.00") {
+                            costo = "Gratis";
+                        }
+
+                        // Aquí va la primera parte del reporte de instructor
+                       
+                            
+                            $("#contenedorPrincipal").append(`
+                            <tr class="table-info">
+                                <th scope="row">${curso.Alumno}</th>
+                                <td>${curso.FechaInscripcion}</td>
+                                <td>${curso.NivelAvance}</td>
+                                <td>${curso.PrecioPagado}</td>
+                                <td>${curso.FormaPago}</td>
+                            </tr>
+                            
+                            `);
+
+                    });
+               
+                }
+
+            });
+        });
+    </script>
 
 
     <script>
 
-<table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Alumno</th>
-                                    <th scope="col">Fecha de Inscripcion</th>
-                                    <th scope="col">Nivel de avance</th>
-                                    <th scope="col">Precio pagado</th>
-                                    <th scope="col">Forma de pago</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="table-info">
-                                    <th scope="row">${curso.Alumno}</th>
-                                    <td>${curso.FechaInscripcion}</td>
-                                    <td>${curso.NivelAvance}</td>
-                                    <td>${curso.PrecioPagado}</td>
-                                    <td>${curso.FormaPago}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
     </script>
     
 </body>

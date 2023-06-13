@@ -96,6 +96,14 @@
             </div>
         </div>
         <script>
+            function redirigirDetallesAlumno(idCurso) {
+                // Construye la URL con la variable "idCurso" en el encabezado (header)
+                const url = `detallesVentas.html?idCurso=${idCurso}`;
+
+                // Redirige a la URL
+                window.location.href = url;
+                }
+
             $(document).ready(function () {
                 $(document).ready(function () {
                     // Obtener el menú
@@ -115,7 +123,7 @@
                             }
                         });
                     }
-
+                    
                     function obtenerCursos() {
                         $.ajax({
                             url: 'http://localhost:3005/BDMCapa/WebServices/cursosPerfil.php',
@@ -206,7 +214,7 @@
                     <h4 class="product-name text-light">Total de ingresos del curso: <strong>$${curso.IngresosCurso}</strong></h4>
                 </div>
                 <div class="col-xs-4">
-                <button type="button" class="btn btn-link" onclick="redirigir()">Detalles del alumno...</button>
+                    <button type="button" class="btn btn-link" onclick="redirigirDetallesAlumno(${curso.ID_curso})">Detalles del alumno...</button>
                 </div>
                 <div class="col-xs-4">
                 <button type="button" class="btn btn-dark" id="borrarCur">Eliminar Curso</button>
@@ -247,13 +255,7 @@
         const acordeonHTML = `
             <div class="accordion bg-black small-accordion" style="width: 350px;" id="accordionExample">
                 <div class="accordion-item bg-dark">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed bg-transparent text-light" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                            aria-expanded="false" aria-controls="collapseOne">
-                            <h6><strong> Detalle de cada alumno inscrito:</strong></h6>
-                        </button>
-                    </h2>
+                    
                     <div id="collapseOne" class="accordion-collapse collapse"
                         aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body bg-dark">
@@ -331,7 +333,7 @@
                             }
                         });
                       
-
+                        
                         // Aquí se registra el evento de clic en los botones del acordeón
                         var accordionItems = document.querySelectorAll('.accordion-item');
                         accordionItems.forEach(function (item) {
