@@ -221,7 +221,26 @@
                                     ejecutado = true;
                                 }
                             }
+                            
+                            if (rol === "Instructor" && curso.procedencia == "2") {
+                                
+                                $("#contenedorPrincipal").append(`
+                                <hr>
+                                    <div class="panel-heading">
+                                        <div class="col-xs-2">
+                                            <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <h4 class="product-name text-light"><strong>${curso.Titulo}</strong></h4>
+                                        </div>
+                                        
+                                        
+                                    
+                                    </div>
+                                    `);
 
+                       
+                            }
                             // Aquí la segunda parte para el reporte de instructor
                             if (rol === "Instructor" && curso.procedencia == "1") {
                
@@ -281,7 +300,7 @@
 
                              <div class="panel-heading">
                                 <div class="col-xs-2">
-                                    <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.ImagenCurso}">
+                                    <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
                                 </div>
                                 <div class="col-xs-4">
                                     <h4 class="product-name text-light">Nombre del curso: <strong>${curso.Curso}</strong></h4>

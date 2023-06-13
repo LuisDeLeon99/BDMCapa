@@ -61,7 +61,7 @@ if (isset($_SESSION['rol'])) {
                             // Recorrer los resultados y guardarlos en el arreglo $results_array3
                             while ($row = $result->fetch_assoc()) {
                                 $row["Imagen"] = base64_encode($row["Imagen"]);
-                                $row["procedencia"] = "0";
+                                $row["procedencia"] = "2";
                                 $results_arrayc[] = $row;
                             }
                         }
@@ -83,7 +83,7 @@ if (isset($_SESSION['rol'])) {
                     } else {
                         // No se encontraron resultados en $results_array
                         header('Content-Type: application/json');
-                        echo '{"error": "error"}';
+                        echo json_encode('Sin cursos');
                         exit();
                     }
                     
@@ -132,7 +132,8 @@ if (isset($_SESSION['rol'])) {
             }
         } else {
             // No se encontraron resultados en $results_array
-            echo '{"error": "error"}';
+            header('Content-Type: application/json');
+            echo json_encode('Sin cursos');
         }
 
     }
@@ -154,7 +155,7 @@ if (isset($_SESSION['rol'])) {
                 if ($result !== false && $result->num_rows > 0) {
                     // Recorrer los resultados y guardarlos en el array
                     while ($row = $result->fetch_assoc()) {
-                        
+                        $row["Imagen"] = base64_encode($row["Imagen"]);
                         $results_array[] = $row;
                         
                       

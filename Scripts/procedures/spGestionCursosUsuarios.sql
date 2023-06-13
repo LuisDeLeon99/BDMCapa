@@ -69,6 +69,7 @@ IF p_Accion = 'SE3' THEN
         vk.ID_alumno,
         vk.ID_curso,
         vk.Curso,
+        vk.Imagen,
         vk.Categoria,
         vk.Alumno,
         vk.FechaInscripcion,

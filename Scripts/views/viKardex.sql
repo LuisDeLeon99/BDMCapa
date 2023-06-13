@@ -8,6 +8,7 @@ SELECT
     CONCAT(u.Nombre, ' ', u.Apaterno, ' ', u.Amaterno) AS Alumno,
     cu.ID_curso,
     c.Titulo AS Curso,
+    c.Imagen AS Imagen,
     cat.Categoria AS Categoria,
     cu.Fecha AS FechaInscripcion,
     cu.FechaF AS FechaTerminacion,
