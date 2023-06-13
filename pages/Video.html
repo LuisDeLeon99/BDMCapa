@@ -43,6 +43,9 @@
      
     </div>
     <div>
+        <button id="botonDescargar">Descargar Diploma</button>
+    </div>
+    <div>
         <button id="openModalBtn2" type="button" class="btn btn-primary" data-bs-toggle="modal"
             data-bs-target="#myModal2">Calificar</button>
 
@@ -190,6 +193,44 @@
                     }
                 });
             }
+            $(document).ready(function() {
+                $('#botonDescargar').on('click', obtenerDiploma);
+                 });
+
+            function obtenerDiploma() {
+                var cursoId = 1; // Reemplaza con el valor correcto
+                var nivelId = 1; // Reemplaza con el valor correcto
+
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/video.php', // Reemplaza con la ruta correcta hacia tu archivo PHP
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        cursoId: cursoId,
+                        nivelId: nivelId
+                    },
+                    success: function(response) {
+                        if (response && response.file_url) {
+                            // Crear un enlace temporal para descargar el archivo
+                            var link = document.createElement('a');
+                            link.href = response.file_url;
+                            link.download = response.file_name;
+                            link.target = '_blank';
+                            link.style.display = 'none';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        } else {
+                            console.log("No se pudo generar el archivo.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+
             function tarjetaCursos(curso) {
              
              
