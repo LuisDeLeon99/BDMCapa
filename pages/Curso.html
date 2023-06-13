@@ -54,7 +54,8 @@
             <div class="card mb-5 center bg-light"
                 style="margin:auto; width:75%;">
                 <div class="center">
-
+ 
+                   
                 </div>
 
             </div>
@@ -111,6 +112,42 @@
                         }
                     });
                 }
+
+
+                function agregarAlCarrito(cursoID) {
+                // Aquí puedes realizar las acciones necesarias para agregar el curso al carrito
+                // Puedes utilizar el parámetro "cursoID" para obtener el ID del curso seleccionado
+                // Por ejemplo:
+                
+                // Realizar una petición AJAX para agregar el curso al carrito
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/agregarCarrito.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                    cursoID: cursoID
+                    // Otros datos relacionados con el curso que deseas enviar al servidor
+                    },
+                    success: function(response) {
+                    // Manejar la respuesta del servidor después de agregar el curso al carrito
+                    if (response.status === 'success') {
+                        // Muestra el popup de éxito
+                        alert('¡Curso agregado al carrito correctamente!');
+                        console.log('Curso agregado al carrito:', response);
+                    } else {
+                        // Muestra el mensaje de error en caso de que ocurra un error
+                        alert(response.message);
+                    }     
+                    
+                    },
+                    error: function(xhr, status, error) {
+                    console.error('Error al agregar el curso al carrito:', error);
+                    alert('No hay sesión activa. Por favor, inicia sesión antes de agregar cursos al carrito.');
+                    // Manejar el error de alguna manera
+                    }
+                });
+            }
+
                 function tarjetaCursos(curso) {
                  
                 
@@ -139,7 +176,7 @@
                                     <p class="text-secondary-emphasis" style="font-size: 20px;">Adquiere este curso por:</p>
                                     <h3 class="card-title center"><strong>$${curso[0].Costo}</strong></h3>
                                      <div>
-                                         <button type="button" class="btn btn-info btn-lg custom-btn">Agregar al carrito</button>
+                                        <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto btn-agregar-carrito" href="#" data-id-curso="${curso.ID_curso}">Agregar al carrito</a></div>
                                          <br>
                                          <button type="button" class="btn btn-light btn-lg custom-btn">Comprar ahora</button>
                                          <br>
