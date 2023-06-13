@@ -15,7 +15,7 @@ BEGIN
     SELECT COUNT(*) INTO total_niveles FROM NivelesUsuarios WHERE ID_curso = NEW.ID_curso;
     
    
-    SELECT COUNT(*) INTO niveles_completados FROM NivelesUsuarios WHERE ID_curso = NEW.ID_curso AND Completado = 1;
+     SELECT COUNT(*) INTO niveles_completados FROM NivelesUsuarios WHERE ID_curso = NEW.ID_curso AND Completado = 1 AND ID_alumno = NEW.ID_alumno;
     
     
     SET progreso = (niveles_completados * 100.0) / total_niveles;
@@ -30,9 +30,7 @@ BEGIN
     
     UPDATE CursosUsuarios
     SET Progreso = progreso
-    WHERE ID_curso = NEW.ID_curso AND ID_alumno IN (
-        SELECT ID_alumno FROM TempCursosUsuarios
-    );
+    WHERE ID_curso = NEW.ID_curso AND ID_alumno = NEW.ID_alumno;
     
     
     DROP TEMPORARY TABLE IF EXISTS TempCursosUsuarios;

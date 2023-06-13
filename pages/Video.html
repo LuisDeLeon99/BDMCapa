@@ -151,15 +151,31 @@
             // Obtener el menú
             obtenerCursos();
 
-            $(document).ready(function() {
-                $('.rating-stars .star').click(function() {
-                    var value = $(this).data('value');
-                    $('#calificacionCurso').val(value);
-                    $(this).addClass('active');
-                    $(this).prevAll('.star').addClass('active');
-                    $(this).nextAll('.star').removeClass('active');
+            
+            $('.rating-stars .star').click(function() {
+                var value = $(this).data('value');
+                $('#calificacionCurso').val(value);
+                $(this).addClass('active');
+                $(this).prevAll('.star').addClass('active');
+                $(this).nextAll('.star').removeClass('active');
+
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/calificar.php', // Reemplaza 'ruta_del_script.php' con la ruta correcta a tu script de manejo de la calificación
+                    method: 'POST',
+                    data: { calificacion: value,
+                        cursoId: cursoId,
+                     }, // Enviar la calificación como datos en la solicitud Ajax
+                    success: function(response) {
+                        // Aquí puedes manejar la respuesta del servidor, si es necesario
+                        console.log('Calificación enviada con éxito');
+                    },
+                    error: function(xhr, status, error) {
+                        // Manejo de errores en caso de que la solicitud Ajax falle
+                        console.log('Error al enviar la calificación:', error);
+                    }
                 });
             });
+            
             // Función para obtener el menú mediante AJAX
             function obtenerCursos() {
                 

@@ -12,6 +12,7 @@ SELECT
     MAX(cu.Progreso) AS NivelAvance,
     dv.PrecioUnitario AS PrecioPagado,
     p.Descripcion AS FormaPago,
+    cu.Calif AS Calificacion,
     calcularPromedioCalificaciones(cu.ID_curso) AS PromedioCalificaciones,
 (SELECT COUNT(*) FROM Niveles WHERE ID_curso = cu.ID_curso) AS NumeroNiveles
 FROM CursosUsuarios cu

@@ -9,7 +9,7 @@ BEGIN
     DECLARE promedio DECIMAL(5,2);
     
     SELECT AVG(Calif) INTO promedio
-    FROM Comentarios
+    FROM CursosUsuarios
     WHERE ID_curso = ID_curso;
     
     RETURN promedio;
