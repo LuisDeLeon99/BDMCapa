@@ -102,12 +102,46 @@
      
     </div>
     <script>
-        function redirigirCurso(idCurso) {
+        function redirigirCurso() {
                 // Construye la URL con la variable "idCurso" en el encabezado (header)
-                const url = `Curso.html?idCurso=${idCurso}`;
+                
+                const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const cursoId = urlParams.get('curso');
+            const nivelId = urlParams.get('nivel');
+            const nivel = urlParams.get('nivels');
 
-                // Redirige a la URL
-                window.location.href = url;
+            // Realizar la llamada AJAX al archivo PHP
+            $.ajax({
+                url: 'http://localhost:3005/BDMCapa/WebServices/siguientenivel.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    cursoId: cursoId,
+                    nivelId: nivelId,
+                    nivel: nivel
+                },
+                success: function(response) {
+                    // Maneja la respuesta del servidor en caso de éxito
+                    console.log(response);
+                    if (response.progreso !== 100 && response.nivel <= parseInt(response.nivelmax)) {
+                        
+                        const url = `http://localhost:3005/BDMCapa/pages/Video.html?curso=${response.cursoId}&nivel=${response.nivelId}&nivels=${response.nivel}`;
+                        window.location.href = url; // Redirige a la siguiente página
+                    } 
+                    if (response.progreso == 100 ) {
+
+                    }else {
+                        // Realiza otra acción si el progreso es 100
+                        // Agrega tu código aquí
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Maneja el error en caso de fallo de la llamada AJAX
+                    console.error(error);
+                }
+            });
+                
                 }
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -167,7 +201,7 @@
                         Tu navegador no admite la reproducción de video.
                     </video>
                     <div class="col-xs-6">
-                        <button type="button" class="btn btn-outline-light" onclick="redirigirCurso(${curso.ID_curso})">
+                        <button type="button" class="btn btn-outline-light" onclick="redirigirCurso()">
                             Siguiente nivel
                         </button>
                     </div>
@@ -179,27 +213,8 @@
         });
         $("#contenedorPrincipal").on('click', '.btn-siguiente-nivel', function() {
             // Obtener los valores necesarios para enviar al archivo PHP
-            const cursoId = urlParams.get('curso');
-            const nivelId = urlParams.get('nivel');
-
-            // Realizar la llamada AJAX al archivo PHP
-            $.ajax({
-                url: 'http://localhost:3005/BDMCapa/WebServices/siguientenivel.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    cursoId: cursoId,
-                    nivelId: nivelId
-                },
-                success: function(response) {
-                    // Maneja la respuesta del servidor en caso de éxito
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    // Maneja el error en caso de fallo de la llamada AJAX
-                    console.error(error);
-                }
-            });
+            
+            
         });
     </script>
 </body>
