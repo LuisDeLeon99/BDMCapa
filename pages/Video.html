@@ -43,6 +43,9 @@
      
     </div>
     <div>
+        <button id="botonDescargar">Descargar Diploma</button>
+    </div>
+    <div>
         <button id="openModalBtn2" type="button" class="btn btn-primary" data-bs-toggle="modal"
             data-bs-target="#myModal2">Calificar</button>
 
@@ -206,6 +209,44 @@
                     }
                 });
             }
+            $(document).ready(function() {
+                $('#botonDescargar').on('click', obtenerDiploma);
+                 });
+
+            function obtenerDiploma() {
+                var cursoId = 1; // Reemplaza con el valor correcto
+                var nivelId = 1; // Reemplaza con el valor correcto
+
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/video.php', // Reemplaza con la ruta correcta hacia tu archivo PHP
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        cursoId: cursoId,
+                        nivelId: nivelId
+                    },
+                    success: function(response) {
+                        if (response && response.file_url) {
+                            // Crear un enlace temporal para descargar el archivo
+                            var link = document.createElement('a');
+                            link.href = response.file_url;
+                            link.download = response.file_name;
+                            link.target = '_blank';
+                            link.style.display = 'none';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        } else {
+                            console.log("No se pudo generar el archivo.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+
             function tarjetaCursos(curso) {
              
              
@@ -216,11 +257,16 @@
                         <source src="data:video/mp4;base64,${curso.Video}" type="video/mp4">
                         Tu navegador no admite la reproducción de video.
                     </video>
+                    <div>
+                         <h4 class="card-title text-black">Este nivel contiene</h4>
+                         <h4 class="card-text text-light">Variable descripcion del Nivel</h4>
+                    </div>
                     <div class="col-xs-6">
                         <button type="button" class="btn btn-outline-light" onclick="redirigirCurso()">
                             Siguiente nivel
                         </button>
                     </div>
+
                 </div>
             `);
 
