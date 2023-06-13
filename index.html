@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Full-Learning</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
@@ -49,7 +49,10 @@
         </div>
     </nav>
     <!-- Header-->
+    
     <header class="bg-dark py-1">
+        <br>
+    <br>
         <div class="container px-2 px-md-3 my-2">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Enseñanza eficaz</h1>
@@ -360,6 +363,38 @@
     });
 });
     </script>
+<script>
+    window.onscroll = function() {
+        makeNavbarSticky();
+    };
+
+    function makeNavbarSticky() {
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky");
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>
+<script>
+    window.onscroll = function() {
+        makeNavbarSticky();
+    };
+
+    function makeNavbarSticky() {
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky");
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>
 
 </body>
 
