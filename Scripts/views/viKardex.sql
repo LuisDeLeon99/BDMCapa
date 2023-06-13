@@ -11,8 +11,9 @@ SELECT
     cat.Categoria AS Categoria,
     cu.Fecha AS FechaInscripcion,
     cu.FechaF AS FechaTerminacion,
+    cu.Progreso AS Progreso,
     CASE
-        WHEN nu.Completado = 100 THEN 'Completo'
+        WHEN cu.Progreso = 100 THEN 'Completo'
         ELSE 'Incompleto'
     END AS ProgresoCurso,
     CASE

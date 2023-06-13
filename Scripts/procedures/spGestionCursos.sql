@@ -128,7 +128,11 @@ BEGIN
 		FROM viComprasUsuario 
 		WHERE viComprasUsuario.ID_usuario = p_ID_usuario and viComprasUsuario.ID_curso = p_ID_curso;
 	END IF;
-    
+    IF p_Accion = 'SE8' THEN
+    SELECT Curso.ID_curso, Curso.Costo, Curso.Titulo, Curso.Imagen, Curso.ID_usuario			
+		FROM Curso 
+		WHERE Curso.ID_usuario = p_ID_usuario;
+	END IF;
     
 END //
 

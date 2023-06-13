@@ -24,7 +24,7 @@ if (!isset($_SESSION['usuario'])) {
    
    $completado = 0;
    $query = "CALL spGestionNivelesUsuarios('UP','$ID_usuario','$cursoID','$nivelID','$completado','$Creacion')";
-  
+   $result = $conn->query($query);
    
     header('Content-Type: application/json');
     echo json_encode('hecho');

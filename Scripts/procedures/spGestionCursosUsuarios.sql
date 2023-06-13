@@ -73,6 +73,7 @@ IF p_Accion = 'SE3' THEN
         vk.Alumno,
         vk.FechaInscripcion,
         vk.FechaTerminacion,
+        vk.Progreso,
         vk.ProgresoCurso,
         vk.EstadoCurso       
     FROM viKardex vk

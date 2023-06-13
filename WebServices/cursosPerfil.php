@@ -13,9 +13,10 @@ if (isset($_SESSION['rol'])) {
     // Array para almacenar los resultados
     $results_array = array();
     $results_arrayb = array();
+    $results_arrayc = array();
     $totalCosto = 0;
     $totalCostoDecimal = number_format($totalCosto, 2, '.', '');
-    $ID_usuario = $_SESSION['ID_usuario'];
+    $ID_usuario = intval($_SESSION['ID_usuario']);
     $Creacion = '2000-05-05'; 
     if ($_SESSION['rol'] == 'Instructor'){
         $rol =  $_SESSION['rol'];
@@ -46,7 +47,48 @@ if (isset($_SESSION['rol'])) {
                  // Avanzar al siguiente conjunto de resultados
              } while ($conn->more_results() && $conn->next_result());
             }
-      
+            
+            if (empty($results_array[0])) {
+                
+                $query3 = "CALL spGestionCursos('SE8','0','0','$totalCostoDecimal','','','','','0','0','0','$Creacion','0','0','$ID_usuario')";
+                    
+                if ($conn->multi_query($query3)) {
+                    do {
+                        // Obtener el resultado actual
+                        $result = $conn->store_result();
+                        
+                        if ($result !== false && $result->num_rows > 0) {
+                            // Recorrer los resultados y guardarlos en el arreglo $results_array3
+                            while ($row = $result->fetch_assoc()) {
+                                $row["Imagen"] = base64_encode($row["Imagen"]);
+                                $row["procedencia"] = "0";
+                                $results_arrayc[] = $row;
+                            }
+                        }
+                        
+                        // Liberar los resultados
+                        if ($result !== false) {
+                            $result->free();
+                        }
+                        
+                        // Avanzar al siguiente conjunto de resultados
+                    } while ($conn->more_results() && $conn->next_result());
+                    
+                    // Salir del código PHP con la respuesta de la tercera consulta
+                    if (!empty($results_arrayc[0])) {
+                        $results_arrayc[0]["Rol"] = $rol;
+                        header('Content-Type: application/json');
+                        echo json_encode($results_arrayc);
+                        exit();
+                    } else {
+                        // No se encontraron resultados en $results_array
+                        header('Content-Type: application/json');
+                        echo '{"error": "error"}';
+                        exit();
+                    }
+                    
+                }
+            }
             $results_array[0]["Rol"] = $rol;
 
             // Ejecutar el segundo procedimiento almacenado
