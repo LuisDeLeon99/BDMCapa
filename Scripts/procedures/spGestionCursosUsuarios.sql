@@ -96,6 +96,23 @@ IF p_Accion = 'SE4' THEN
     where va.ID_curso = p_ID_curso
     ;
 END IF;
+IF p_Accion = 'SE5' THEN
+    SELECT
+       va.ID_curso,
+       va.ID_usuario,
+        va.Curso,
+        va.Alumno,
+        va.FechaInscripcion,
+        va.NivelAvance,
+        va.PrecioPagado,
+        va.FormaPago,
+        va.PromedioCalificaciones,
+        va.NumeroNiveles
+       
+    FROM viDetalleAlumnos va
+    where va.ID_curso = p_ID_curso and va.ID_usuario = p_ID_alumno
+    ;
+END IF;
 
 END //
 
