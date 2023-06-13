@@ -1,74 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/categorias.css">
-    <link rel="stylesheet" type="text/css" href="css/disenoPantallas.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/categorias.css">
+        <link rel="stylesheet" type="text/css" href="css/disenoPantallas.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-</head>
+    </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Full-Learning</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../index.html">Inicio
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Buscar">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
-                <ul class="navbar-nav me-auto espacioder" id="menu-item">
-                </ul>
+    <body>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Full-Learning</a>
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                    aria-controls="navbarColor02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="../index.html">Inicio
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-sm-2" type="search"
+                            placeholder="Buscar">
+                        <button class="btn btn-secondary my-2 my-sm-0"
+                            type="submit">Buscar</button>
+                    </form>
+                    <ul class="navbar-nav me-auto espacioder" id="menu-item">
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-    <!-- <header class="bg-dark py-1">
-        <div class="container px-2 px-md-3 my-2">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Enseñanza eficaz</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Aquí aprenderás todo lo que desees</p>
+        </nav>
+
+        <div class="card mb-3" style="margin:auto; width:95%;">
+            <br>
+            <br>
+            <div style="margin:auto; width:85%;" class="card mb-3 bg-dark py-1"
+                id="contenedorPrincipal">
+                <br>
+
             </div>
-        </div>
-    </header> -->
+            <div class="card mb-5 center bg-light"
+                style="margin:auto; width:75%;">
+                <div class="center">
 
-    <div class="card mb-3" style="margin:auto; width:95%;">
+                </div>
 
-        <div style="margin:auto; width:85%;" class="card mb-3 bg-dark py-1" id="contenedorPrincipal">
-
-            
-
-        </div>
-        <div class="card mb-5 center bg-light"style="margin:auto; width:75%;">
-            <div class="center">
-                
             </div>
-            
-        </div>
 
-        <div class="card mb-5 center bg-light disqus-container" id="dis">
-            
-        </div>
-        
-        
-        
-        
-        <script>
+            <div class="card mb-5 center bg-light disqus-container" id="dis">
+
+            </div>
+
+            <script>
             const urlParams = new URLSearchParams(window.location.search);
             const cursoId = urlParams.get('curso');
             $(document).ready(function () {
@@ -118,28 +113,31 @@
                 }
                 function tarjetaCursos(curso) {
                  
-                 
+                
                  // Aquí va el código HTML de la tarjeta de curso
                  $("#contenedorPrincipal").append(`
-                    <h3 class="card-header">${curso[0].Titulo}</h3>
+                    <h3 class="card-header flex">${curso[0].Titulo}</h3>
+                   <p class="text-body-secondary espacioder">Fecha en que se agrego: ${curso[0].Creacion}</p>
+                           
+                             <br>
+                    <div class="card-text">
+                            
                      <div class="container">
-                         <div>
+                         <div class="card bg-secondary mb-3" style="width: 55rem;">
                              <div>
-                                 <h4 class="card-title text-muted">¿De qué trata el curso?</h4>
-                                 <p class="card-text">${curso[0].Descripcion}</p>
+                                 <h4 class="card-title text-black">¿De qué trata el curso?</h4>
+                                 <h4 class="card-text text-light">${curso[0].Descripcion}</h4>
                              </div>
                          </div>
-                         <div class="flex">
-                                 <h6 class="card-text espacioder">Este curso se agrego</h6>
-                                 <p class="card-text">${curso[0].Creacion}</p>
-                             </div>
+                         
                          <div class="card border-dark mb-3" style="margin-left:auto; width:25%;">
                              <div class="card-body">
                                  <div class="center">
                                     <img class="card-img-top" src="data:image/jpeg;base64,${curso[0].Imagen}" alt="...">
                                  </div>
                                  <div style="margin:auto;">
-                                    <h4 class="card-title">$${curso[0].Costo}</h4>
+                                    <p class="text-secondary-emphasis" style="font-size: 20px;">Adquiere este curso por:</p>
+                                    <h3 class="card-title center"><strong>$${curso[0].Costo}</strong></h3>
                                      <div>
                                          <button type="button" class="btn btn-info btn-lg custom-btn">Agregar al carrito</button>
                                          <br>
@@ -151,33 +149,59 @@
                              <p class="card-text"></p>
                          </div>
                      </div>
-                     <div class="card-body">
-                        <p class="card-text"></p>
-                     </div>
-                     <div class="card mb-5 center bg-light"style="width: 350px;">
-                        <div class="center">
-                            <h4 class="card-title text-dark">Niveles del curso: ${curso[0].Niveles}
-                            </h4>
-                            
-                            
-                        </a>
-                                
-                        </div>
+                     <hr>
+                    
+                            <div class="card-tittle" style="display: flex; justify-content: center; align-items: center;">
+                                <h4 class="text-body-secondary text-light">Niveles que contiene el curso: <strong>${curso[0].Niveles}
+                                </strong></h4>
+                            </div>   
+                    
+                     
                  `);
-                 
+                
+
+
+
                     for (let i = 1; i < curso.length; i++) {
                         $("#contenedorPrincipal").append(`
-                            <div class="card mb-5 center bg-light" style="width: 450px;">
-                                <div class="center">
-                                    <h4 class="card-title text-dark">Nivel ${i}</h4>
-                                    <a href="http://localhost:3005/BDMCapa/pages/Video.html?curso=${curso[i].ID_curso}&nivel=${curso[i].IDNiv}" class="curso-link" data-curso-id="${curso[i].ID_curso}" data-nivel-id="${curso[i].IDNiv}">
-                                        <h5 class="text-dark"><strong>${curso[i].Titulo}</strong></h5>
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="panel-heading center">
+                            <div class="accordion bg-black small-accordion" style="width: 600px;" id="accordionExample">
+                                <div class="accordion-item bg-info">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button collapsed bg-transparent text-light center" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                            aria-expanded="false" aria-controls="collapseOne">
+                                            <h4 class="text-dark center"><strong> Nivel ${i}:</strong></h4>
+                                        </button>
+                                    </h2> 
+                                    <div id="collapseOne" class="accordion-collapse collapse"
+                                       aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body bg-dark">
+                                            <div class="col-xs-4">
+                                                <a href="http://localhost:3005/BDMCapa/pages/Video.html?curso=${curso[i].ID_curso}&nivel=${curso[i].IDNiv}" class="curso-link" data-curso-id="${curso[i].ID_curso}" data-nivel-id="${curso[i].IDNiv}">
+                                                <h5 class="product-name text-light">
+                                                    Nivel: <strong>${curso[i].Titulo}</strong>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                               </div>
+                           </div>
+                        </div>
                         `);
                     }
-                
+                // Aquí se registra el evento de clic en los botones del acordeón
+                var accordionItems = document.querySelectorAll('.accordion-item');
+                        accordionItems.forEach(function (item) {
+                            var button = item.querySelector('.accordion-button');
+                            button.addEventListener('click', function () {
+                                button.classList.toggle('collapsed');
+                                var collapsePanel = item.querySelector(button.getAttribute('data-bs-target'));
+                                collapsePanel.classList.toggle('show');
+                            });
+                        });
+
+
                  $("#dis").append(`
                  <div id="disqus_thread" data-disqus-identifier="${curso[0].ID_curso}"></div>        
                  `);
@@ -218,7 +242,7 @@
             });
             });
         </script>
-        <script>
+            <script>
             function dis(curso) {
             
             /**
@@ -236,11 +260,29 @@
             (d.head || d.body).appendChild(s);
             })();}
         </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <noscript>Please enable JavaScript to view the <a
+                    href="https://disqus.com/?ref_noscript">comments powered by
+                    Disqus.</a></noscript>
 
-<script id="dsq-count-scr"  src="//http-localhost-3005-bdmcapa.disqus.com/count.js" async></script>
+            <script id="dsq-count-scr"
+                src="//http-localhost-3005-bdmcapa.disqus.com/count.js" async></script>
 
+            <script>
+    window.onscroll = function() {
+        makeNavbarSticky();
+    };
 
-</body>
+    function makeNavbarSticky() {
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
 
-</html>
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky");
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>
+        </body>
+
+    </html>
