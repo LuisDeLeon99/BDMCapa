@@ -19,7 +19,8 @@ ID_curso INT  NOT NULL, -- FK(Curso)
 ID_alumno INT NOT NULL, -- FK(Usuario)
 ID_instructor INT NOT NULL, -- FK(Usuario)
 Progreso DECIMAL(5,2)  NOT NULL,
-Diploma BLOB NOT NULL, 
+Diploma BLOB NOT NULL,
+Calif DECIMAL(2,2) , 
 Fecha DATE NOT NULL,
 FechaF DATE,
 PRIMARY KEY (ID_curso, ID_alumno)
