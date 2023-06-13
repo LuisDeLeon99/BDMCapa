@@ -207,63 +207,7 @@
                             setupImagePreview("imagenCurso", "imagePreview1", "base64Preview1");
                             setupImagePreview("diploma", "imagePreview2", "base64Preview2");
                         </script>
-                        <br>
-                        <div>
-                            <button id="openModalBtn2" type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#myModal2">Calificar</button>
-    
-                            <div class="modal" id="myModal2" style="margin:250px 80px 45px 55px;">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Califica el curso</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-    
-                                        <div class="form-group">
-                                            <label for="inputdescripcionCat" class="form-label mt-4">Aqui estrellitas</label>
-    
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                              <div class="bi-star-fill"></div>
-                                              <div class="bi-star-fill"></div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" onclick="crearCategoria()"
-                                                class="btn btn-primary">Guardar</button>
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cerrar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <script>
-                                // Obtener el botón por su ID
-                                var openModalBtn = document.getElementById('openModalBtn2');
-    
-                                // Obtener la pantalla modal por su ID
-                                var modal = document.getElementById('myModal2');
-    
-                                // Agregar un evento de clic al botón
-                                openModalBtn.addEventListener('click', function () {
-                                    // Mostrar la pantalla modal
-                                    modal.style.display = 'block';
-                                });
-    
-                                // Agregar un evento de clic al botón de cerrar
-                                var closeModalBtn = modal.querySelector('.btn-close');
-                                closeModalBtn.addEventListener('click', function () {
-                                    // Ocultar la pantalla modal
-                                    modal.style.display = 'none';
-                                });
-                            </script>
-                         
-                        </div>
-                        
+                        <br>      
                         <div>
                             <label class="form-label mt-4">Categoria del curso</label>
                             <br>
