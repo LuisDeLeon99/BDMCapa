@@ -24,6 +24,13 @@ BEGIN
             FechaCompletado = curdate()
         WHERE ID_alumno = p_ID_alumno AND ID_curso = p_ID_curso AND ID_nivel = p_ID_nivel;
     END IF;
+    
+    IF p_Accion = 'UP2' THEN
+        UPDATE NivelesUsuarios
+        SET Completado = 0,
+            FechaCompletado = curdate()
+        WHERE ID_alumno = p_ID_alumno AND ID_curso = p_ID_curso AND ID_nivel = p_ID_nivel;
+    END IF;
 
     IF p_Accion = 'DE' THEN
         DELETE FROM NivelesUsuarios
