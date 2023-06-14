@@ -54,9 +54,10 @@ BEGIN
     END IF;
 
     IF p_Accion = 'SE' THEN
-        SELECT Curso.ID_curso, Curso.Niveles, Curso.Costo, Curso.Titulo, Curso.Descripcion, Curso.Imagen, Curso.IDCat, Curso.Creacion, Curso.ID_usuario
-        FROM Curso WHERE Curso.ID_curso = p_ID_curso;
-    END IF;
+    SELECT Curso.ID_curso, Curso.Niveles, Curso.Costo, Curso.Titulo, Curso.Descripcion, Curso.Imagen, Curso.IDCat, Curso.Creacion, Curso.ID_usuario, calcularPromedioCalificaciones(Curso.ID_curso) AS PromedioCalificaciones
+    FROM Curso
+    WHERE Curso.ID_curso = p_ID_curso;
+END IF;
 
     IF p_Accion = 'SE1' THEN
         IF p_IDCat <> 1 THEN

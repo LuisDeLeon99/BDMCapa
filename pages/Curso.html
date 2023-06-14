@@ -9,6 +9,8 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/categorias.css">
         <link rel="stylesheet" type="text/css" href="css/disenoPantallas.css">
+        
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     </head>
@@ -148,60 +150,54 @@
                 });
             }
 
-                function tarjetaCursos(curso) {
-                 
-                
-                 // Aquí va el código HTML de la tarjeta de curso
-                 $("#contenedorPrincipal").append(`
-                    <h3 class="card-header flex">${curso[0].Titulo}</h3>
-                   <p class="text-body-secondary espacioder">Fecha en que se agrego: ${curso[0].Creacion}</p>
-                           
-                             <br>
-                    <div class="card-text">
-                            
-                     <div class="container">
-                         <div class="card bg-secondary mb-3" style="width: 55rem;">
-                             <div>
-                                 <h4 class="card-title text-black">¿De qué trata el curso?</h4>
-                                 <h4 class="card-text text-light">${curso[0].Descripcion}</h4>
-                             </div>
-                             <br>
-                             <div>
-                                 <h6 class="card-title text-black">Calificacion del curso</h6>
-                                 <h4 class="card-text text-light">Aqui mostrar estrellas</h4>
-                             </div>
-                         </div>
-                         
-                         <div class="card border-dark mb-3" style="margin-left:auto; width:25%;">
-                             <div class="card-body">
-                                 <div class="center">
-                                    <img class="card-img-top" src="data:image/jpeg;base64,${curso[0].Imagen}" alt="...">
-                                 </div>
-                                 <div style="margin:auto;">
-                                    <p class="text-secondary-emphasis" style="font-size: 20px;">Adquiere este curso por:</p>
-                                    <h3 class="card-title center"><strong>$${curso[0].Costo}</strong></h3>
-                                     <div>
-                                        <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto btn-agregar-carrito" href="#" data-id-curso="${curso.ID_curso}">Agregar al carrito</a></div>
-                                         <br>
-                                         <button type="button" class="btn btn-light btn-lg custom-btn">Comprar ahora</button>
-                                         <br>
-                                     </div>
-                                 </div>
-                             </div>
-                             <p class="card-text"></p>
-                         </div>
-                     </div>
-                     <hr>
-                    
-                            <div class="card-tittle" style="display: flex; justify-content: center; align-items: center;">
-                                <h4 class="text-body-secondary text-light">Niveles que contiene el curso: <strong>${curso[0].Niveles}
-                                </strong></h4>
-                            </div>   
-                    
-                     
-                 `);
-                
+            function tarjetaCursos(curso) {
+    // Aquí va el código HTML de la tarjeta de curso
+    $("#contenedorPrincipal").append(`
+        <h3 class="card-header flex">${curso[0].Titulo}</h3>
+        <p class="text-body-secondary espacioder">Fecha en que se agrego: ${curso[0].Creacion}</p>
+        <br>
+        <div class="card-text">
+            <div class="container">
+                <div class="card bg-secondary mb-3" style="width: 55rem;">
+                    <div>
+                        <h4 class="card-title text-black">¿De qué trata el curso?</h4>
+                        <h4 class="card-text text-light">${curso[0].Descripcion}</h4>
+                    </div>
+                    <br>
+                    <div>
+                        <h6 class="card-title text-black">Calificacion del curso</h6>
+                        <div id="starsContainer" class="card-text text-light"></div>
+                    </div>
+                </div>
+                <div class="card border-dark mb-3" style="margin-left:auto; width:25%;">
+                    <div class="card-body">
+                        <div class="center">
+                            <img class="card-img-top" src="data:image/jpeg;base64,${curso[0].Imagen}" alt="...">
+                        </div>
+                        <div style="margin:auto;">
+                            <p class="text-secondary-emphasis" style="font-size: 20px;">Adquiere este curso por:</p>
+                            <h3 class="card-title center"><strong>$${curso[0].Costo}</strong></h3>
+                            <div>
+                                <div class="text-center">
+                                    <a style="color:black" class="btn btn-outline-info mt-auto btn-agregar-carrito" href="#" data-id-curso="${curso.ID_curso}">Agregar al carrito</a>
+                                </div>
+                                <br>
+                                <button type="button" class="btn btn-light btn-lg custom-btn">Comprar ahora</button>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+            <hr>
+            <div class="card-tittle" style="display: flex; justify-content: center; align-items: center;">
+                <h4 class="text-body-secondary text-light">Niveles que contiene el curso: <strong>${curso[0].Niveles}</strong></h4>
+            </div>
+        </div>
+    `);
 
+    
 
 
                     for (let i = 1; i < curso.length; i++) {
@@ -232,6 +228,22 @@
                         </div>
                         `);
                     }
+
+                    var promedioCalificaciones = parseFloat(curso[0].PromedioCalificaciones);
+var numEstrellasPintadas = Math.floor(promedioCalificaciones / 20); // Utilizamos Math.floor para redondear hacia abajo
+var numEstrellasTotales = Math.ceil(promedioCalificaciones / 20); // Utilizamos Math.ceil para redondear hacia arriba
+
+// Generar las estrellas
+var starsContainer = $("#starsContainer");
+starsContainer.empty(); // Limpiar el contenedor de estrellas antes de agregar las nuevas
+
+for (var i = 1; i <= numEstrellasTotales; i++) {
+  var starHtml = `<span class="star" data-value="${i}">&#9733;</span>`;
+  if (i <= numEstrellasPintadas) {
+    starHtml = `<span class="star active" data-value="${i}">&#9733;</span>`;
+  }
+  starsContainer.append(starHtml);
+}
                 // Aquí se registra el evento de clic en los botones del acordeón
                 var accordionItems = document.querySelectorAll('.accordion-item');
                         accordionItems.forEach(function (item) {
