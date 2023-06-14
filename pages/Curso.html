@@ -120,14 +120,15 @@
                 // Aquí puedes realizar las acciones necesarias para agregar el curso al carrito
                 // Puedes utilizar el parámetro "cursoID" para obtener el ID del curso seleccionado
                 // Por ejemplo:
-                
+                const urlParams = new URLSearchParams(window.location.search);
+                 const cursoId = urlParams.get('curso');
                 // Realizar una petición AJAX para agregar el curso al carrito
                 $.ajax({
                     url: 'http://localhost:3005/BDMCapa/WebServices/agregarCarrito.php',
                     type: 'POST',
                     dataType: 'json',
                     data: {
-                    cursoID: cursoID
+                    cursoID: cursoId
                     // Otros datos relacionados con el curso que deseas enviar al servidor
                     },
                     success: function(response) {
@@ -231,7 +232,12 @@
 
                     var promedioCalificaciones = parseFloat(curso[0].PromedioCalificaciones);
 var numEstrellasPintadas = Math.floor(promedioCalificaciones / 20); // Utilizamos Math.floor para redondear hacia abajo
-var numEstrellasTotales = Math.ceil(promedioCalificaciones / 20); // Utilizamos Math.ceil para redondear hacia arriba
+var numEstrellasTotales = 5;
+
+// Limitar el número máximo de estrellas pintadas al total de estrellas
+if (numEstrellasPintadas > numEstrellasTotales) {
+  numEstrellasPintadas = numEstrellasTotales;
+}
 
 // Generar las estrellas
 var starsContainer = $("#starsContainer");
