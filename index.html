@@ -83,7 +83,38 @@
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center "
                 id="contenedorPrincipal">
-
+                <div class="col mb-5" data-id="${curso.ID_curso}">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <!-- Product image-->
+                        <a href="http://localhost:3005/BDMCapa/pages/Curso.html?curso=${curso.ID_curso}" >
+                             <img class="card-img-top" src="data:image/jpeg;base64,${curso.Imagen}" alt="...">
+                        </a>
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">${curso.Titulo}</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-dark text-decoration-line-through">$300.00</span>
+                                ${costo}
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto btn-agregar-carrito" href="#" data-id-curso="${curso.ID_curso}">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
             </div>
     </section>
     <!-- Footer-->
@@ -104,7 +135,7 @@
         var totalCursos = 0;
         var busqueda ='';
         $(document).ready(function () {
-            // Obtener el menú
+            /* // Obtener el menú
             $('.ordenar-item').click(function(event) {
             event.preventDefault();
             
@@ -116,8 +147,8 @@
             // Llamar a la función obtenerCursos con la nueva acción
             $('#contenedorPrincipal').empty();
             obtenerCursos(1, accion, categoria, busqueda);    
-         });
-         $('#categoria').on('click', '.dropdown-item', function (event) {
+         }); */
+        /*  $('#categoria').on('click', '.dropdown-item', function (event) {
         event.preventDefault();
 
         // Obtener el valor de la categoría seleccionada
@@ -125,7 +156,7 @@
          $('#contenedorPrincipal').empty();
         // Llamar a la función obtenerCursos con la acción actualizada y la nueva categoría seleccionada
         obtenerCursos(pagina, accion, categoria, busqueda);
-        });
+        }); */
 
         $('form').submit(function (event) {
         event.preventDefault();
