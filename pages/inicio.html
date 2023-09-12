@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Learning</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link href="./css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./css/disenoPantallas.css">
+    <link rel="stylesheet" type="text/css" href="./popper.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Frop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="inicio.html">Inicio
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="pages/Cursos.html">Categorías</a>
+                    </li> -->
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-sm-2" type="search" placeholder="Buscar">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                <ul class="navbar-nav me-auto espacioder" id="menu-item">
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <!-- Header-->
+    
+    <header class="bg-dark py-1">
+        <br>
+    <br>
+        <div class="container px-2 px-md-3 my-2">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">¡Bienvenido a Frop!</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Tu destino para comprar y descubrir </p>
+            </div>
+        </div>
+    </header>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">Ordenar por</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item ordenar-item" href="#" data-accion="mejor-calificados">Mejor calificados</a>
+                    <a class="dropdown-item ordenar-item" href="#" data-accion="mas-comprados">Más comprados</a>
+                    <a class="dropdown-item ordenar-item" href="#" data-accion="recien-agregados">Recién agregados</a>
+                </div>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">Categorias</a>
+                <div class="dropdown-menu"  id="categoria" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item categoria-item" href="#" data-categoria="${categoria.IDCat}">Categoria 1</a>
+                    <a class="dropdown-item categoria-item" href="#" data-categoria="${categoria.IDCat}">Categoria 2</a>
+                    <a class="dropdown-item categoria-item" href="#" data-categoria="${categoria.IDCat}">Categoria 3</a>
+                    <!-- Aquí se generarán dinámicamente las opciones de categoría -->
+                </div>
+            </li>
+    </ul>
+    <section class="py-5">
+
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Producto 1</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div class="text-dark text-decoration-line-through">
+                                <!-- Product price-->
+                                $40.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                href="#">Agregar al carrito</a></div>
+                                
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                        </div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder ">Producto 2 en oferta</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-dark text-decoration-line-through">$20.00</span>
+                                $18.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                    href="#">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                        </div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Producto 3 en oferta</h5>
+                                <!-- Product price-->
+                                <span class="text-dark text-decoration-line-through">$50.00</span>
+                                $25.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                href="#">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Producto 4</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div class="text-dark text-decoration-line-through">
+                                <!-- Product price-->
+                                $40.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                href="#">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                        </div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder ">Producto 5 en oferta</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                <span class="text-dark text-decoration-line-through">$20.00</span>
+                                $18.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                    href="#">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                        </div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Producto 6 en oferta</h5>
+                                <!-- Product price-->
+                                <span class="text-dark text-decoration-line-through">$50.00</span>
+                                $25.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                href="#">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Producto 7</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div class="text-dark text-decoration-line-through">
+                                <!-- Product price-->
+                                $40.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                href="#">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge-->
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                        </div>
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center text-dark">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Producto 8 en oferta</h5>
+                                <!-- Product price-->
+                                <span class="text-dark text-decoration-line-through">$50.00</span>
+                                $25.00
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto"
+                                href="#">Agregar al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Todos los derechos reservados 2023</p>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    
+    <script>
+
+        var pagina = 1;
+        var accion = 'SE1';
+        var categoria = 1;
+        var totalCursos = 0;
+        var busqueda ='';
+        $(document).ready(function () {
+            /* // Obtener el menú
+            $('.ordenar-item').click(function(event) {
+            event.preventDefault();
+            
+            // Obtener el valor del atributo "data-accion"
+            var accion = $(this).data('accion');
+            if(accion === 'mejor-calificados' ) accion = 'SE1';
+            if(accion === 'mas-comprados' ) accion = 'SE2';
+            if(accion === 'recien-agregados' ) accion = 'SE3';
+            // Llamar a la función obtenerCursos con la nueva acción
+            $('#contenedorPrincipal').empty();
+            obtenerCursos(1, accion, categoria, busqueda);    
+         }); */
+        /*  $('#categoria').on('click', '.dropdown-item', function (event) {
+        event.preventDefault();
+
+        // Obtener el valor de la categoría seleccionada
+         categoria = $(this).data('categoria');
+         $('#contenedorPrincipal').empty();
+        // Llamar a la función obtenerCursos con la acción actualizada y la nueva categoría seleccionada
+        obtenerCursos(pagina, accion, categoria, busqueda);
+        }); */
+
+        $('form').submit(function (event) {
+        event.preventDefault();
+        
+        // Obtener el valor del campo de búsqueda
+        var searchTerm = $('input[type="search"]').val().trim();
+        
+        // Actualizar la variable de búsqueda
+        busqueda = searchTerm;
+        $('#contenedorPrincipal').empty();
+        // Llamar a la función obtenerCursos con la acción actualizada, la nueva búsqueda y la categoría
+        obtenerCursos(pagina, accion, categoria, busqueda);
+        }); 
+            obtenerMenu();
+            obtenerCursos();
+
+            // Obtener los cursos
+            //obtenerCursos('SE1', 1);
+
+            // Función para obtener el menú mediante AJAX
+            function obtenerMenu() {
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/menu.php',
+                    success: function (response) {
+                        // Actualizar el contenido del menú
+                        $('#menu-item').html(response);
+                    },
+                    error: function () {
+                        // Manejar errores en la solicitud AJAX
+                        console.log('Error al obtener el menú');
+                    }
+                });
+            }
+            
+            function obtenerCursos(pagina, accion, categoria, busqueda) {
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/indexcursos.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        pagina: pagina,
+                        accion: accion,
+                        categoria: categoria,
+                        busqueda: busqueda
+                    },
+                    success: function (response) {
+                        // Utilizar los datos recibidos en el arreglo
+                        if (response && response.length > 0) {
+                            console.log(response);
+                            // Actualizar la cantidad total de cursos si es la primera página
+                            if (pagina === 1) {
+                                totalCursos = parseInt(response[0].TotalCurso);
+                            }
+                            tarjetaCursos(response);
+                            // Verificar si se alcanzó el final de la tabla
+                            if (response.length < 8 || pagina * 8 >= totalCursos) {
+                                $(window).off('scroll'); // Desactivar el evento de scroll
+                            }
+                            // Asociar evento de clic a los enlaces "Agregar al carrito"
+                            $('.btn-agregar-carrito').click(function() {
+                            var idCurso = $(this).data('id-curso');
+                            agregarAlCarrito(idCurso);
+                            });
+                        } else {
+                            console.log("La respuesta está vacía.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+            
+            function agregarAlCarrito(cursoID) {
+                // Aquí puedes realizar las acciones necesarias para agregar el curso al carrito
+                // Puedes utilizar el parámetro "cursoID" para obtener el ID del curso seleccionado
+                // Por ejemplo:
+                
+                // Realizar una petición AJAX para agregar el curso al carrito
+                $.ajax({
+                    url: 'http://localhost:3005/BDMCapa/WebServices/agregarCarrito.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                    cursoID: cursoID
+                    // Otros datos relacionados con el curso que deseas enviar al servidor
+                    },
+                    success: function(response) {
+                    // Manejar la respuesta del servidor después de agregar el curso al carrito
+                    if (response.status === 'success') {
+                        // Muestra el popup de éxito
+                        alert('¡Curso agregado al carrito correctamente!');
+                        console.log('Curso agregado al carrito:', response);
+                    } else {
+                        // Muestra el mensaje de error en caso de que ocurra un error
+                        alert(response.message);
+                    }     
+                    
+                    },
+                    error: function(xhr, status, error) {
+                    console.error('Error al agregar el curso al carrito:', error);
+                    alert('No hay sesión activa. Por favor, inicia sesión antes de agregar cursos al carrito.');
+                    // Manejar el error de alguna manera
+                    }
+                });
+            }
+
+            function tarjetaCursos(cursos) {
+                cursos.forEach(function (curso) {
+                    let costo = curso.Costo;
+                    if (costo === "0.00") {
+                        costo = "Gratis";
+                    }
+                    $("#contenedorPrincipal").append(`
+                    <div class="col mb-5" data-id="${curso.ID_curso}">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <a href="http://localhost:3005/BDMCapa/pages/Curso.html?curso=${curso.ID_curso}" >
+                                 <img class="card-img-top" src="data:image/jpeg;base64,${curso.Imagen}" alt="...">
+                            </a>
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center text-dark">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">${curso.Titulo}</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-dark text-decoration-line-through">$300.00</span>
+                                    ${costo}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a style="color:black" class="btn btn-outline-info mt-auto btn-agregar-carrito" href="#" data-id-curso="${curso.ID_curso}">Agregar al carrito</a></div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+                });
+
+            }
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                    pagina++;
+                    obtenerCursos(); // Carga más cursos al llegar al final de la página
+                }
+            });
+
+            
+        });
+    </script>
+    <script async>
+        // Hacer la solicitud AJAX al archivo PHP
+        async function obtenerCategorias() {
+            try {
+                const response = await fetch('./WebServices/categoriafetch.php', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (response.ok) {
+                    const categorias = await response.json();
+                    console.log(categorias);
+
+                    // Generar las opciones de categoría dinámicamente
+                    let optionsHTML = '';
+
+                    categorias.forEach(categoria => {
+                        // Agregar cada categoría como una opción al HTML
+                        optionsHTML += `<a class="dropdown-item categoria-item" href="#" data-categoria="${categoria.IDCat}">${categoria.Categoria}</a>`;
+                    });
+
+                    // Obtener el elemento select por su ID
+                    const categoriaSelect = document.getElementById('categoria');
+
+                    // Eliminar las opciones existentes
+                    categoriaSelect.innerHTML = '';
+                    // Establecer el contenido HTML en el select
+                    categoriaSelect.innerHTML += optionsHTML;
+                } else {
+                    console.error('Error en la solicitud:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+            }
+        }
+
+        obtenerCategorias();
+
+        const categoriaItems = document.querySelectorAll('.dropdown-menu .categoria-item');
+
+        // Agregar un controlador de eventos de clic a cada opción de categoría
+        categoriaItems.forEach(categoriaItem => {
+            categoriaItem.addEventListener('click', function(event) {
+        event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+
+        // Obtener el valor de la categoría seleccionada
+        const categoriaSeleccionada = this.getAttribute('data-categoria');
+
+        // Realizar la acción deseada con la categoría seleccionada
+        console.log('Categoría seleccionada:', categoriaSeleccionada);
+
+        // Puedes agregar aquí el código adicional para realizar la acción deseada al seleccionar una categoría
+        // Por ejemplo, puedes redirigir a una página específica o mostrar contenido relacionado con la categoría seleccionada
+    });
+});
+    </script>
+<script>
+    window.onscroll = function() {
+        makeNavbarSticky();
+    };
+
+    function makeNavbarSticky() {
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky");
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>
+<script>
+    window.onscroll = function() {
+        makeNavbarSticky();
+    };
+
+    function makeNavbarSticky() {
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky");
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>
+
+</body>
+
+</html>

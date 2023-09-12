@@ -1,15 +1,53 @@
 <?php
 include 'validacion.php';
-require_once 'conexion.php';
+/* require_once 'conexion.php'; */
 
 $valida = 0;
 $usuarioExistente = 0;
-// Create connection
-//$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
 
-
+// dummy
 if($_POST){
+    
+    $nombre = $_POST['nombre'];
+    $apellidop = $_POST['apellidopat'];
+    $apellidom = $_POST['apellidomat'];
+    $correo = $_POST['correo'];
+    $fechaNac = $_POST['Fecha_N'];
+    $usuario = $_POST['usuario'];
+    $contraseña = $_POST['contrasenia'];
+    $valida = validarContrasena($contraseña);
+    $confcontra = $_POST['confcontra'];
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if($check !== false){
+        $image = $_FILES['image']['tmp_name'];
+        $imgContent = addslashes(file_get_contents($image));
+    }
+    else $imgContent = 1;
+    $genero = $_POST['genero'];
+    $genero = intval($genero);
+    $rol = $_POST['rol'];
+    $rol = intval($rol);
+    }
+
+    
+     
+        if ($valida) {
+           
+                // Registro exitoso, redirigir a index.html
+                header("Location: ../index.html");
+                exit();
+            
+        }
+    else
+    {
+        echo "Error al crear el usuario. Por favor, inténtalo de nuevo más tarde.";
+        exit();
+    }
+    
+
+
+
+/* if($_POST){
     
     $nombre = $_POST['nombre'];
     $apellidop = $_POST['apellidopat'];
@@ -73,5 +111,5 @@ if($_POST){
 // }
 
 // Cerrar la conexión
-mysqli_close($conn);
+mysqli_close($conn); */
 ?>
