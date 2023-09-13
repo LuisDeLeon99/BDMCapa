@@ -72,3 +72,93 @@
 .rating-stars .star.active {
     color: #f7bf16;
 }
+
+#sidebar {
+    background-color: #d1d1d1b9;
+    padding: 20px;
+    height: 100%;
+    color: #fff;
+}
+
+.category_list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.category_list .nav-item {
+    margin-bottom: 10px; /* Espacio entre cada elemento */
+}
+
+.category_list .nav-link {
+    color: #ffffff;
+    background-color: #0c51e6c5;
+    text-decoration: none;
+    padding: 10px 15px; /* Espacio alrededor del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    
+}
+.category_list .nav-link:hover {
+    background-color: #0c51e66c;
+}
+
+.category_list .nav-link.active {
+    font-weight: bold;
+    background-color: #1c98e0cc; /* Color de fondo cuando está activo */
+}
+.category_list .nav-link.active:hover {
+    
+    background-color: #1c98e077; /* Color de fondo cuando está activo */
+}
+
+/* Estilos para el botón de agregar lista */
+.btn-custom {
+    background-color: #e91a9a; /* Cambia el color de fondo a tu preferencia */
+    color: #fff; /* Cambia el color del texto a tu preferencia */
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.btn-custom:hover {
+    background-color: #ac008785; /* Cambio de color al pasar el cursor por encima */
+}
+.btn-custom2 {
+    background-color: #e91a9a; /* Cambia el color de fondo a tu preferencia */
+    color: #fff; /* Cambia el color del texto a tu preferencia */
+    border: none;
+    border-radius: 5px;
+    width: 15%;
+    padding: 10px 15px;
+}
+
+.btn-custom2:hover {
+    background-color: #ac008785; /* Cambio de color al pasar el cursor por encima */
+}
+
+.card-custom {
+    border: 1px solid #e1e1e1; /* Borde alrededor de las tarjetas */
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #8f8c8ccb; /* Color de fondo de las tarjetas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra de las tarjetas */
+}
+
+.card-custom h3 {
+    font-size: 1.25rem; /* Tamaño de fuente para los títulos */
+    margin-top: 0;
+}
+
+.card-custom p {
+    font-size: 1rem; /* Tamaño de fuente para el texto del producto */
+}
+
+.card-custom .btn-danger {
+    background-color: #dc3545; /* Color de fondo del botón Eliminar */
+    color: #fff; /* Color del texto del botón Eliminar */
+    border: none;
+}
+
+.card-custom .btn-danger:hover {
+    background-color: #ff0019; /* Cambio de color al pasar el cursor por encima del botón Eliminar */
+}

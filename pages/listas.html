@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis productos</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> <!-- Carga Bootstrap primero -->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/disenoPantallas.css"> <!-- Luego carga tus estilos personalizados -->
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+
+
+    <body>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Frop</a>
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                    aria-controls="navbarColor02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./inicio.html">Inicio
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-sm-2" type="search"
+                            placeholder="Buscar">
+                        <button class="btn btn-secondary my-2 my-sm-0"
+                            type="submit">Buscar</button>
+                    </form>
+                    <ul class="navbar-nav me-auto espacioder" id="menu-item">
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+       
+        
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Barra Lateral -->
+                <nav id="sidebar" class="col-md-3 col-lg-2">
+                    <div class="position-sticky" >
+                        <ul class="nav flex-column category_list">
+                            <!-- Genera dinámicamente los enlaces para cada lista -->
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <span class="nav-icon"></span> Lista de Compras
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="nav-icon"></span> Lista de Deseos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="nav-icon"></span> Otra Lista
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- Botón para agregar una nueva lista -->
+                        <button class="btn btn-custom mt-4">Agregar Lista</button>
+                    </div>
+                </nav>
+        
+                <!-- Contenido Principal -->
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 center">
+                    <!-- Título de la Lista Actual -->
+                    <h1 class="mt-4">Lista de Compras</h1>
+        
+                    <!-- Lista de Productos -->
+                    <div class="card-custom mb-3">
+                        <div class="card-body">
+                            <h3 class="card-title">Producto 1</h3>
+                            <p class="card-text">Descripción del Producto 1.</p>
+                            <p class="card-text">Precio: $10.00</p>
+                            <!-- Botón para eliminar el producto -->
+                            <button class="btn btn-danger">Eliminar</button>
+                        </div>
+                    </div>
+                    <div class="card-custom mb-3">
+                        <div class="card-body">
+                            <h3 class="card-title">Producto 2</h3>
+                            <p class="card-text">Descripción del Producto 2.</p>
+                            <p class="card-text">Precio: $10.00</p>
+                            <!-- Botón para eliminar el producto -->
+                            <button class="btn btn-danger">Eliminar</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Botón para agregar un nuevo producto -->
+                    <button type="button" class="btn-custom2 btn-primary" data-toggle="modal" data-target="#agregarProductoModal">
+                        Agregar Producto
+                    </button>
+                </main>
+            </div>
+        </div>
+    
+        <!-- Modal para agregar un nuevo producto -->
+        <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Contenido del modal para agregar un nuevo producto -->
+        </div>
+
+<script>
+    // Función para crear una nueva lista
+    function crearLista() {
+        // Recupera los datos del formulario
+        const nombreLista = document.getElementById("nombreLista").value;
+        const descripcionLista = document.getElementById("descripcionLista").value;
+        const tipoLista = document.getElementById("tipoLista").value;
+
+        // Crea un nuevo elemento de lista
+        const nuevaLista = document.createElement("li");
+        nuevaLista.textContent = nombreLista;
+
+        // Agrega el nuevo elemento de lista a la lista existente
+        document.getElementById("listas").appendChild(nuevaLista);
+
+        // Cierra el modal
+        $('#crearListaModal').modal('hide');
+
+        // Limpia los campos del formulario
+        document.getElementById("nombreLista").value = "";
+        document.getElementById("descripcionLista").value = "";
+        document.getElementById("tipoLista").value = "publica";
+    }
+</script>
+<script>
+    function agregarObjetoALista() {
+        // Obtener los valores ingresados por el usuario
+        const nombreObjeto = document.getElementById('nombreObjeto').value;
+        const descripcionObjeto = document.getElementById('descripcionObjeto').value;
+        const precioObjeto = document.getElementById('precioObjeto').value;
+
+        // Aquí debes agregar la lógica para agregar estos valores a la lista de objetos.
+        // Puedes utilizar JavaScript para crear elementos HTML dinámicamente y agregarlos a la lista.
+        // También puedes almacenar estos valores en una estructura de datos (por ejemplo, un arreglo)
+        // para gestionar las listas de objetos en el lado del cliente.
+
+        // Luego, puedes actualizar la visualización de la lista en la página.
+
+        // Finalmente, cierra el modal.
+        $('#crearListaModal').modal('hide');
+    }
+</script>
+        <script>
+            function redirigirDetallesAlumno(idCurso) {
+                // Construye la URL con la variable "idCurso" en el encabezado (header)
+                const url = `detallesVentas.html?idCurso=${idCurso}`;
+
+                // Redirige a la URL
+                window.location.href = url;
+                }
+
+            $(document).ready(function () {
+                $(document).ready(function () {
+                    // Obtener el menú
+                    obtenerMenu();
+                    obtenerCursos()
+
+                    function obtenerMenu() {
+                        $.ajax({
+                            url: 'http://localhost:3005/BDMCapa/WebServices/menupages.php',
+                            success: function (response) {
+                                // Actualizar el contenido del menú
+                                $('#menu-item').html(response);
+                            },
+                            error: function () {
+                                // Manejar errores en la solicitud AJAX
+                                console.log('Error al obtener el menú');
+                            }
+                        });
+                    }
+                    
+                    function obtenerCursos() {
+                        $.ajax({
+                            url: 'http://localhost:3005/BDMCapa/WebServices/cursosPerfil.php',
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response && response.length > 0) {
+                                    console.log(response);
+
+                                    rol = response[0].Rol;
+                                    cursosResponse = response;
+                                    tarjetaCursos(response, rol);
+                                } else {
+                                    console.log("La respuesta está vacía.");
+
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+
+
+                    }
+
+                    function tarjetaCursos(cursos, rol) {
+                        var ejecutado = false;
+                    if (rol === "Alumno") {
+                        $("#contenedorKardex").append(`
+
+                        <div class="row" id="boton">
+                            <div class="col-xs-6 text-ligth">
+                                <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Kardex</h1>
+                            </div>
+                            <hr>
+                            <div class="col-xs-6">
+                                <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir2()">
+                                    <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso al carrito
+                                </button>
+                            </div>
+                        </div>
+                       `); 
+                    }else{
+                        $("#contenedorCursosVen").append(`
+                               
+                               <div class="row" id="boton">
+                                   <div class="col-xs-6 text-ligth">
+                                       <h1><span class="glyphicon glyphicon-shopping-cart text-white"></span> Cursos que has vendido</h1>
+                                   </div>
+                                   <hr>
+                                   <div class="col-xs-6">
+                                       <button type="button" class="btn btn-outline-light btn-lg espacioder" onclick="redirigir()">
+                                           <span class="glyphicon glyphicon-share-alt"></span> Agregar otro curso
+                                       </button>
+                                   </div>
+                               </div>                            
+                               `);
+
+                             
+                    }
+               
+                        cursos.forEach(function (curso) {
+                            let costo = curso.Costo;
+
+                            if (costo === "0.00") {
+                                costo = "Gratis";
+                            }
+
+                            // Aquí va la primera parte del reporte de instructor
+                            if (rol === "Instructor" && curso.procedencia == "0") {
+                                
+                                $("#contenedorPrincipal").append(`
+                                <hr>
+             <div class="panel-heading">
+                <div class="col-xs-2">
+                    <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.ImagenCurso}">
+                </div>
+                <div class="col-xs-4">
+                    <h4 class="product-name text-light"><strong>${curso.Curso}</strong></h4>
+                </div>
+                <div class="col-xs-4">
+                    <h4 class="product-name text-light">Alumnos inscritos: <strong>${curso.AlumnosInscritos}</strong></h4>
+                </div>
+                <div class="col-xs-4">
+                    <h4 class="product-name text-light">Nivel promedio cursado de cada alumno: <strong>${curso.NivelPromedio}</strong></h4>
+                </div>
+                <div class="col-xs-4 espacioder">
+                    <button type="button" class="btn btn-dark" id="borrarCur">Eliminar Curso</button>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <h4 class="product-name text-light">Total de ingresos del curso: <strong>$${curso.IngresosCurso}</strong></h4>
+                </div>
+                
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-link" onclick="redirigirDetallesAlumno(${curso.ID_curso})"> <h4>Detalles del alumno...</h4></button>
+                    </div>
+                  
+            </div>
+            `);
+
+///Intentar crear funcion ajax para los detalles del alumno
+
+                                if (!ejecutado) {
+                                    $("#boton").append(`<br>`);
+                                    ejecutado = true;
+                                }
+                            }
+                            
+                            if (rol === "Instructor" && curso.procedencia == "2") {
+                                
+                                $("#contenedorPrincipal").append(`
+                                <hr>
+                                    <div class="panel-heading">
+                                        <div class="col-xs-2">
+                                            <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <h4 class="product-name text-light"><strong>${curso.Titulo}</strong></h4>
+                                        </div>
+                                        
+                                        
+                                    
+                                    </div>
+                                    `);
+
+                       
+                            }
+                            // Aquí la segunda parte para el reporte de instructor
+                            
+
+
+                            // Aquí el kardex para el alumno
+                            if (rol === "Alumno") {
+                                if (curso.FechaTerminacion == null) curso.FechaTerminacion = "Curso incompleto";
+                                $("#contenedorPrincipal").append(`
+
+                             <div class="panel-heading">
+                                <div class="col-xs-2">
+                                    <img class="img-responsive" style="max-width: 15%; height: auto;" src="data:image/jpeg;base64,${curso.Imagen}">
+                                </div>
+                                <div class="col-xs-4">
+                                    <h4 class="product-name text-light">Nombre del curso: <strong>${curso.Curso}</strong></h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h4 class="product-name text-light">Categoria: <strong>${curso.Categoria}</strong></h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h4 class="product-name text-light">Fecha de inscripcion: <strong>${curso.FechaInscripcion}</strong></h4>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h4 class="product-name text-light">Fecha de termino: <strong>${curso.FechaTerminacion}</strong></h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-light espacioder">
+                                        <h3>Este curso esta: <strong>${curso.ProgresoCurso}</strong></h3>
+                                    </div>
+                                </div>
+                                <div class="text-dark">
+                                    <h5 class="text-light"><strong>Progreso: ${curso.Progreso}%</strong></h5>
+                                    <div class="progress" style="width: 550px;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: ${curso.Progreso}%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                                <hr>
+            `);
+                            }
+                        });
+                      
+                        
+                        // Aquí se registra el evento de clic en los botones del acordeón
+                        var accordionItems = document.querySelectorAll('.accordion-item');
+                        accordionItems.forEach(function (item) {
+                            var button = item.querySelector('.accordion-button');
+                            button.addEventListener('click', function () {
+                                button.classList.toggle('collapsed');
+                                var collapsePanel = item.querySelector(button.getAttribute('data-bs-target'));
+                                collapsePanel.classList.toggle('show');
+                            });
+                        });
+                    }
+
+
+
+                });
+            });
+        </script>
+
+<script>
+    window.onscroll = function() {
+        makeNavbarSticky();
+    };
+
+    function makeNavbarSticky() {
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
+
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky");
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>
+
+    </body>
+
+</html>

@@ -47,16 +47,11 @@
             <h1>Bienvenido a la creación de Producto</h1>
 
             <div class="form-group">
-                <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">Niveles que tendrá el
-                    curso</label>
+                <label for="nivelesnum" class="form-label mt-4" style="font-size: 20px;">¿Cuántos tienes en existencia?</label>
                 <br>
-                <select class="form-select-sm" id="nivelesnum" name="nivelesCurso">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+                <div class="input-group">
+                    <input type="number" id="nivelesnum" name="nivelesCurso" class="form-control" min="0" style="max-width: 150px;">
+                </div>
             </div>
 
             <fieldset class="form-group">
@@ -162,7 +157,7 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label for="diploma" class="form-label mt-4">Diploma que se recibe al concluir el curso</label>
+                            <label for="diploma" class="form-label mt-4">Imagen Detalle 1</label>
                             <input class="form-control" type="file" id="diploma" name="diploma" accept="image/*">
                             <div class="image-preview" id="imagePreview2">
                                 <img src="" alt="Image preview" class="image-preview__image"
@@ -170,6 +165,27 @@
                                 <span class="image-preview__default-text">Preview</span>
                             </div>
                             <div id="base64Preview2"></div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="diploma" class="form-label mt-4">Imagen Detalle 2</label>
+                            <input class="form-control" type="file" id="diploma" name="diploma" accept="image/*">
+                            <div class="image-preview" id="imagePreview2">
+                                <img src="" alt="Image preview" class="image-preview__image"
+                                    style="margin:auto; width:30%;">
+                                <span class="image-preview__default-text">Preview</span>
+                            </div>
+                            <div id="base64Preview2"></div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="diploma" class="form-label mt-4">Video del producto</label>
+                            <input class="form-control" type="file" id="videoCurso" name="videoCurso" accept="video/*" required
+                                title="Es necesario subir un video" />
+                            <div class="video-preview" id="videoPreview" style="display: none;">
+                                <video src="" class="video-preview__video" controls style="margin:auto; width:30%;"></video>
+                                <span class="video-preview__default-text">Preview</span>
+                            </div>
                         </div>
                         
                         <script>
@@ -273,6 +289,10 @@
                             <div id="categoriaDiv">
                                 <select class="categoria-select" id="categoria" name="categoria">
                                     <option value="" selected>Selecciona una categoría</option>
+                                    <option value="categoria1">Categoría 1</option>
+                                    <option value="categoria2">Categoría 2</option>
+                                    <option value="categoria3">Categoría 3</option>
+                                    <option value="categoria4">Categoría 4</option>
                                 </select>
                             </div>
                         </div>
@@ -282,7 +302,7 @@
 
                         <script>
                             function redirigir() {
-                                window.location.href = "cargarNiveles.html";
+                                window.location.href = "inicio.html";
                             }
                         </script>
                     </div>

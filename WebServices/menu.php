@@ -25,7 +25,7 @@ if (isset($_SESSION['usuario'])) {
             <a class="nav-link" href="Perfil.html">Cuenta</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="Perfil.html">Listas</a>
+        <a class="nav-link" href="listas.html">Listas</a>
     </li>
         <li class="nav-item">
         <a class="nav-link" href="cursosAgregados.html">Compras</a>

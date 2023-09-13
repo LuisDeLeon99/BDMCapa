@@ -50,6 +50,77 @@
             <br>
             <div style="margin:auto; width:85%;" class="card mb-3 bg-dark py-1"
                 id="contenedorPrincipal">
+                <h3 class="card-header flex">Producto</h3>
+        <p class="text-body-secondary espacioder">Fecha en que se agrego: fecha</p>
+        <br>
+        <div class="card-text">
+            <div class="container">
+                <div class="card bg-secondary mb-3" style="width: 55rem;">
+                    <div>
+                        <h4 class="card-title text-black">Este producto...</h4>
+                        <h4 class="card-text text-light">Descripcion 1</h4>
+                    </div>
+                    <br>
+                    <div>
+                        <h6 class="card-title text-black">Calificacion del producto</h6>
+                        <div id="starsContainer" class="card-text text-light"></div>
+                    </div>
+                </div>
+                <div class="card border-dark mb-3" style="margin-left:auto; width:25%;">
+                    <div class="card-body">
+                        <div class="center">
+                            <img class="card-img-top" src="https://via.placeholder.com/450x300" alt="Imagen de marcador de posición" />
+                        </div>
+                        <div style="margin:auto;">
+                            <p class="text-secondary-emphasis" style="font-size: 20px;">Adquiere este producto por:</p>
+                            <h3 class="card-title center"><strong>precio</strong></h3>
+                            <div>
+                                <div class="text-center">
+                                    <button style="color:black" class="btn btn-outline-info mt-auto btn-agregar-carrito" type="button" data-id-curso="${curso[0].ID_curso}">Agregar al carrito</button>
+
+                                </div>
+                                <br>
+                                <button type="button" class="btn btn-light btn-lg custom-btn">Comprar ahora</button>
+                                <br>
+                                </div>
+                        </div>
+                    </div>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+            <hr>
+            <div class="card-title" style="display: flex; justify-content: center; align-items: center;">
+                <h4 class="text-body-secondary text-light">Video del producto:</h4>
+                <!-- Enlace al video -->
+                <a href="Video.html" style="margin-left: 10px;">
+                    <img src="https://via.placeholder.com/50x50" alt="Ícono de video">
+                </a>
+            </div>
+            <div class="panel-heading center">
+                <div class="accordion bg-black small-accordion" style="width: 600px;" id="accordionExample">
+                    <div class="accordion-item bg-info">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed bg-transparent text-light center" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                                <h4 class="text-dark center"><strong> Imagenes del producto:</strong></h4>
+                            </button>
+                        </h2> 
+                        <div id="collapseOne" class="accordion-collapse collapse"
+                           aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body bg-dark">
+                                <div class="col-xs-4">
+                                    <a href="http://localhost:3005/BDMCapa/pages/Video.html?curso=${curso[i].ID_curso}&nivel=${curso[i].IDNiv}&nivels=${curso[i].Nivel}" class="curso-link" data-curso-id="${curso[i].ID_curso}" data-nivel-id="${curso[i].IDNiv}">
+                                    <h5 class="product-name text-light">
+                                        Nivel: <strong>${curso[i].Titulo}</strong>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+               </div>
+            </div>
+        </div>
                 <br>
 
             </div>
